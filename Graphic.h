@@ -5,11 +5,15 @@
 using namespace std;
 
 void drawA(int XX, int YY);
+void drawB(int XX, int YY);
 void drawC(int XX, int YY);
 void drawO(int XX, int YY);
 void drawR(int XX, int YY);
+void drawU(int XX, int YY);
+void drawT(int XX, int YY);
 
 void drawCARO(int XX, int YY);
+void drawABOUT(int XX, int YY);
 
 void drawBoard(int startX, int startY);
 void drawBoardMenu(int XX, int YY, int size, int b_color, string str);

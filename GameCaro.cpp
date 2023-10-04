@@ -20,7 +20,14 @@ void loadGame() {
 }
 
 void about() {
+	system("cls");
+	drawABOUT(36, 3);
+	
 
+	while (true) {
+		if (nextMove() == 5)
+			return;
+	}
 }
 
 void help() {
@@ -58,6 +65,7 @@ void drawMenu(int XX, int YY) {
 	
 	int S = 0;  // Con trỏ hiển thị mục đang chọn
 	while (true) {
+		drawCARO(40, 3);
 		for (int i = 0; i < 5; ++i)
 			s1[i].draw();
 		s2[S].draw();
@@ -72,17 +80,18 @@ void drawMenu(int XX, int YY) {
 			else if (S == 3) help();
 			else if (S == 4) exit();
 			else assert(false);
+			system("cls");
 		}
 	}
 }
+
+
 int32_t main() {
 	fixConsoleWindow(1100, 710);
 
 	ShowCur(0);
-	drawCARO(40, 3);
 	drawMenu(46, 12);
-
-	//drawBoard(5, 5);
+	nextMove();
 
 	_getch();
 
