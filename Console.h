@@ -1,6 +1,7 @@
 #ifndef _CONSOLE_H_
 #define _CONSOLE_H_
 #include "library.h"
+#include <Windows.h>
 using namespace std;
 
 void fixConsoleWindow(int WIDTH, int HEIGHT);
