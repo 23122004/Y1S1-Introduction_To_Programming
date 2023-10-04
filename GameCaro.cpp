@@ -1,6 +1,7 @@
 ﻿#include "library.h"
 #include <Windows.h>
 #include<conio.h>
+#include "GameControl.h"
 using namespace std;
 
 // Console
@@ -37,16 +38,6 @@ void ShowCur(bool CursorVisibility)
 	SetConsoleCursorInfo(handle, &cursor);
 }
 
-// Operation
-const int BOARD_SIZE = 12;
-struct _Point{
-	int X, Y, opt;
-} status[BOARD_SIZE + 5][BOARD_SIZE + 5];
-
-bool _TURN;
-int _COMMAND;
-int _X, _Y;
-
 // Control
 int nextMove() {
 	while (true) {
@@ -75,7 +66,7 @@ int nextMove() {
 		} 
 	}
 }
-
+const int BOARD_SIZE = 12;
 // DrawBoard
 void drawBoard(int startX, int startY) {
 	setColor(15, 0);
@@ -99,19 +90,6 @@ void drawBoard(int startX, int startY) {
 			else cout << " ";
 		} cout << "\n";
 	}	
-}
-
-void resetData(int startX, int startY) {
-	for (int y = 0; y <= BOARD_SIZE; ++y) 
-		for (int x = 0; x <= BOARD_SIZE; ++x) {
-			status[y][x].Y = startY + y * 2 + 1;
-			status[y][x].X = startX + x * 4 + 2;
-			status[y][x].opt = 0;
-		}
-
-	_TURN = 0; _COMMAND = -1;
-	_X = status[0][0].X;
-	_Y = status[0][0].Y;
 }
 
 void startGame() {

@@ -1,0 +1,257 @@
+﻿#include "GameControl.h"
+
+const int BOARD_SIZE = 12;
+_Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
+int _TURN;
+int _COMMAND;
+int _X, _Y; // tọa độ con trỏ
+
+long long consecutiveScore(int len, int openEnds, bool currentTurn) // tính điểm
+{
+    if (len < 5 && openEnds == 0) return 0;
+    switch (len)
+    {
+    case 4:
+        switch (openEnds)
+        {
+        case 1:
+            if (currentTurn)
+                return 10000000;
+            return 500;
+        case 2:
+            if (currentTurn)
+                return 10000000;
+            return 10000000;
+        }
+    case 3:
+        switch (openEnds)
+        {
+        case 1:
+            if (currentTurn)
+                return 40;
+            return 25;
+        case 2:
+            if (currentTurn)
+                return 10000;
+            return 100;
+        }
+    case 2:
+        switch (openEnds)
+        {
+        case 1:
+            return 3;
+        case 2:
+            return 5;
+        }
+    case 1:
+        switch (openEnds)
+        {
+        case 1:
+            return 1;
+        case 2:
+            return 2;
+        }
+    default:
+        switch (openEnds)
+        {
+        case 2:
+            return (long long)1e10;
+        case 1:
+            return (long long)1e10 - (long long)1e9;
+        case 0:
+            return (long long)1e10 - (long long)2e9;
+        }
+    }
+}
+
+long long get_score(int a[], int player)
+{
+    int Size = BOARD_SIZE + 2;
+    long long score = 0;
+    for (int i = 1; i < Size - 1; i++) if (abs(a[i]) == 1) // đánh giá điểm
+    {
+        int j = i;
+        while (j + 1 < Size - 1 && a[i] == a[j + 1]) j++;
+
+        int len = j - i + 1;
+        int openEnds = 2 - (a[i - 1] != 0) - (a[j + 1] != 0); // số ô mở hai bên
+        score += 1ll * consecutiveScore(len, openEnds, player == a[i]) * a[i];
+        i = j;
+    }
+    return score;
+}
+
+bool valid(int x, int y)
+{
+    return y > 0 && x > 0 && x <= BOARD_SIZE && y <= BOARD_SIZE;
+}
+
+long long evaluation(int player) // hàm đánh giá trạng thái
+{
+    long long score = 0;
+    int* b = new int[BOARD_SIZE + 2];
+    for (int i = 1; i <= BOARD_SIZE; i++) // đánh giá hàng ngang
+    {
+        for (int k = 0; k < BOARD_SIZE + 2; k++)
+        {
+            if (valid(i, k))
+                b[k] = status[i][k].opt;
+            else
+                b[k] = 2;
+        }
+        score += get_score(b, player);
+    }
+
+    for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá hàng dọc
+    {
+        for (int k = 0; k < BOARD_SIZE + 2; k++)
+        {
+            if (valid(k, j))
+                b[k] = status[k][j].opt;
+            else
+                b[k] = 2;
+        }
+        score += get_score(b, player);
+    }
+
+    for (int i = 0; i <= BOARD_SIZE; i++) // đánh giá đường chéo chính
+    {
+        for (int k = 0; k < BOARD_SIZE + 2; k++)
+        {
+            if (valid(i + k, k))
+                b[k] = status[i + k][k].opt;
+            else
+                b[k] = 2;
+        }
+        score += get_score(b, player);
+    }
+    for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá đường chéo chính
+    {
+        for (int k = 0; k < BOARD_SIZE + 2; k++)
+        {
+            if (valid(k, j + k))
+                b[k] = status[k][j + k].opt;
+            else
+                b[k] = 2;
+        }
+        score += get_score(b, player);
+    }
+
+    for (int i = 1; i <= BOARD_SIZE + 1; i++) // đánh giá đường chéo phụ
+    {
+        for (int k = 0; k < BOARD_SIZE + 2; k++)
+        {
+            if (valid(i - k, k))
+                b[k] = status[i - k][k].opt;
+            else
+                b[k] = 2;
+        }
+        score += get_score(b, player);
+    }
+    for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá đường chéo phụ
+    {
+        for (int k = 0; k < BOARD_SIZE + 2; k++)
+        {
+            if (valid(BOARD_SIZE + 1 - k, j + k))
+                b[k] = status[BOARD_SIZE + 1 - k][j + k].opt;
+            else
+                b[k] = 2;
+        }
+        score += get_score(b, player);
+    }
+
+    return score;
+}
+
+long long minimax(int depth, long long alpha, long long beta, int player, int& x, int& y)
+{
+    long long val = evaluation(player); // tính trạng thái bàn cờ hiện tại nếu đến lượt người chơi "player"
+    if (depth == 0 || abs(val) >= 1e8) // kiểm tra xuống độ sâu cuối cùng hoặc một trong hai thắng
+        return val; // trả về đánh giá trạng thái
+
+    // đặt cho người chơi (Max)
+    if (player == 1)
+    {
+        long long maxEval = (long long)-1e12;
+        for (int i = 1; i <= BOARD_SIZE; i++)
+            for (int j = 1; j <= BOARD_SIZE; j++) // xét từng ô chưa được đánh
+                if (status[i][j].opt == 0)
+                {
+                    status[i][j].opt = 1; // đánh thử x vào ô i, j
+                    long long eval = minimax(depth - 1, alpha, beta, -1, x, y); // gọi đệ quy minimax
+                    status[i][j].opt = 0;
+                    if (maxEval < eval)
+                    {
+                        maxEval = eval;
+                        if (depth == 3) x = i, y = j;
+                    }
+                    if (alpha < eval) alpha = eval;
+                    if (beta <= alpha) // alpha-beta pruning
+                        break;
+                }
+        return maxEval;
+    }
+    else // đặt cho máy tương tự như cho người chơi (Min)
+    {
+        long long minEval = (long long)1e12;
+        for (int i = 1; i <= BOARD_SIZE; i++)
+            for (int j = 1; j <= BOARD_SIZE; j++)
+                if (status[i][j].opt == 0)
+                {
+                    status[i][j].opt = -1;
+                    long long eval = minimax(depth - 1, alpha, beta, 1, x, y);
+                    status[i][j].opt = 0;
+                    if (minEval > eval)
+                    {
+                        minEval = eval;
+                        if (depth == 3) x = i, y = j;
+                    }
+                    if (beta > eval) beta = eval;
+                    if (beta <= alpha)
+                        break;
+                    if (minEval < (long long)-1e8) break;
+                }
+        return minEval;
+    }
+}
+
+void resetData(int startX, int startY) 
+{
+    for (int y = 1; y <= BOARD_SIZE; ++y)
+        for (int x = 1; x <= BOARD_SIZE; ++x) 
+        {
+            status[y][x].Y = (startY - 1) + y * 2 + 1;
+            status[y][x].X = (startX - 1) + x * 4 + 2;
+            status[y][x].opt = 0;
+        }
+    _TURN = 1; _COMMAND = -1;
+    _X = status[1][1].X;
+    _Y = status[1][1].Y;
+}
+
+void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của người chơi
+// máy chơi trả về tham chiếu x, y là tọa độ vừa được đặt
+{
+    static int cntMoves = 0;
+    cntMoves++;
+    if (cntMoves == 1) // nước đi đầu tiên của bot là random
+    {
+        int dx[] = { -1, 1, 0, 0 };
+        int dy[] = { 0, 0, -1, 1 };
+        int r = rand() % 4;
+        while (!valid(x + dx[r], y + dy[r])) r = rand() % 4;
+        x += dx[r];
+        y += dy[r];
+    }
+    else minimax(3, (long long)-1e12, (long long)1e12, -1, x, y);
+    assert(status[x][y].opt == 0);
+    // bot mặc định là o
+    status[x][y].opt = -1;
+}
+
+void playerMove(int& x, int& y, int turn) // người chơi turn = 1 hoặc -1 là người chơi X hoặc O
+{
+    // *nhập vào x, y; 
+    status[x][y].opt = turn;
+    // *vẽ vào tọa độ x, y   
+}
