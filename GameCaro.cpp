@@ -2,6 +2,7 @@
 #include <conio.h>
 #include "library.h"
 #include "GameControl.h"
+#include "Console.h"
 using namespace std;
 
 // Console
@@ -31,8 +32,7 @@ void setColor(int background_color, int text_color) {
 	SetConsoleTextAttribute(hconsole, color_code);
 }
 
-void ShowCur(bool CursorVisibility)
-{
+void ShowCur(bool CursorVisibility) {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };
 	SetConsoleCursorInfo(handle, &cursor);
