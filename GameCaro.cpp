@@ -41,7 +41,7 @@ void ShowCur(bool CursorVisibility)
 const int BOARD_SIZE = 12;
 struct _Point{
 	int X, Y, opt;
-} status[BOARD_SIZE][BOARD_SIZE];
+} status[BOARD_SIZE + 5][BOARD_SIZE + 5];
 
 bool _TURN;
 int _COMMAND;
