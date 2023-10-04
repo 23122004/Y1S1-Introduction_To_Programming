@@ -55,3 +55,24 @@
 	5 : Esc
 	6 : Undo
 	7 : Save
+
+* Help
+ - Control: 
+   + W A S D or các phím mũi tên
+   + Enter
+   + Phim save: I
+   + Phim undo: U
+   + Phím thoát: esc
+ - Rule (viết bằng Tiếng Anh): 
+   + Board 12 * 12
+   + turn off unikey
+   + tên người dùng chỉ gồm các kí tự thường, hoa, số (không các kí tự đặc biệt, khoảng trắng, ...) gh từ 2 - 10 kí tự
+   + X plays first
+   + The winner is the first player to form an unbroken line of five or more mark of their color horizontally, vertically, or diagonally. 
+   + Lưu giới hạn tối đa 10 file, nếu quá 10 file sẽ ghi đè lên file tạo lâu nhất
+
+
+* Ghi chú:
+ - Thắng tô đậm lên
+ - Lưu giới hạn tối đa 10 file
+ - Load game có chức năng: play, delete, rename
