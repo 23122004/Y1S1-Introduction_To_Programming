@@ -1,7 +1,4 @@
-﻿#include<iostream>
-#include<windows.h>
-#include <assert.h>
-#include<conio.h>
+﻿#include "library.h"
 using namespace std;
 
 // Console
