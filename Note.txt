@@ -1,0 +1,57 @@
+﻿* Vẽ menu
+	drawBoardMenu(XX, YY, 20, 15, "NEW GAME");
+	drawBoardMenu(XX, YY + 3, 20, 15, "LOAD GAME");
+	drawBoardMenu(XX, YY + 6, 20, 15, "ABOUT");
+	drawBoardMenu(XX, YY + 9, 20, 15, "HELP");
+	drawBoardMenu(XX, YY + 12, 20, 15, "EXIT");
+
+* Vẽ menu highlight
+	drawBoardMenu(XX, YY, 20, 14, ">>   NEW GAME   <<");
+	drawBoardMenu(XX, YY + 3, 20, 14, ">>   LOAD GAME  <<");
+	drawBoardMenu(XX, YY + 6, 20, 14, ">>     ABOUT    <<");
+	drawBoardMenu(XX, YY + 9, 20, 14, ">>     HELP     <<");
+	drawBoardMenu(XX, YY + 12, 20, 14, ">>     EXIT     <<");
+
+* Bảng màu
+	0 = Black          8 = Gray
+	1 = Blue           9 = Light Blue
+	2 = Green          10 = Light Green
+	3 = Aqua           11 = Light Aqua
+	4 = Red            12 = Light Red
+	5 = Purple         13 = Light Purple
+	6 = Yellow         14 = Light Yellow
+	7 = White          15 = Bright White
+
+* Mã các ký tự hay dùng
+	16 : ►
+	17 : ◄
+	30 : ▲
+	31 : ▼
+	28 : ∟
+	179 : │
+	180 : ┤
+	191 : ┐
+	192 : └
+	193 : ┴
+	194 : ┬
+	195 : ├
+	196 : ─
+	197 : ┼
+	217 : ┘
+	218 : ┌
+	186 : ║
+	187 : ╗
+	188 : ╝
+	200 : ╚
+	201 : ╔
+	205 : ═
+
+* Các mã số lệnh trong hàm nextMove
+	0: Enter
+	1 : MoveUp
+	2 : MoveLeft
+	3 : MoveDown
+	4 : MoveRight
+	5 : Esc
+	6 : Undo
+	7 : Save

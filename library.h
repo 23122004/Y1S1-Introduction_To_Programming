@@ -17,6 +17,8 @@
 #include <cstdlib>
 #include <cstring>
 #include <ctime>
+#include <conio.h>
+#include <Windows.h>
 
 #if __cplusplus >= 201103L
 #include <ccomplex>
