@@ -1,6 +1,6 @@
 ﻿#include "library.h"
 #include <Windows.h>
-#include<conio.h>
+#include <conio.h>
 #include "GameControl.h"
 using namespace std;
 

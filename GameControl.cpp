@@ -251,7 +251,7 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
 
 void playerMove(int& x, int& y, int turn) // người chơi turn = 1 hoặc -1 là người chơi X hoặc O
 {
-    // *nhập vào x, y; 
+    // *nhập vào x, y
     status[x][y].opt = turn;
-    // *vẽ vào tọa độ x, y   
+    // *vẽ vào tọa độ x, y
 }
