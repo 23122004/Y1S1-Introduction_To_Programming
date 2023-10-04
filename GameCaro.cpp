@@ -1,4 +1,5 @@
 ﻿#include "library.h"
+#include <Windows.h>
 using namespace std;
 
 // Console
