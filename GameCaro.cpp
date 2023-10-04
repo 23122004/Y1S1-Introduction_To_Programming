@@ -71,7 +71,7 @@ int nextMove() {
 			if (c == 'D' || c == 'd') return 4;
 
 			if (c == 'U' || c == 'u') return 6;
-			if (c == 'I' || c == 'I') return 7;
+			if (c == 'I' || c == 'i') return 7;
 		} 
 	}
 }
