@@ -340,7 +340,7 @@ int32_t main() {
 	drawCARO(40, 3);
 	drawMenu(46, 12);
 
-	//drawBoard(5, 5);
+	drawBoard(5, 5);
 
 	_getch();
 
