@@ -329,7 +329,6 @@ void drawMenu(int XX, int YY) {
 			else assert(false);
 		}
 	}
-
 }
 
 // Main
