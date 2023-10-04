@@ -4,6 +4,7 @@
 #include "GameControl.h"
 using namespace std;
 
+cout << "hihi";
 // Console
 void fixConsoleWindow(int WIDTH, int HEIGHT) {
 	HWND consoleWindow = GetConsoleWindow();
