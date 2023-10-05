@@ -1,5 +1,5 @@
 #include "Graphic.h"
-#define co_theme 15, 0
+#define co_theme 15,0
 const int BOARD_SIZE = 12;
 
 void drawA(int XX, int YY) { // 6 * 8
