@@ -255,3 +255,13 @@ void playerMove(int& x, int& y, int turn) // người chơi turn = 1 hoặc -1 l
     status[x][y].opt = turn;
     // *vẽ vào tọa độ x, y
 }
+
+void addBoard(int **a, int turn, int lastX, int lastY)
+{
+    for (int i = 1; i <= BOARD_SIZE; i++)
+        for (int j = 1; j <= BOARD_SIZE; j++)
+            status[i][j].opt = a[i][j];
+    _X = status[lastX][lastY].X;
+    _Y = status[lastX][lastY].Y;
+    _TURN = turn;
+}

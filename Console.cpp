@@ -11,7 +11,7 @@ void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình conso
 	RECT r;
 	GetWindowRect(consoleWindow, &r);
 	MoveWindow(consoleWindow, 0, 0, WIDTH, HEIGHT, TRUE);
-} 
+}
 
 void gotoXY(int x, int y) { // Di chuyển con trỏ đến vị trí (y, x)
 	COORD coord;
