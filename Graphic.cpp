@@ -266,67 +266,106 @@ void drawD(int XX, int YY) {  // 6 * 8
 	cout << char(188);
 }
 
-void drawG(int XX, int YY) {
-	gotoXY(XX, YY);
-	setColor(0, 0);  cout << "        ";
+void drawG(int XX, int YY) {  // 6 * 9
+	gotoXY(XX + 1, YY);
+	setColor(0, 0); cout << "      ";
 	setColor(co_theme); cout << char(187);
 
 	gotoXY(XX, YY + 1);
-	cout << char(200) << char(205) << char(205);
 	setColor(0, 0); cout << "  ";
-	setColor(co_theme);  cout << char(201) << char(205) << char(205) << char(188);
+	setColor(co_theme); cout << char(201);
+	for (int i = 0; i < 4; ++i) cout << char(205);
+	cout << char(188);
 
-	for (int i = 0; i < 3; ++i) {
-		gotoXY(XX + 3, YY + 2 + i);
-		setColor(0, 0); cout << "  ";
-		setColor(co_theme); cout << char(186);
-	}
+	gotoXY(XX, YY + 2);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186) << "  ";
+	setColor(0, 0); cout << "   ";
+	setColor(co_theme); cout << char(187);
 
-	gotoXY(XX + 3, YY + 5);
-	cout << char(200) << char(205) << char(188);
-	cout << "chu G";
+	gotoXY(XX, YY + 3);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186) << "   ";
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 4);
+	cout << char(200);
+	setColor(0, 0); cout << "      ";
+	setColor(co_theme); cout << char(201) << char(188);
+
+	gotoXY(XX + 1, YY + 5);
+	cout << char(200);
+	for (int i = 0; i < 5; ++i) cout << char(205);
+	cout << char(188);
 }
 
-void drawM(int XX, int YY) {
+void drawM(int XX, int YY) {  // 6 * 11
 	gotoXY(XX, YY);
-	setColor(0, 0);  cout << "        ";
+	setColor(0, 0); cout << "   ";
+	setColor(co_theme); cout << char(187) << "   ";
+	setColor(0, 0); cout << "   ";
 	setColor(co_theme); cout << char(187);
 
 	gotoXY(XX, YY + 1);
-	cout << char(200) << char(205) << char(205);
+	setColor(0, 0); cout << "    ";
+	setColor(co_theme); cout << char(187) << " ";
+	setColor(0, 0); cout << "    ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 2);
 	setColor(0, 0); cout << "  ";
-	setColor(co_theme);  cout << char(201) << char(205) << char(205) << char(188);
+	setColor(co_theme); cout << char(201);
+	setColor(0, 0); cout << "    ";
+	setColor(co_theme); cout << char(201);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
 
-	for (int i = 0; i < 3; ++i) {
-		gotoXY(XX + 3, YY + 2 + i);
-		setColor(0, 0); cout << "  ";
-		setColor(co_theme); cout << char(186);
-	}
+	gotoXY(XX, YY + 3);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186) << char(200);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(201) << char(188);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
 
-	gotoXY(XX + 3, YY + 5);
-	cout << char(200) << char(205) << char(188);
-	cout << "chu M";
+	gotoXY(XX, YY + 4);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186) << " " << char(200) << char(205) << char(188) << " ";
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 5);
+	cout << char(200) << char(205) << char(188) << "     " << char(200) << char(205) << char(188);
 }
 
-void drawE(int XX, int YY) {
+void drawE(int XX, int YY) {  // 6 * 8
 	gotoXY(XX, YY);
-	setColor(0, 0);  cout << "        ";
+	setColor(0, 0); cout << "       ";
 	setColor(co_theme); cout << char(187);
 
 	gotoXY(XX, YY + 1);
-	cout << char(200) << char(205) << char(205);
 	setColor(0, 0); cout << "  ";
-	setColor(co_theme);  cout << char(201) << char(205) << char(205) << char(188);
+	setColor(co_theme); cout << char(201);
+	for (int i = 0; i < 4; ++i) cout << char(205);
+	cout << char(188);
 
-	for (int i = 0; i < 3; ++i) {
-		gotoXY(XX + 3, YY + 2 + i);
-		setColor(0, 0); cout << "  ";
-		setColor(co_theme); cout << char(186);
-	}
+	gotoXY(XX, YY + 2);
+	setColor(0, 0); cout << "     ";
+	setColor(co_theme); cout << char(187);
 
-	gotoXY(XX + 3, YY + 5);
-	cout << char(200) << char(205) << char(188);
-	cout << "chu E";
+	gotoXY(XX, YY + 3);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(201) << char(205) << char(205) << char(188);
+
+	gotoXY(XX, YY + 4);
+	setColor(0, 0); cout << "       ";
+	setColor(co_theme); cout << char(187);
+
+	gotoXY(XX, YY + 5);
+	cout << char(200);
+	for (int i = 0; i < 6; ++i) cout << char(205);
+	cout << char(188);
 }
 
 void drawCARO(int XX, int YY) {
@@ -350,12 +389,12 @@ void drawLOADGAME(int XX, int YY) {
 	drawA(XX + 17, YY);
 	drawD(XX + 25, YY);
 	drawG(XX + 37, YY);
-	drawA(XX + 60, YY);
-	drawM(XX + 70, YY);
-	drawE(XX + 80, YY);
+	drawA(XX + 46, YY);
+	drawM(XX + 54, YY);
+	drawE(XX + 65, YY);
 }
 
-void drawBoardMenu(int XX, int YY, int size, int b_color, string str) { // size * 3
+void drawBoardMenu(int XX, int YY, int size, int b_color, string str) { // 3 * size, vẽ bảng menu chọn
 	setColor(co_theme);
 
 	gotoXY(XX, YY); cout << char(201);
@@ -374,11 +413,28 @@ void drawBoardMenu(int XX, int YY, int size, int b_color, string str) { // size 
 	setColor(co_theme);
 }
 
-void drawBoard(int startX, int startY) {  // Vẽ bảng caro 12*12
+void drawBoardSize(int XX, int YY, int h, int w) { // h * w, vẽ bảng viền bự
+	setColor(co_theme);
+
+	gotoXY(XX, YY); cout << char(201);
+	for (int i = 0; i < w - 2; ++i) cout << char(205);
+	cout << char(187);
+
+	for (int i = 1; i < h - 1; ++i) {
+		gotoXY(XX, YY + i); cout << char(186);
+		gotoXY(XX + w - 1, YY + i); cout << char(186);
+	}
+
+	gotoXY(XX, YY + h - 1); cout << char(200);
+	for (int i = 0; i < w - 2; ++i) cout << char(205);
+	cout << char(188);
+}
+
+void drawBoard(int XX, int YY) {  // Vẽ bảng caro 12*12
 	setColor(co_theme);
 	for (int y = 0; y <= 2 * BOARD_SIZE; ++y) {
 		for (int x = 0; x <= 4 * BOARD_SIZE; ++x) {
-			gotoXY(startX + x, startY + y);
+			gotoXY(XX + x, YY + y);
 
 			if (x == 0 && y == 0) cout << char(218);
 			else if (x == 0 && y == 2 * BOARD_SIZE) cout << char(192);
@@ -396,21 +452,4 @@ void drawBoard(int startX, int startY) {  // Vẽ bảng caro 12*12
 			else cout << " ";
 		} cout << "\n";
 	}
-}
-
-void drawBoardSize(int XX, int YY, int h, int w) { // h * w, vẽ bảng viền bự
-	setColor(co_theme);
-
-	gotoXY(XX, YY); cout << char(201);
-	for (int i = 0; i < w - 2; ++i) cout << char(205);
-	cout << char(187);
-
-	for (int i = 1; i < h - 1; ++i) {
-		gotoXY(XX, YY + i); cout << char(186);
-		gotoXY(XX + w - 1, YY + i); cout << char(186);
-	}
-
-	gotoXY(XX, YY + h - 1); cout << char(200);
-	for (int i = 0; i < w - 2; ++i) cout << char(205);
-	cout << char(188);
 }
