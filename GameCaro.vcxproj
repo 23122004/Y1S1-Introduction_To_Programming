@@ -131,22 +131,16 @@
     <ClCompile Include="GameCaro.cpp" />
     <ClCompile Include="GameControl.cpp" />
     <ClCompile Include="Graphic.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="Newgame.cpp" />
-=======
     <ClCompile Include="LoadGame.cpp" />
->>>>>>> e16f926704a4ab09ce9886f2261ce9180a020e25
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Console.h" />
     <ClInclude Include="GameControl.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="library.h" />
-<<<<<<< HEAD
     <ClInclude Include="Newgame.h" />
-=======
     <ClInclude Include="LoadGame.h" />
->>>>>>> e16f926704a4ab09ce9886f2261ce9180a020e25
   </ItemGroup>
   <ItemGroup>
     <Text Include="Note.txt" />
