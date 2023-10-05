@@ -24,7 +24,7 @@ void about() {
 	system("cls");
 	drawABOUT(36, 3);
 	
-	setColor(co_theme);
+
 	int XX = 40, YY = 13;
 
 	drawBoardSize(XX - 4, YY - 2, 17, 43);
