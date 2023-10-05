@@ -1,4 +1,4 @@
-#include "Graphic.h"
+﻿#include "Graphic.h"
 #define co_theme 15,0
 const int BOARD_SIZE = 12;
 
@@ -216,47 +216,54 @@ void drawT(int XX, int YY) { // 6 * 9
 	cout << char(200) << char(205) << char(188);
 }
 
-void drawL(int XX, int YY) { 
+void drawL(int XX, int YY) {  // 6 * 8
 	gotoXY(XX, YY);
-	setColor(0, 0);  cout << "        ";
+	setColor(0, 0); cout << "  ";
 	setColor(co_theme); cout << char(187);
 
-	gotoXY(XX, YY + 1);
-	cout << char(200) << char(205) << char(205);
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme);  cout << char(201) << char(205) << char(205) << char(188);
-
-	for (int i = 0; i < 3; ++i) {
-		gotoXY(XX + 3, YY + 2 + i);
+	for (int i = 1; i <= 3; ++i) {
+		gotoXY(XX, YY + i);
 		setColor(0, 0); cout << "  ";
 		setColor(co_theme); cout << char(186);
 	}
+	
+	gotoXY(XX, YY + 4);
+	setColor(0, 0); cout << "       ";
+	setColor(co_theme); cout << char(187);
 
-	gotoXY(XX + 3, YY + 5);
-	cout << char(200) << char(205) << char(188);
-	cout << "chu L";
-
+	gotoXY(XX, YY + 5);
+	cout << char(200);
+	for (int i = 0; i < 6; ++i) cout << char(205);
+	cout << char(188);
 }
 
-void drawD(int XX, int YY) {
+void drawD(int XX, int YY) {  // 6 * 8
 	gotoXY(XX, YY);
-	setColor(0, 0);  cout << "        ";
+	setColor(0, 0); cout << "      ";
 	setColor(co_theme); cout << char(187);
 
 	gotoXY(XX, YY + 1);
-	cout << char(200) << char(205) << char(205);
 	setColor(0, 0); cout << "  ";
-	setColor(co_theme);  cout << char(201) << char(205) << char(205) << char(188);
+	setColor(co_theme); cout << char(201) << char(205) << char(205);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(187);
 
-	for (int i = 0; i < 3; ++i) {
-		gotoXY(XX + 3, YY + 2 + i);
+	for (int i = 2; i <= 3; ++i) {
+		gotoXY(XX, YY + i);
+		setColor(0, 0); cout << "  ";
+		setColor(co_theme); cout << char(186) << "  ";
 		setColor(0, 0); cout << "  ";
 		setColor(co_theme); cout << char(186);
 	}
 
-	gotoXY(XX + 3, YY + 5);
-	cout << char(200) << char(205) << char(188);
-	cout << "chu D";
+	gotoXY(XX, YY + 4);
+	setColor(0, 0); cout << "      ";
+	setColor(co_theme); cout << char(201) << char(188);
+
+	gotoXY(XX, YY + 5);
+	cout << char(200);
+	for (int i = 0; i < 5; ++i) cout << char(205);
+	cout << char(188);
 }
 
 void drawG(int XX, int YY) {
@@ -339,10 +346,10 @@ void drawABOUT(int XX, int YY) {
 
 void drawLOADGAME(int XX, int YY) {
 	drawL(XX, YY);
-	drawO(XX + 10, YY);
-	drawA(XX + 20, YY);
-	drawD(XX + 30, YY);
-	drawG(XX + 45, YY);
+	drawO(XX + 8, YY);
+	drawA(XX + 17, YY);
+	drawD(XX + 25, YY);
+	drawG(XX + 37, YY);
 	drawA(XX + 60, YY);
 	drawM(XX + 70, YY);
 	drawE(XX + 80, YY);
@@ -367,7 +374,7 @@ void drawBoardMenu(int XX, int YY, int size, int b_color, string str) { // size 
 	setColor(co_theme);
 }
 
-void drawBoard(int startX, int startY) {  // V? b?ng Caro 12 * 12
+void drawBoard(int startX, int startY) {  // Vẽ bảng caro 12*12
 	setColor(co_theme);
 	for (int y = 0; y <= 2 * BOARD_SIZE; ++y) {
 		for (int x = 0; x <= 4 * BOARD_SIZE; ++x) {
@@ -391,7 +398,7 @@ void drawBoard(int startX, int startY) {  // V? b?ng Caro 12 * 12
 	}
 }
 
-void drawBoardSize(int XX, int YY, int h, int w) { // h * w, v? b?ng vi?n b?
+void drawBoardSize(int XX, int YY, int h, int w) { // h * w, vẽ bảng viền bự
 	setColor(co_theme);
 
 	gotoXY(XX, YY); cout << char(201);
