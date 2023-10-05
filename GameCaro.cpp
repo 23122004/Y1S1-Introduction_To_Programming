@@ -104,8 +104,8 @@ int32_t main() {
 
 	ShowCur(0);
 	drawMenu(46, 12);
-	nextMove();
 
+	//drawD(10, 10);
 	_getch();
 
 	return 0;
