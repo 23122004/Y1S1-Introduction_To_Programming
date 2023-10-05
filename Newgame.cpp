@@ -3,12 +3,63 @@
 #include "Console.h"
 #include "Graphic.h"
 using namespace std;
+    //dienten 
+void putname(int XX, int YY, string  &a) 
+{
+	char ch = '`';
 	
-	void player2() {}
+
+	while (1)
+	{
+		int x, y;
+		ch = _getch();
+		if (ch == 13 || ch == 10) // kiểm tra nếu nhấn enter thì dừng
+		{
+			cout<<"\n";
+			break;
+		}
+		if (ch == '\b' && a.size()) // nếu là ký tự backspace thì xóa
+		{
+			a.pop_back();
+			curr_coordinate(x, y);
+			x--;
+			gotoXY(XX , YY);
+			cout << " ";
+			curr_coordinate(x, y);
+			x--;
+			gotoXY(XX, YY);
+		}
+		else if (a.size() < 10) // giới hạn 10 ký tự
+		{
+			a.push_back(ch);
+			cout << ch;
+		}
+	}
+	cout << a; // a hiện tại là tên
+	
+}
+	
+	//dientenhainguoichoi
+    void player2(int XX, int YY)
+	{
+		system("cls");
+		string nameplayer1; 
+	    drawBoardMenu(XX, YY, 20, 15, "NAME PLAYER 1: ");
+		drawBoardMenu(XX, YY, 25, 14, ">>NAME PLAYER 1: << ");
+		int X_1 = XX + 14; //toa do ten nguoi dung 
+			putname(X_1, YY, nameplayer1);
+		string nameplayer2;
+		drawBoardMenu(XX, YY+ 3 , 20, 15, "NAME PLAYER 2: ");
+		drawBoardMenu(XX, YY + 3 , 20, 14, ">>NAME PLAYER 2: << ");
+		putname(X_1, YY , nameplayer2);
+		
+
+	}
 	void player1() {}
 	void home() {}
 	
 	void drawNewGameMenu(int XX, int YY) {
+		system("cls");
 		struct _aboutMenu1 {
 			int X1, Y1, size1, b_color1;
 			string str1;
@@ -40,7 +91,7 @@ using namespace std;
 			if (_in1 == 1) S1 = (S1 + 2) % 3;
 			else if (_in1 == 3) S1 = (S1 + 1) % 3;
 			else if (_in1 == 0) {
-				if (S1 == 0) player2();
+				if (S1 == 0) player2(XX,YY);
 				else if (S1 == 1) player1();
 				else if (S1 == 2) home();
 				else assert(false);
