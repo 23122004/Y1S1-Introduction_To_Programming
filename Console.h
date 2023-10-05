@@ -7,6 +7,7 @@ void fixConsoleWindow(int WIDTH, int HEIGHT);
 void gotoXY(int x, int y);
 void setColor(int background_color, int text_color);
 void ShowCur(bool CursorVisibility);
+void curr_coordinate(int& x, int& y);
 int nextMove();
 
 #endif

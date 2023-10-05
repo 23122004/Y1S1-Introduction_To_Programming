@@ -76,6 +76,7 @@
  - Thắng tô đậm lên
  - Lưu giới hạn tối đa 10 file
  - Load game có chức năng: play, delete, rename
+ - Nếu ô đó đã đánh thì tô đậm + không đánh được nữa
 
 * Đoạn code giới hạn ký tự
 #include "library.h"

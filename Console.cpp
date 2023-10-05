@@ -32,6 +32,14 @@ void ShowCur(bool CursorVisibility) {  // Ẩn hiện con trỏ; 0: ẩn, 1: hi�
 	SetConsoleCursorInfo(handle, &cursor);
 }
 
+void curr_coordinate(int& x, int& y) // lấy vị trí hiện tại của con trỏ
+{
+	CONSOLE_SCREEN_BUFFER_INFO curr;
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &curr);
+	x = curr.dwCursorPosition.X;
+	y = curr.dwCursorPosition.Y;
+}
+
 int nextMove() {  // Nhận các thao tác chức năng cơ bản
 	while (true) {
 		if (_kbhit()) {
