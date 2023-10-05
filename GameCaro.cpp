@@ -2,12 +2,8 @@
 #include "GameControl.h"
 #include "Console.h"
 #include "Graphic.h"
-<<<<<<< HEAD
 #include "Newgame.h"
-
-=======
 #include "LoadGame.h"
->>>>>>> e16f926704a4ab09ce9886f2261ce9180a020e25
 using namespace std;
 
 void startGame() {
