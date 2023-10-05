@@ -4,6 +4,7 @@
 void loadGame() {
 	system("cls");
 	cout << "TEST";
+	drawLOADGAME(18, 3);
 
 
 	while (true) {
