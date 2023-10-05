@@ -1,4 +1,5 @@
 #include "LoadGame.h"
+#include "Graphic.h"
 
 
 void loadGame() {
@@ -7,8 +8,5 @@ void loadGame() {
 	drawLOADGAME(18, 3);
 
 
-	while (true) {
-		if (nextMove() == 5)
-			return;
-	}
+	while (nextMove() != 5); // press ESC to exit
 }

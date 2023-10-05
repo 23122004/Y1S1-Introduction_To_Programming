@@ -4,6 +4,8 @@
 #include "Graphic.h"
 #include "Newgame.h"
 #include "LoadGame.h"
+
+#define co_theme 15, 0
 using namespace std;
 
 void startGame() {
@@ -22,11 +24,22 @@ void about() {
 	system("cls");
 	drawABOUT(36, 3);
 	
+	setColor(co_theme);
+	int XX = 40, YY = 13;
 
-	while (true) {
-		if (nextMove() == 5)
-			return;
-	}
+	drawBoardSize(XX - 4, YY - 2, 17, 43);
+	gotoXY(XX, YY);      cout << "HCMUS - 23TNT1 - Group 5:";
+	gotoXY(XX, YY + 2);  cout << "   23122001 - Dinh Duc Anh Khoa";
+	gotoXY(XX, YY + 4);  cout << "   23122002 - Nguyen Dinh Ha Duong";
+	gotoXY(XX, YY + 6);  cout << "   23122013 - Dinh Duc Tai";
+	gotoXY(XX, YY + 8);  cout << "   23122004 - Nguyen Le Hoang Trung";
+	gotoXY(XX, YY + 10); cout << "Advisor: Dr.Truong Toan Thinh";
+
+	setColor(14, 0);
+	gotoXY(XX + 6, YY + 12); cout << "<< Press ESC to exit >>";
+	setColor(co_theme);
+
+	while (nextMove() != 5);
 }
 
 void help() {
@@ -87,11 +100,11 @@ void drawMenu(int XX, int YY) {
 
 int32_t main() {
 	fixConsoleWindow(1100, 710);
+	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
 
 	ShowCur(0);
 	drawMenu(46, 12);
 	nextMove();
-
 
 	_getch();
 
