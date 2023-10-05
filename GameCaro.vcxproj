@@ -131,12 +131,14 @@
     <ClCompile Include="GameCaro.cpp" />
     <ClCompile Include="GameControl.cpp" />
     <ClCompile Include="Graphic.cpp" />
+    <ClCompile Include="Newgame.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Console.h" />
     <ClInclude Include="GameControl.h" />
     <ClInclude Include="Graphic.h" />
     <ClInclude Include="library.h" />
+    <ClInclude Include="Newgame.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Note.txt" />

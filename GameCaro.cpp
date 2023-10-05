@@ -2,6 +2,8 @@
 #include "GameControl.h"
 #include "Console.h"
 #include "Graphic.h"
+#include "Newgame.h"
+
 using namespace std;
 
 void startGame() {
@@ -11,8 +13,8 @@ void startGame() {
 }
 
 // Menu
-void newGame() {
-
+void newGame(int XX,int YY ) {
+	drawNewGameMenu(XX, YY);
 }
 
 void loadGame() {
@@ -74,7 +76,7 @@ void drawMenu(int XX, int YY) {
 		if (_in == 1) S = (S + 4) % 5;
 		else if (_in == 3) S = (S + 1) % 5;
 		else if (_in == 0) {
-			if (S == 0) newGame();
+			if (S == 0) newGame(XX,YY);
 			else if (S == 1) loadGame();
 			else if (S == 2) about();
 			else if (S == 3) help();
@@ -92,6 +94,7 @@ int32_t main() {
 	ShowCur(0);
 	drawMenu(46, 12);
 	nextMove();
+
 
 	_getch();
 
