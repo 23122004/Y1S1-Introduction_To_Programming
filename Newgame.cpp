@@ -4,6 +4,7 @@
 #include "Graphic.h"
 using namespace std;
     //dienten 
+void play() {}
 void putname(int XX, int YY, string  &a) 
 {
 	char ch = '`';
@@ -40,26 +41,29 @@ void putname(int XX, int YY, string  &a)
 }
 	
 	//dientenhainguoichoi
-    void player2(int XX, int YY)
-	{
-		system("cls");
-		string nameplayer1; 
-	    drawBoardMenu(XX, YY, 20, 15, "NAME PLAYER 1: ");
-		drawBoardMenu(XX, YY, 25, 14, ">>NAME PLAYER 1: << ");
-		int X_1 = XX + 14; //toa do ten nguoi dung 
-			putname(X_1, YY, nameplayer1);
-		string nameplayer2;
-		drawBoardMenu(XX, YY+ 3 , 20, 15, "NAME PLAYER 2: ");
-		drawBoardMenu(XX, YY + 3 , 20, 14, ">>NAME PLAYER 2: << ");
-		putname(X_1, YY , nameplayer2);
-		
+void player2(int XX, int YY, string nameplayer1, string nameplayer2)
+{
+	system("cls");
+	drawBoardMenu(XX, YY, 23, 15, "NAME PLAYER 1:    ");
+	int X_1 = XX + 14; //toa do ten nguoi dung 
+	putname(X_1, YY, nameplayer1);
+	drawBoardMenu(XX, YY + 3, 23, 15, "NAME PLAYER 2:      ");
+	putname(X_1, YY, nameplayer2);
+	while (true) {
+		if (_kbhit()) {
+			char c = _getch();
 
+			if (c == 13) play();
+
+
+		}
 	}
+}
+
 	void player1() {}
 	void home() {}
 	
 	void drawNewGameMenu(int XX, int YY) {
-		system("cls");
 		struct _aboutMenu1 {
 			int X1, Y1, size1, b_color1;
 			string str1;
@@ -69,34 +73,33 @@ void putname(int XX, int YY, string  &a)
 			}
 		};
 
-		_aboutMenu1 s3[3], s4[3];  // s3: phông thường, s4: phông highlight
-		s3[0] = { XX, YY, 20, 15, "     2 PLAYER     " };
-		s3[1] = { XX, YY + 3, 20, 15, "     1 PLAYER     " };
-		s3[2] = { XX, YY + 6, 20, 15, "       HOME      " };
-		
+		_aboutMenu1 s1[2], s2[2];  // s3: phông thường, s4: phông highlight
+		s1[0] = { XX, YY, 20, 15, "     1 PLAYER     " };
+		s1[1] = { XX, YY + 3, 20, 15, "     2 PLAYER     " };
 
-		s4[0] = { XX, YY, 20, 14, ">>   2 PLAYER   <<" };
-		s4[1] = { XX, YY + 3, 20, 14, ">>   1 PLAYER  <<" };
-		s4[2] = { XX, YY + 6, 20, 14, ">>     HOME    <<" };
-;
+		s2[0] = { XX, YY, 20, 14, ">>   1 PLAYER   <<" };
+		s2[1] = { XX, YY + 3, 20, 14, ">>   2 PLAYER  <<" };
 
-		int S1 = 0;  // Con trỏ hiển thị mục đang chọn
+		system("cls");
+		int S = 0;  // Con trỏ hiển thị mục đang chọn
+		string name1, name2; 
 		while (true) {
-			drawCARO(40, 3);
-			for (int i = 0; i < 3; ++i)
-				s3[i].draw();
-			s4[S1].draw();
+			drawNEWGAME(XX, YY);
+			for (int i = 0; i < 2; ++i)
+				s1[i].draw();
+			s2[S].draw();
 
 			int _in1 = nextMove();
-			if (_in1 == 1) S1 = (S1 + 2) % 3;
-			else if (_in1 == 3) S1 = (S1 + 1) % 3;
+			if (_in1 == 1) S = (S + 2) % 3;
+			else if (_in1 == 3) S = (S + 1) % 3;
 			else if (_in1 == 0) {
-				if (S1 == 0) player2(XX,YY);
-				else if (S1 == 1) player1();
-				else if (S1 == 2) home();
+				if (S == 0) player1();
+				else if (S == 1) player2(XX,YY,name1, name2 );
 				else assert(false);
-				system("cls");
+				break;
 			}
+			else if (_in1 == 5)
+				break;
 		}
 	}
 
