@@ -322,7 +322,6 @@ void drawE(int XX, int YY) {
 	cout << "chu E";
 }
 
-
 void drawCARO(int XX, int YY) {
 	drawC(XX, YY);
 	drawA(XX + 8, YY);
