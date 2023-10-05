@@ -108,7 +108,7 @@ int main()
         ch = getch();
         if(ch == 13 || ch == 10) // kiểm tra nếu nhấn enter thì dừng
         {
-            printf("\n");
+			cout << '\n';
             break;
         }
         if(ch == '\b' && a.size()) // nếu là ký tự backspace thì xóa
