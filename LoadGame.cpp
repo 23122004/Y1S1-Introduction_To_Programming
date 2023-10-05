@@ -1,6 +1,13 @@
 #include "LoadGame.h"
 
-void loadgame() {
+
+void loadGame() {
 	system("cls");
-	cout << "Test";
+	cout << "TEST";
+
+
+	while (true) {
+		if (nextMove() == 5)
+			return;
+	}
 }

@@ -2,6 +2,7 @@
 #include "GameControl.h"
 #include "Console.h"
 #include "Graphic.h"
+#include "LoadGame.h"
 using namespace std;
 
 void startGame() {
@@ -15,9 +16,6 @@ void newGame() {
 
 }
 
-void loadGame() {
-
-}
 
 void about() {
 	system("cls");
