@@ -14,7 +14,7 @@ void startGame() {
 
 // Menu
 void newGame(int XX,int YY ) {
-	drawNewGameMenu(XX, YY);
+	drawNewGameMenu(XX, YY);	
 }
 
 
