@@ -4,8 +4,6 @@
 #include "Graphic.h"
 #include "Newgame.h"
 #include "LoadGame.h"
-
-#define co_theme 15, 0
 using namespace std;
 
 void startGame() {
