@@ -17,10 +17,13 @@ void drawD(int XX, int YY);
 void drawG(int XX, int YY);
 void drawM(int XX, int YY);
 void drawE(int XX, int YY);
+void drawN(int XX, int YY);
+void drawW(int XX, int YY);
 
 void drawCARO(int XX, int YY);
 void drawABOUT(int XX, int YY);
 void drawLOADGAME(int XX, int YY);
+void drawNEWGAME(int XX, int YY);
 
 void drawBoard(int startX, int startY);
 void drawBoardMenu(int XX, int YY, int size, int b_color, string str);
