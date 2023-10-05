@@ -27,7 +27,9 @@
     <ClCompile Include="Graphic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Newgame.cpp">
+    <ClCompile Include="Newgame.cpp">      
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="LoadGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -46,6 +48,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Newgame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="LoadGame.h">
       <Filter>Header Files</Filter>
     </ClInclude>
