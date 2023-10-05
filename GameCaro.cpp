@@ -2,13 +2,10 @@
 #include "GameControl.h"
 #include "Console.h"
 #include "Graphic.h"
-#define co_theme 15, 0
-<<<<<<< HEAD
 #include "Newgame.h"
-
-=======
 #include "LoadGame.h"
->>>>>>> e16f926704a4ab09ce9886f2261ce9180a020e25
+
+#define co_theme 15, 0
 using namespace std;
 
 void startGame() {
