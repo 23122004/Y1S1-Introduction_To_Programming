@@ -256,7 +256,7 @@ void playerMove(int& x, int& y, int turn) // người chơi turn = 1 hoặc -1 l
     // *vẽ vào tọa độ x, y
 }
 
-void addBoard(int **a, int turn, int lastX, int lastY)
+void loadGameBoardUpdate(int **a, int turn, int lastX, int lastY)
 {
     for (int i = 1; i <= BOARD_SIZE; i++)
         for (int j = 1; j <= BOARD_SIZE; j++)
