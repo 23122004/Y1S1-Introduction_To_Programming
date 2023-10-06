@@ -1,4 +1,6 @@
 ﻿#include "GameControl.h"
+#include "Newgame.h"
+#include "Graphic.h"
 
 const int BOARD_SIZE = 12;
 _Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
@@ -264,4 +266,13 @@ void loadGameBoardUpdate(int **a, int turn, int lastX, int lastY)
     _X = status[lastX][lastY].X;
     _Y = status[lastX][lastY].Y;
     _TURN = turn;
+}
+
+void startGame(bool vsBot) {
+    system("cls");
+    resetData(0, 0);
+    drawBoard(0, 0);
+
+
+    _getch();
 }

@@ -1,14 +1,6 @@
 ﻿#include "Newgame.h"
+#include "GameControl.h"
 using namespace std;
-
-void startGame() {
-	system("cls");
-	resetData(0, 0);
-	drawBoard(0, 0);
-
-
-	_getch();
-}
 
 bool putname(int XX, int YY, string &str) {  // Insert name
 	setColor(15, 0);
@@ -50,7 +42,7 @@ void player2(int XX, int YY) {
 	drawBoardMenu(XX, YY + 3, 29, 15, " NAME PLAYER 2: ");
 	if (!putname(XX + 17, YY + 4, name2 = "[player2]")) return;
 
-	startGame();
+	startGame(false);
 }
 
 void player1(int XX, int YY) {
@@ -60,7 +52,7 @@ void player1(int XX, int YY) {
 	drawBoardMenu(XX, YY, 27, 15, " NAME PLAYER:   ");
 	if (!putname(XX + 15, YY + 1, name = "[player]")) return;
 
-	startGame();
+	startGame(true);
 }
 	
 void drawNewGameMenu(int XX, int YY) {

@@ -18,5 +18,6 @@ void botMove(int& x, int& y); // nước đi của bot
 void playerMove(int& x, int& y, int turn); // nước đi của người chơi
 void loadGameBoardUpdate(int** a, int turn, int lastX, int lastY); // cập nhật bảng hiện tại nếu load game
 // sửa lại bằng mảng động hoặc vector đều được
+void startGame(bool vsBot);
 
 #endif
