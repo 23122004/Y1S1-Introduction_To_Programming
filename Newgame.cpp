@@ -16,8 +16,10 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 		int x, y;
 		char ch = _getch();
 
-		if (ch == 13 && (int)str.size()) 
-			break;  // if "enter" then exit
+		if (ch == 13)
+		{
+			if((int)str.size()) break;  // if "enter" then exit
+		}
 		else if (ch == 27) 
 			return 0;  // if "esc" then back to menu
 		else if (ch == '\b' && (int)str.size()) {  // nếu là ký tự backspace thì xóa
