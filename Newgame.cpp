@@ -36,7 +36,7 @@ void putname(int XX, int YY, string  &a)
 			cout << ch;
 		}
 	}
-	cout << a; // a hiện tại là tên
+	
 	
 }
 	
@@ -61,10 +61,7 @@ void player2(int XX, int YY, string nameplayer1, string nameplayer2)
 }
 
 	void player1() {}
-	void home() {}
-	
-void player1() {}
-void player2() {}
+
 	
 void drawNewGameMenu(int XX, int YY) {
 	struct _aboutMenu1 {
@@ -83,11 +80,11 @@ void drawNewGameMenu(int XX, int YY) {
 	s2[0] = { XX, YY, 20, 14, ">>   1 PLAYER   <<" };
 	s2[1] = { XX, YY + 3, 20, 14, ">>   2 PLAYER  <<" };
 
-		system("cls");
+	system("cls");
 		int S = 0;  // Con trỏ hiển thị mục đang chọn
 		string name1, name2; 
 		while (true) {
-			drawNEWGAME(XX, YY);
+			drawNEWGAME(23, 3);
 			for (int i = 0; i < 2; ++i)
 				s1[i].draw();
 			s2[S].draw();
@@ -96,7 +93,7 @@ void drawNewGameMenu(int XX, int YY) {
 		if (_in1 == 1 || _in1 == 3) S ^= 1;
 		else if (_in1 == 0) {
 			if (S == 0) player1();
-			else if (S == 1) player2();
+			else if (S == 1) player2(XX,YY, name1 ,name2 );
 			else assert(false);
 			break;
 		} else if (_in1 == 5)
