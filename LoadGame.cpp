@@ -4,9 +4,7 @@
 
 void loadGame() {
 	system("cls");
-	cout << "TEST";
-	drawLOADGAME(18, 3);
-
+	drawLOADGAME(20, 3);
 
 	while (nextMove() != 5); // press ESC to exit
 }

@@ -8,4 +8,5 @@ void home(int XX, int YY);
 void putname(int XX, int YY);
 
 void drawNewGameMenu(int XX, int YY);
+
 #endif

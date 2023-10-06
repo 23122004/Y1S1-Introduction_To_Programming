@@ -16,7 +16,7 @@ void startGame() {
 
 // Menu
 void newGame(int XX,int YY ) {
-	drawNewGameMenu(XX, YY);
+	drawNewGameMenu(XX, YY);	
 }
 
 
@@ -24,7 +24,7 @@ void about() {
 	system("cls");
 	drawABOUT(36, 3);
 	
-	setColor(co_theme);
+
 	int XX = 40, YY = 13;
 
 	drawBoardSize(XX - 4, YY - 2, 17, 43);
@@ -97,14 +97,12 @@ void drawMenu(int XX, int YY) {
 	}
 }
 
-
 int32_t main() {
 	fixConsoleWindow(1100, 710);
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
 
 	ShowCur(0);
 	drawMenu(46, 12);
-	nextMove();
 
 	_getch();
 
