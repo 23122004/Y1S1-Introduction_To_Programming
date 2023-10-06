@@ -16,7 +16,7 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
 void resetData(int startX, int startY); // reset bảng
 void botMove(int& x, int& y); // nước đi của bot
 void playerMove(int& x, int& y, int turn); // nước đi của người chơi
-void addBoard(int** a, int turn, int lastX, int lastY); // cập nhật bảng hiện tại nếu load game
+void loadGameBoardUpdate(int** a, int turn, int lastX, int lastY); // cập nhật bảng hiện tại nếu load game
 // sửa lại bằng mảng động hoặc vector đều được
 
 #endif
