@@ -527,20 +527,33 @@ void drawBoard(int XX, int YY) {  // Vẽ bảng caro 12*12
 		for (int x = 0; x <= 4 * BOARD_SIZE; ++x) {
 			gotoXY(XX + x, YY + y);
 
-			if (x == 0 && y == 0) cout << char(218);
-			else if (x == 0 && y == 2 * BOARD_SIZE) cout << char(192);
-			else if (x == 4 * BOARD_SIZE && y == 0) cout << char(191);
-			else if (x == 4 * BOARD_SIZE && y == 2 * BOARD_SIZE) cout << char(217);
+			if (x == 0 && y == 0) cout << char(201);
+			else if (x == 0 && y == 2 * BOARD_SIZE) cout << char(200);
+			else if (x == 4 * BOARD_SIZE && y == 0) cout << char(187);
+			else if (x == 4 * BOARD_SIZE && y == 2 * BOARD_SIZE) cout << char(188);
 
-			else if (x % 4 == 0 && y == 0) cout << char(194);
-			else if (x % 4 == 0 && y == 2 * BOARD_SIZE) cout << char(193);
-			else if (x == 0 && y % 2 == 0) cout << char(195);
-			else if (x == 4 * BOARD_SIZE && y % 2 == 0) cout << char(180);
+			else if (x % 4 == 0 && y == 0) cout << char(209);
+			else if (x % 4 == 0 && y == 2 * BOARD_SIZE) cout << char(207);
+			else if (x == 0 && y % 2 == 0) cout << char(199);
+			else if (x == 4 * BOARD_SIZE && y % 2 == 0) cout << char(182);
 
 			else if (x % 4 == 0 && y % 2 == 0) cout << char(197);
-			else if (x % 4 == 0) cout << char(179);
-			else if (y % 2 == 0) cout << char(196);
-			else cout << " ";
+			else if (x % 4 == 0) {
+				if (x == 0 || x == 4 * BOARD_SIZE) cout << char(186);
+				else cout << char(179);
+			} else if (y % 2 == 0) {
+				if (y == 0 || y == 2 * BOARD_SIZE) cout << char(205);
+				else cout << char(196);
+			} else cout << " ";
 		} cout << "\n";
 	}
+}
+
+void drawPopUp(int XX, int YY) {
+	gotoXY(XX, YY);
+	cout << " " << char(201); for (int i = 0; i < 16; ++i) cout << char(205); cout << char(187) << "\n";
+	cout << char(201) << char(188) << "                " << char(200) << char(187) << "\n";
+	cout << char(186) << "     NEW GAME     " << char(186) << "\n";
+	cout << char(200) << char(187) << "                " << char(201) << char(188) << "\n";
+	cout << " " << char(200); for (int i = 0; i < 16; ++i) cout << char(205); cout << char(188);
 }

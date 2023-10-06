@@ -28,5 +28,6 @@ void drawNEWGAME(int XX, int YY);
 void drawBoard(int startX, int startY);
 void drawBoardMenu(int XX, int YY, int size, int b_color, string str);
 void drawBoardSize(int XX, int YY, int h, int w);
+void drawPopUp(int XX, int YY);
 
 #endif

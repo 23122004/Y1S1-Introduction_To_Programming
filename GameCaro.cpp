@@ -17,11 +17,9 @@ void newGame(int XX,int YY ) {
 void about() {
 	system("cls");
 	drawABOUT(36, 3);
-	
-
 	int XX = 40, YY = 13;
 
-	drawBoardSize(XX - 4, YY - 2, 17, 43);
+	drawBoardSize(XX - 6, YY - 2, 17, 47);
 	gotoXY(XX, YY);      cout << "HCMUS - 23TNT1 - Group 5:";
 	gotoXY(XX, YY + 2);  cout << "   23122001 - Dinh Duc Anh Khoa";
 	gotoXY(XX, YY + 4);  cout << "   23122002 - Nguyen Dinh Ha Duong";
