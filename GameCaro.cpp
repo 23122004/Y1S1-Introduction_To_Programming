@@ -8,12 +8,6 @@
 #define co_theme 15, 0
 using namespace std;
 
-void startGame() {
-	system("cls");
-	resetData(0, 0);
-	drawBoard(0, 0);
-}
-
 // Menu
 void newGame(int XX,int YY ) {
 	drawNewGameMenu(XX, YY);	
