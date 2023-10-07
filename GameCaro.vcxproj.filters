@@ -57,5 +57,6 @@
   <ItemGroup>
     <Text Include="Note.txt" />
     <Text Include="game1.txt" />
+    <Text Include="game2.txt" />
   </ItemGroup>
 </Project>

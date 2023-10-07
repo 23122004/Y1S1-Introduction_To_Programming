@@ -13,6 +13,6 @@ void Overwrite_information_to_file(const std::string& fileName, int** a, int tur
 void loadFromFile(string filename);
 void CurrentGame(string filename, int XX, int YY);
 void drawBoardWithValues(int XX, int YY, int** a);
-
+void drawNameOfGame(int XX, int YY, string Current_game);
 
 #endif

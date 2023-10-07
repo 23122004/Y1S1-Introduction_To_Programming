@@ -4,15 +4,40 @@
 #include "Graphic.h"
 
 
+// vector fileNames include name of files that save the game
+// each fileName have some particular information : 
+// First line : turn, lastX, lastY
+//       next : 2-dimensional matrix a
+vector<string> fileNames;
+
 void loadGame() {
-	int t = nextMove();
+	// new screen LoadGame
 	system("cls");
 	drawLOAD_GAME(20, 3);
 	drawBoard(15, 20);
-	CurrentGame("game1.txt", 15, 20);
+
+	
+	fileNames.push_back("game1.txt");
+	fileNames.push_back("game2.txt");
+
+	string Current_game = "game1.txt";
+	
+	CurrentGame(Current_game, 15, 20);
+	
+	int index = 0;
 	while (nextMove() != 5) {
-		int t = nextMove();
-	}; // press ESC to exit
+		if (nextMove() == 1) {
+			Current_game = fileNames[index];
+			index = (index + 1) % fileNames.size();
+			CurrentGame(Current_game, 15, 20);
+		}
+		if (nextMove() == 3) {
+			Current_game = fileNames[index];
+			index = (index - 1) % fileNames.size();
+			CurrentGame(Current_game, 15, 20);
+		}
+	}
+	// press ESC to exit
 }
 
 
@@ -42,11 +67,17 @@ void CurrentGame(string filename, int XX, int YY) {
 	}
 
 	drawBoardWithValues(XX, YY, a);
-
+	drawNameOfGame(90, 20, filename);
 	for (int i = 1; i <= BOARD_SIZE_loadgame; i++) {
 		delete[] a[i];
 	}
 	delete[] a;
+}
+
+
+void drawNameOfGame(int XX, int YY, string Current_game) {
+	gotoXY(XX, YY);
+	cout << Current_game;
 }
 
 
@@ -57,10 +88,10 @@ void drawBoardWithValues(int XX, int YY, int** a) {
 	int cellWidth = 4;
 	int cellHeight = 2;
 
-	for (int i = 0; i < BOARD_SIZE_loadgame; ++i) {
-		for (int j = 0; j < BOARD_SIZE_loadgame; ++j) {
-			int centerX = XX + j * cellWidth + cellWidth / 2;
-			int centerY = YY + i * cellHeight + cellHeight / 2;
+	for (int i = 1; i <= BOARD_SIZE_loadgame; ++i) {
+		for (int j = 1; j <= BOARD_SIZE_loadgame; ++j) {
+			int centerX = XX + j * cellWidth + cellWidth / 2 - 4;
+			int centerY = YY + i * cellHeight + cellHeight / 2 - 2;
 
 			gotoXY(centerX, centerY);
 
@@ -78,12 +109,8 @@ void drawBoardWithValues(int XX, int YY, int** a) {
 }
 
 
-// vector fileNames include name of files that save the game
-// each fileName have some particular information : 
-// First line : turn, lastX, lastY
-//       next : 2-dimensional matrix a
 
-vector<string> fileNames;
+
 
 // OVERWRITE A NEW FILEGAME
 
