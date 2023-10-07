@@ -549,11 +549,33 @@ void drawBoard(int XX, int YY) {  // Vẽ bảng caro 12*12
 	}
 }
 
-void drawPopUp(int XX, int YY) {
-	gotoXY(XX, YY);
-	cout << " " << char(201); for (int i = 0; i < 16; ++i) cout << char(205); cout << char(187) << "\n";
-	cout << char(201) << char(188) << "                " << char(200) << char(187) << "\n";
-	cout << char(186) << "     NEW GAME     " << char(186) << "\n";
-	cout << char(200) << char(187) << "                " << char(201) << char(188) << "\n";
-	cout << " " << char(200); for (int i = 0; i < 16; ++i) cout << char(205); cout << char(188);
+void drawPopUp(int XX, int YY, int h, int w) {
+	setColor(co_theme);
+
+	gotoXY(XX + 2, YY); 
+		cout << char(201); 
+		for (int i = 0; i < w - 6; ++i) cout << char(205); 
+		cout << char(187);
+
+	gotoXY(XX + 1, YY + 1); cout << char(201) << char(188);
+	gotoXY(XX + w - 3, YY + 1); cout << char(200) << char(187) << "\n";
+
+	gotoXY(XX, YY + 2); cout << char(201) << char(188);
+	gotoXY(XX + w - 2, YY + 2); cout << char(200) << char(187) << "\n";
+
+	for (int i = 0; i < h - 6; ++i) {
+		gotoXY(XX, YY + 3 + i); cout << char(186);
+		gotoXY(XX + w - 1, YY + 3 + i); cout << char(186);
+	}
+
+	gotoXY(XX, YY + h - 3); cout << char(200) << char(187);
+	gotoXY(XX + w - 2, YY + h - 3); cout << char(201) << char(188);
+
+	gotoXY(XX + 1, YY + h - 2); cout << char(200) << char(187);
+	gotoXY(XX + w - 3, YY + h - 2); cout << char(201) << char(188);
+
+	gotoXY(XX + 2, YY + h - 1);
+		cout << char(200); 
+		for (int i = 0; i < w - 6; ++i) cout << char(205);
+		cout << char(188);
 }
