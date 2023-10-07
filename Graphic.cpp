@@ -449,6 +449,127 @@ void drawW(int XX, int YY) {  // 6 * 10
 	cout << char(200) << char(205) << char(205) << char(188) << char(200) << char(205) << char(205) << char(188);
 }
 
+void drawH(int XX, int YY) {  // 6 * 8
+	gotoXY(XX, YY);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(187) << "  ";
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(187);
+
+	gotoXY(XX, YY + 1);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186) << "  ";
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 2);
+	setColor(0, 0); cout << "       ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 3);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(201) << char(205) << char(205);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 4);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186) << "  ";
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 5);
+	cout << char(200) << char(205) << char(188) << "  " << char(200) << char(205) << char(188);
+}
+
+void drawP(int XX, int YY) {  // 6 * 8
+	gotoXY(XX, YY );
+	setColor(0, 0); cout << "      ";
+	setColor(co_theme); cout << char(187);
+
+	gotoXY(XX, YY + 1);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(201) << char(205) << char(205);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(187);
+
+	gotoXY(XX, YY + 2);
+	setColor(0, 0); cout << "      ";
+	setColor(co_theme); cout << char(201) << char(188);
+
+	gotoXY(XX, YY + 3);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(201) << char(205) << char(205) << char(205) << char(188);
+
+	gotoXY(XX, YY + 4);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 5);
+	cout << char(200) << char(205) << char(188);
+}
+
+void drawX(int XX, int YY) {  // 6 * 8
+	gotoXY(XX, YY);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(187) << "  ";
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(187);
+
+	gotoXY(XX, YY + 1);
+	cout << char(200);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(187);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(201) << char(188);
+
+	gotoXY(XX, YY + 2);
+	cout << " " << char(200);
+	setColor(0, 0); cout << "   ";
+	setColor(co_theme); cout << char(201) << char(188);
+
+	gotoXY(XX, YY + 3);
+	cout << " ";
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(201);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(187);
+
+	gotoXY(XX, YY + 4);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(201) << char(188) << " ";
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(187);
+
+	gotoXY(XX, YY + 5);
+	cout << char(200) << char(205) << char(188) << "  " << char(200) << char(205) << char(188);
+}
+
+void drawI(int XX, int YY) {  // 6 * 3
+	gotoXY(XX, YY);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(187);
+
+	gotoXY(XX, YY + 1);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 2);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 3);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 4);
+	setColor(0, 0); cout << "  ";
+	setColor(co_theme); cout << char(186);
+
+	gotoXY(XX, YY + 5);
+	cout << char(200) << char(205) << char(188);
+}
+
 void drawCARO(int XX, int YY) {
 	drawC(XX, YY);
 	drawA(XX + 8, YY);
@@ -464,7 +585,7 @@ void drawABOUT(int XX, int YY) {
 	drawT(XX + 34, YY);
 }
 
-void drawLOADGAME(int XX, int YY) {
+void drawLOAD_GAME(int XX, int YY) {
 	drawL(XX, YY);
 	drawO(XX + 8, YY);
 	drawA(XX + 17, YY);
@@ -475,7 +596,7 @@ void drawLOADGAME(int XX, int YY) {
 	drawE(XX + 65, YY);
 }
 
-void drawNEWGAME(int XX, int YY) {
+void drawNEW_GAME(int XX, int YY) {
 	drawN(XX, YY);
 	drawE(XX + 10, YY);
 	drawW(XX + 18, YY);
@@ -483,6 +604,27 @@ void drawNEWGAME(int XX, int YY) {
 	drawA(XX + 41, YY);
 	drawM(XX + 49, YY);
 	drawE(XX + 60, YY);
+}
+
+void drawHELP(int XX, int YY) {
+	drawH(XX, YY);
+	drawE(XX + 8, YY);
+	drawL(XX + 16, YY);
+	drawP(XX + 24, YY);
+}
+
+void drawX_WIN(int XX, int YY) {
+	drawX(XX, YY);
+	drawW(XX + 12, YY);
+	drawI(XX + 22, YY);
+	drawN(XX + 25, YY);
+}
+
+void drawO_WIN(int XX, int YY) {
+	drawO(XX, YY);
+	drawW(XX + 13, YY);
+	drawI(XX + 23, YY);
+	drawN(XX + 26, YY);
 }
 
 void drawBoardMenu(int XX, int YY, int size, int b_color, string str) { // 3 * size, vẽ bảng menu chọn

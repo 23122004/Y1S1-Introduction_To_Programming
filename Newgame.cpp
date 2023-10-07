@@ -33,7 +33,7 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 }
 	
 void player2(int XX, int YY) {
-	system("cls"); drawNEWGAME(25, 3);
+	system("cls"); drawNEW_GAME(25, 3);
 	string name1, name2;
 
 	drawBoardMenu(XX, YY, 29, 15, " NAME PLAYER 1: ");
@@ -47,7 +47,7 @@ void player2(int XX, int YY) {
 }
 
 void player1(int XX, int YY) {
-	system("cls"); drawNEWGAME(25, 3);
+	system("cls"); drawNEW_GAME(25, 3);
 	string name;
 
 	drawBoardMenu(XX, YY, 27, 15, " NAME PLAYER:   ");
@@ -78,7 +78,7 @@ void drawNewGameMenu(int XX, int YY) {
 	int S = 0;  // Con trỏ hiển thị mục đang chọn
 
 	while (true) {
-		drawNEWGAME(23, 3);
+		drawNEW_GAME(23, 3);
 		for (int i = 0; i < 2; ++i)
 			s1[i].draw();
 		s2[S].draw();

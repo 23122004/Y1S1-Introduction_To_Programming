@@ -34,7 +34,8 @@ void about() {
 }
 
 void help() {
-
+	system("cls");
+	drawHELP(41, 3);
 }
 
 void exit() {

@@ -19,11 +19,18 @@ void drawM(int XX, int YY);
 void drawE(int XX, int YY);
 void drawN(int XX, int YY);
 void drawW(int XX, int YY);
+void drawH(int XX, int YY);
+void drawP(int XX, int YY);
+void drawX(int XX, int YY);
+void drawI(int XX, int YY);
 
 void drawCARO(int XX, int YY);
 void drawABOUT(int XX, int YY);
-void drawLOADGAME(int XX, int YY);
-void drawNEWGAME(int XX, int YY);
+void drawLOAD_GAME(int XX, int YY);
+void drawNEW_GAME(int XX, int YY);
+void drawHELP(int XX, int YY);
+void drawX_WIN(int XX, int YY);
+void drawO_WIN(int XX, int YY);
 
 void drawBoard(int startX, int startY);
 void drawBoardMenu(int XX, int YY, int size, int b_color, string str);

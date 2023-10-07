@@ -7,7 +7,7 @@
 void loadGame() {
 	int t = nextMove();
 	system("cls");
-	drawLOADGAME(20, 3);
+	drawLOAD_GAME(20, 3);
 	drawBoard(15, 20);
 	CurrentGame("game1.txt", 15, 20);
 	while (nextMove() != 5) {
