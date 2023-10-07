@@ -65,9 +65,9 @@ void loadFromFile(string filename) {
 	file >> lastY;
 
 	// Create // Dynamic allocation of 2-dimensional matrix a
-	int** a = new int*[BOARD_SIZE_loadgame];
+	int** a = new int*[BOARD_SIZE_loadgame + 1];
 	for (int i = 1; i <= BOARD_SIZE_loadgame; i++) {
-		a[i] = new int[BOARD_SIZE_loadgame];
+		a[i] = new int[BOARD_SIZE_loadgame + 1];
 	}
 
 	// file >> matrix a
@@ -81,7 +81,7 @@ void loadFromFile(string filename) {
 	loadGameBoardUpdate(a, turn, lastX, lastY);
 
 	// Delete memory - 
-	for (int i = 1; i <= BOARD_SIZE_loadgame + 2; i++) {
+	for (int i = 1; i <= BOARD_SIZE_loadgame; i++) {
 		delete[] a[i];
 	}
 	delete[] a;
