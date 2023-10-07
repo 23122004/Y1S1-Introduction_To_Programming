@@ -11,6 +11,8 @@ void loadGame();
 void Add_NewFile_to_vector_fileNames(string fileName);
 void Overwrite_information_to_file(const std::string& fileName, int** a, int turn, int lastX, int lastY, int BOARD_SIZE);
 void loadFromFile(string filename);
+void CurrentGame(string filename, int XX, int YY);
+void drawBoardWithValues(int XX, int YY, int** a);
 
 
 #endif

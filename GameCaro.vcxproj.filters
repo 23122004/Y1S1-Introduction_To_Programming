@@ -27,7 +27,7 @@
     <ClCompile Include="Graphic.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Newgame.cpp">      
+    <ClCompile Include="Newgame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LoadGame.cpp">
@@ -56,5 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Note.txt" />
+    <Text Include="game1.txt" />
   </ItemGroup>
 </Project>
