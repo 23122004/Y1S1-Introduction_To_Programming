@@ -6,7 +6,7 @@
 
 void loadGame() {
 	system("cls");
-	drawLOADGAME(20, 3);
+	drawLOAD_GAME(20, 3);
 
 	while (nextMove() != 5); // press ESC to exit
 }
