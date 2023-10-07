@@ -42,6 +42,7 @@ void player2(int XX, int YY) {
 	drawBoardMenu(XX, YY + 3, 29, 15, " NAME PLAYER 2: ");
 	if (!putname(XX + 17, YY + 4, name2 = "[player2]")) return;
 
+	resetData(0, 0);
 	startGame(false);
 }
 
@@ -52,6 +53,7 @@ void player1(int XX, int YY) {
 	drawBoardMenu(XX, YY, 27, 15, " NAME PLAYER:   ");
 	if (!putname(XX + 15, YY + 1, name = "[player]")) return;
 
+	resetData(0, 0);
 	startGame(true);
 }
 	

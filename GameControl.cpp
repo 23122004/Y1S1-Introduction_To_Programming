@@ -270,7 +270,6 @@ void loadGameBoardUpdate(int **a, int turn, int lastX, int lastY)
 
 void startGame(bool vsBot) {
     system("cls");
-    resetData(0, 0);
     drawBoard(0, 0);
 
 

@@ -86,4 +86,5 @@ void loadFromFile(string filename) {
 	}
 	delete[] a;
 
+	//startgame(vsBot);
 }
