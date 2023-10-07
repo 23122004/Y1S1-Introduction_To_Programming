@@ -16,32 +16,44 @@ void loadGame() {
 	drawLOAD_GAME(20, 3);
 	drawBoard(15, 20);
 
-	
 	fileNames.push_back("game1.txt");
 	fileNames.push_back("game2.txt");
+	fileNames.push_back("game3.txt");
 
 	string Current_game = "game1.txt";
 	
-	CurrentGame(Current_game, 15, 20);
+	CurrentGame(Current_game, 15, 20, 0);
 	
 	int index = 0;
 	while (nextMove() != 5) {
 		if (nextMove() == 1) {
 			Current_game = fileNames[index];
 			index = (index + 1) % fileNames.size();
-			CurrentGame(Current_game, 15, 20);
+			CurrentGame(Current_game, 15, 20, index);
+			//check again 
+			gotoXY(70, 20);
+			cout << index ;
+			gotoXY(70, 22);
+			cout << fileNames[index];
+			//
 		}
 		if (nextMove() == 3) {
 			Current_game = fileNames[index];
-			index = (index - 1) % fileNames.size();
-			CurrentGame(Current_game, 15, 20);
+			index = (fileNames.size() + index - 1) % fileNames.size();
+			CurrentGame(Current_game, 15, 20, index);
+			//check again 
+			gotoXY(70, 20);
+			cout << index;
+			gotoXY(70, 22);
+			cout << fileNames[index];
+			//
 		}
 	}
 	// press ESC to exit
 }
 
 
-void CurrentGame(string filename, int XX, int YY) {
+void CurrentGame(string filename, int XX, int YY, int index_file_name) {
 	//load filegame to a[i][j]
 	int turn = 0, lastX = 0, lastY = 0;
 	const int BOARD_SIZE_loadgame = 12;
@@ -67,7 +79,7 @@ void CurrentGame(string filename, int XX, int YY) {
 	}
 
 	drawBoardWithValues(XX, YY, a);
-	drawNameOfGame(90, 20, filename);
+	drawNameOfGame(90, 20, index_file_name);
 	for (int i = 1; i <= BOARD_SIZE_loadgame; i++) {
 		delete[] a[i];
 	}
@@ -75,9 +87,9 @@ void CurrentGame(string filename, int XX, int YY) {
 }
 
 
-void drawNameOfGame(int XX, int YY, string Current_game) {
+void drawNameOfGame(int XX, int YY, int index_file_name) {
 	gotoXY(XX, YY);
-	cout << Current_game;
+	cout << fileNames[index_file_name];
 }
 
 
