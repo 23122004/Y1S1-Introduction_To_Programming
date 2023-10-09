@@ -209,7 +209,7 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
                     if (beta > eval) beta = eval;
                     if (beta <= alpha)
                         break;
-                    if (minEval < (long long)-1e8) break;
+                    if (minEval < (long long)-1e8) return minEval;
                 }
         return minEval;
     }
@@ -259,10 +259,12 @@ void makeMove(int Turn, int x, int y)
     moveTo(x, y);
     if (Turn == 1)
     {
+        setColor(15, 4);
         cout << 'X';
     }
     else
     {
+        setColor(15, 1);
         cout << 'O';
     }
     moveTo(x, y);
@@ -276,7 +278,7 @@ void startGame(bool vsBot)
     int x = 6, y = 6;
     moveTo(x, y);
 
-    while (evaluation(1) < 1e8)
+    while (abs(evaluation(1)) < 1e8)
     {
         if (Turn == -1 && vsBot) botMove(x, y);
         else
@@ -296,6 +298,6 @@ void startGame(bool vsBot)
         makeMove(Turn, x, y);
         Turn *= -1;
     }
+    ShowCur(0);
     // nguoi choi [Turn] thua
-    _getch();
 }
