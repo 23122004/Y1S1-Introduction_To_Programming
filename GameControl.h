@@ -1,6 +1,10 @@
 ﻿#ifndef _GAMECONTROL_H_
 #define _GAMECONTROL_H_
 #include "library.h"
+#include "Newgame.h"
+#include "Graphic.h"
+#include "Console.h"
+#include "LoadGame.h"
 using namespace std;
 
 struct _Point 

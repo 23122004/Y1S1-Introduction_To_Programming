@@ -1,12 +1,10 @@
 ﻿#include "GameControl.h"
-#include "Newgame.h"
-#include "Graphic.h"
 
 const int BOARD_SIZE = 12;
 _Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
-int _TURN;
-int _COMMAND;
-int _X, _Y; // tọa độ con trỏ
+int Turn;
+
+#define moveTo(x, y) gotoXY(status[x][y].X, status[x][y].Y)
 
 long long consecutiveScore(int len, int openEnds, bool currentTurn) // tính điểm
 {
@@ -222,13 +220,11 @@ void resetData(int startX, int startY)
     for (int y = 1; y <= BOARD_SIZE; ++y)
         for (int x = 1; x <= BOARD_SIZE; ++x) 
         {
-            status[y][x].Y = (startY - 1) + y * 2 + 1;
-            status[y][x].X = (startX - 1) + x * 4 + 2;
+            status[y][x].Y = startY + (y - 1) * 2 + 1;
+            status[y][x].X = startX + (x - 1) * 4 + 2;
             status[y][x].opt = 0;
         }
-    _TURN = 1; _COMMAND = -1;
-    _X = status[1][1].X;
-    _Y = status[1][1].Y;
+    Turn = 1;
 }
 
 void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của người chơi
@@ -248,14 +244,6 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
     else minimax(3, (long long)-1e12, (long long)1e12, -1, x, y);
     assert(status[x][y].opt == 0);
     // bot mặc định là o
-    status[x][y].opt = -1;
-}
-
-void playerMove(int& x, int& y, int turn) // người chơi turn = 1 hoặc -1 là người chơi X hoặc O
-{
-    // *nhập vào x, y
-    status[x][y].opt = turn;
-    // *vẽ vào tọa độ x, y
 }
 
 void loadGameBoardUpdate(int **a, int turn, int lastX, int lastY)
@@ -263,15 +251,51 @@ void loadGameBoardUpdate(int **a, int turn, int lastX, int lastY)
     for (int i = 1; i <= BOARD_SIZE; i++)
         for (int j = 1; j <= BOARD_SIZE; j++)
             status[i][j].opt = a[i][j];
-    _X = status[lastX][lastY].X;
-    _Y = status[lastX][lastY].Y;
-    _TURN = turn;
+    Turn = turn;
 }
 
-void startGame(bool vsBot) {
+void makeMove(int Turn, int x, int y)
+{
+    moveTo(x, y);
+    if (Turn == 1)
+    {
+        cout << 'X';
+    }
+    else
+    {
+        cout << 'O';
+    }
+    moveTo(x, y);
+}
+
+void startGame(bool vsBot)
+{
     system("cls");
     drawBoard(0, 0);
+    ShowCur(1);
+    int x = 6, y = 6;
+    moveTo(x, y);
 
-
+    while (evaluation(1) < 1e8)
+    {
+        if (Turn == -1 && vsBot) botMove(x, y);
+        else
+        {
+            while (true)
+            {
+                int Key = nextMove();
+                if (Key == 0 && status[x][y].opt == 0) break;
+                if (Key == 1 && x > 1) x -= 1;
+                if (Key == 2 && y > 1) y -= 1;
+                if (Key == 3 && x < BOARD_SIZE) x += 1;
+                if (Key == 4 && y < BOARD_SIZE) y += 1;
+                moveTo(x, y);
+            }
+        }
+        status[x][y].opt = Turn;
+        makeMove(Turn, x, y);
+        Turn *= -1;
+    }
+    // nguoi choi [Turn] thua
     _getch();
 }
