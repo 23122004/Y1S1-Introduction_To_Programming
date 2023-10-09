@@ -300,4 +300,9 @@ void startGame(bool vsBot)
     }
     ShowCur(0);
     // nguoi choi [Turn] thua
+    /*if (Turn == 1)
+        drawO_WIN(0, 0);
+    else
+        drawX_WIN(0, 0);*/
+    _getch();
 }
