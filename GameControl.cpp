@@ -258,6 +258,7 @@ void loadGameBoardUpdate(int **a, int turn, int lastX, int lastY)
 
 void makeMove(int Turn, int x, int y)
 {
+    status[x][y].opt = Turn;
     moveTo(x, y);
     if (Turn == 1)
     {
@@ -282,6 +283,7 @@ void startGame(bool vsBot)
     system("cls");
     drawBoard(0, 0);
     ShowCur(1);
+    Cache.clear();
     int x = 6, y = 6;
     moveTo(x, y);
 
@@ -313,7 +315,6 @@ void startGame(bool vsBot)
             }
         }
         Cache.push_back({ x, y });
-        status[x][y].opt = Turn;
         makeMove(Turn, x, y);
         Turn *= -1;
     }
