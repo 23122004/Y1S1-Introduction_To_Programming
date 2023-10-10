@@ -1,5 +1,10 @@
 ﻿#include "GameControl.h"
 
+#define F first
+#define S second
+typedef pair<int, int> ii;
+vector<ii> Cache;
+
 const int BOARD_SIZE = 12;
 _Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
 int Turn;
@@ -28,12 +33,12 @@ long long consecutiveScore(int len, int openEnds, bool currentTurn) // tính đi
         {
         case 1:
             if (currentTurn)
-                return 40;
-            return 25;
+                return 7;
+            return 5;
         case 2:
             if (currentTurn)
                 return 10000;
-            return 100;
+            return 50;
         }
     case 2:
         switch (openEnds)
@@ -172,7 +177,7 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
     // đặt cho người chơi (Max)
     if (player == 1)
     {
-        long long maxEval = (long long)-1e12;
+        long long maxEval = (long long)-1e11;
         for (int i = 1; i <= BOARD_SIZE; i++)
             for (int j = 1; j <= BOARD_SIZE; j++) // xét từng ô chưa được đánh
                 if (status[i][j].opt == 0)
@@ -193,7 +198,7 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
     }
     else // đặt cho máy tương tự như cho người chơi (Min)
     {
-        long long minEval = (long long)1e12;
+        long long minEval = (long long)1e11;
         for (int i = 1; i <= BOARD_SIZE; i++)
             for (int j = 1; j <= BOARD_SIZE; j++)
                 if (status[i][j].opt == 0)
@@ -209,7 +214,6 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
                     if (beta > eval) beta = eval;
                     if (beta <= alpha)
                         break;
-                    if (minEval < (long long)-1e8) return minEval;
                 }
         return minEval;
     }
@@ -230,9 +234,7 @@ void resetData(int startX, int startY)
 void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của người chơi
 // máy chơi trả về tham chiếu x, y là tọa độ vừa được đặt
 {
-    static int cntMoves = 0;
-    cntMoves++;
-    if (cntMoves == 1) // nước đi đầu tiên của bot là random
+    if (Cache.size() == 1) // nước đi đầu tiên của bot là random
     {
         int dx[] = { -1, 1, 0, 0 };
         int dy[] = { 0, 0, -1, 1 };
@@ -241,7 +243,7 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
         x += dx[r];
         y += dy[r];
     }
-    else minimax(3, (long long)-1e12, (long long)1e12, -1, x, y);
+    else minimax(3, (long long)-1e11, (long long)1e11, -1, x, y);
     assert(status[x][y].opt == 0);
     // bot mặc định là o
 }
@@ -262,10 +264,15 @@ void makeMove(int Turn, int x, int y)
         setColor(15, 4);
         cout << 'X';
     }
-    else
+    else if(Turn == -1)
     {
         setColor(15, 1);
         cout << 'O';
+    }
+    else
+    {
+        setColor(15, 15);
+        cout << " ";
     }
     moveTo(x, y);
 }
@@ -291,9 +298,21 @@ void startGame(bool vsBot)
                 if (Key == 2 && y > 1) y -= 1;
                 if (Key == 3 && x < BOARD_SIZE) x += 1;
                 if (Key == 4 && y < BOARD_SIZE) y += 1;
+                if (Key == 6 && !Cache.empty()) // undo
+                {
+                    for (int i = 0; i < 2; i++)
+                    {
+                        x = Cache.back().F;
+                        y = Cache.back().S;
+                        Cache.pop_back();
+                        status[x][y].opt = 0;
+                        makeMove(0, x, y);
+                    }
+                }
                 moveTo(x, y);
             }
         }
+        Cache.push_back({ x, y });
         status[x][y].opt = Turn;
         makeMove(Turn, x, y);
         Turn *= -1;
