@@ -22,7 +22,7 @@ long long consecutiveScore(int len, int openEnds, bool currentTurn) // tính đi
         case 1:
             if (currentTurn)
                 return 10000000;
-            return 500;
+            return 50;
         case 2:
             if (currentTurn)
                 return 10000000;
