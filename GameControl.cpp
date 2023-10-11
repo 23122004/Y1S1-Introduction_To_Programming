@@ -302,7 +302,7 @@ void startGame(bool vsBot)
                 if (Key == 4 && y < BOARD_SIZE) y += 1;
                 if (Key == 6 && !Cache.empty()) // undo
                 {
-                    for (int i = 0; i < 2; i++)
+                    for (int i = 0; i < (vsBot ? 2 : 1); i++)
                     {
                         x = Cache.back().F;
                         y = Cache.back().S;
