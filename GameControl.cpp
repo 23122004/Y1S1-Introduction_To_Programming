@@ -4,8 +4,8 @@
 #define S second
 typedef pair<int, int> ii;
 vector<ii> Cache;
-
-const int BOARD_SIZE = 12;
+set<ii> Neighbor;
+const int BOARD_SIZE = 15;
 _Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
 int Turn;
 
@@ -178,43 +178,49 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
     if (player == 1)
     {
         long long maxEval = (long long)-1e11;
-        for (int i = 1; i <= BOARD_SIZE; i++)
-            for (int j = 1; j <= BOARD_SIZE; j++) // xét từng ô chưa được đánh
-                if (status[i][j].opt == 0)
+        vector<ii> a(Neighbor.begin(), Neighbor.end());
+        for (const ii& tmp : a)
+        {
+            int i = tmp.F, j = tmp.S;
+            if (status[i][j].opt == 0)
+            {
+                status[i][j].opt = 1; // đánh thử x vào ô i, j
+                long long eval = minimax(depth - 1, alpha, beta, -1, x, y); // gọi đệ quy minimax
+                status[i][j].opt = 0;
+                if (maxEval < eval)
                 {
-                    status[i][j].opt = 1; // đánh thử x vào ô i, j
-                    long long eval = minimax(depth - 1, alpha, beta, -1, x, y); // gọi đệ quy minimax
-                    status[i][j].opt = 0;
-                    if (maxEval < eval)
-                    {
-                        maxEval = eval;
-                        if (depth == 3) x = i, y = j;
-                    }
-                    if (alpha < eval) alpha = eval;
-                    if (beta <= alpha) // alpha-beta pruning
-                        break;
+                    maxEval = eval;
+                    if (depth == 3) x = i, y = j;
                 }
+                if (alpha < eval) alpha = eval;
+                if (beta <= alpha) // alpha-beta pruning
+                    break;
+            }
+        }
         return maxEval;
     }
     else // đặt cho máy tương tự như cho người chơi (Min)
     {
         long long minEval = (long long)1e11;
-        for (int i = 1; i <= BOARD_SIZE; i++)
-            for (int j = 1; j <= BOARD_SIZE; j++)
-                if (status[i][j].opt == 0)
+        vector<ii> a(Neighbor.begin(), Neighbor.end());
+        for(const ii &tmp : a)
+        {
+            int i = tmp.F, j = tmp.S;
+            if (status[i][j].opt == 0)
+            {
+                status[i][j].opt = -1;
+                long long eval = minimax(depth - 1, alpha, beta, 1, x, y);
+                status[i][j].opt = 0;
+                if (minEval > eval)
                 {
-                    status[i][j].opt = -1;
-                    long long eval = minimax(depth - 1, alpha, beta, 1, x, y);
-                    status[i][j].opt = 0;
-                    if (minEval > eval)
-                    {
-                        minEval = eval;
-                        if (depth == 3) x = i, y = j;
-                    }
-                    if (beta > eval) beta = eval;
-                    if (beta <= alpha)
-                        break;
+                    minEval = eval;
+                    if (depth == 3) x = i, y = j;
                 }
+                if (beta > eval) beta = eval;
+                if (beta <= alpha)
+                    break;
+            }
+        }
         return minEval;
     }
 }
@@ -256,9 +262,25 @@ void loadGameBoardUpdate(int **a, int turn, int lastX, int lastY)
     Turn = turn;
 }
 
+void addNeighbor(int x, int y)
+{
+    if (Neighbor.count({ x, y })) Neighbor.erase({ x, y });
+    int Upx = x - 2, Upy = y - 2, Lowx = x + 2, Lowy = y + 2;
+    for (int i = Upx; i <= Lowx; i++)
+        for (int j = Upy; j <= Lowy; j++)
+            if (valid(i, j) && status[i][j].opt == 0)
+                Neighbor.insert({ i, j });
+    for (auto x : Neighbor)
+    {
+        moveTo(x.F, x.S);
+        cout << '.';
+    }
+}
+
 void makeMove(int Turn, int x, int y)
 {
     status[x][y].opt = Turn;
+    addNeighbor(x, y);
     moveTo(x, y);
     if (Turn == 1)
     {
@@ -284,7 +306,7 @@ void startGame(bool vsBot)
     drawBoard(0, 0);
     ShowCur(1);
     Cache.clear();
-    int x = 6, y = 6;
+    int x = 8, y = 8;
     moveTo(x, y);
 
     while (abs(evaluation(1)) < 1e8)
