@@ -270,11 +270,11 @@ void addNeighbor(int x, int y)
         for (int j = Upy; j <= Lowy; j++)
             if (valid(i, j) && status[i][j].opt == 0)
                 Neighbor.insert({ i, j });
-    for (auto x : Neighbor)
+    /*for (auto x : Neighbor)
     {
         moveTo(x.F, x.S);
         cout << '.';
-    }
+    }*/
 }
 
 void makeMove(int Turn, int x, int y)
