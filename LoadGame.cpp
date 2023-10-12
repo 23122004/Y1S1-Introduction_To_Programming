@@ -25,8 +25,9 @@ void loadGame() {
 	CurrentGame(Current_game, 15, 20, 0);
 	
 	int index = 0;
-	while (nextMove() != 5) {
-		if (nextMove() == 1) {
+	int move = 0;
+	while ((move = nextMove()) != 5) {
+		if (move == 1) {
 			Current_game = fileNames[index];
 			index = (index + 1) % fileNames.size();
 			CurrentGame(Current_game, 15, 20, index);
@@ -37,7 +38,7 @@ void loadGame() {
 			cout << fileNames[index];
 			//
 		}
-		if (nextMove() == 3) {
+		if (move == 3) {
 			Current_game = fileNames[index];
 			index = (fileNames.size() + index - 1) % fileNames.size();
 			CurrentGame(Current_game, 15, 20, index);
@@ -56,7 +57,7 @@ void loadGame() {
 void CurrentGame(string filename, int XX, int YY, int index_file_name) {
 	//load filegame to a[i][j]
 	int turn = 0, lastX = 0, lastY = 0;
-	const int BOARD_SIZE_loadgame = 12;
+	const int BOARD_SIZE_loadgame = 15;
 
 	ifstream file(filename);
 
@@ -96,7 +97,7 @@ void drawNameOfGame(int XX, int YY, int index_file_name) {
 void drawBoardWithValues(int XX, int YY, int** a) {
 	// Assuming a[][] is a 2D array of size BOARD_SIZE_loadgame x BOARD_SIZE_loadgame (= 12)
 
-	const int BOARD_SIZE_loadgame = 12;
+	const int BOARD_SIZE_loadgame = 15;
 	int cellWidth = 4;
 	int cellHeight = 2;
 
@@ -108,10 +109,12 @@ void drawBoardWithValues(int XX, int YY, int** a) {
 			gotoXY(centerX, centerY);
 
 			if (a[i][j] == 1) {
-				cout << 'x';  // Draw 'x' if a[i][j] is 1
+				setColor(15, 4);
+				cout << 'X';  // Draw 'x' if a[i][j] is 1
 			}
 			else if (a[i][j] == -1) {
-				cout << 'o';  // Draw 'o' if a[i][j] is -1
+				setColor(15, 1);
+				cout << 'O';  // Draw 'o' if a[i][j] is -1
 			}
 			else {
 				cout << ' ';  // Draw '.' if a[i][j] is 0
@@ -125,6 +128,7 @@ void drawBoardWithValues(int XX, int YY, int** a) {
 // OVERWRITE A NEW FILEGAME
 
 // Step 1 :: Add new file game to DataBase (.txt)
+
 void Add_NewFile_to_vector_fileNames(string fileName) {
 	fileName += ".txt";
 	fileNames.push_back(fileName);
@@ -132,9 +136,8 @@ void Add_NewFile_to_vector_fileNames(string fileName) {
 }
 
 
-
 // Step 2 :: Write history game to file : file name of game, matrix a, turn, lastX, lastY, BOARD_SIZE
-void Overwrite_information_to_file(const std::string& fileName_with_txt, int** a, int turn, int lastX, int lastY, int BOARD_SIZE = 12) {
+void Overwrite_information_to_file(const std::string& fileName_with_txt, int** a, int turn, int lastX, int lastY, int BOARD_SIZE = 15) {
 	std::ofstream file(fileName_with_txt, std::ios::trunc); // Open and Delete data of file.
 	if (file.is_open()) {
 
