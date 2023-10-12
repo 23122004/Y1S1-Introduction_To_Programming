@@ -5,7 +5,7 @@
 typedef pair<int, int> ii;
 vector<ii> Cache;
 
-const int BOARD_SIZE = 12;
+const int BOARD_SIZE = 15;
 _Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
 int Turn;
 
@@ -188,7 +188,7 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
                     if (maxEval < eval)
                     {
                         maxEval = eval;
-                        if (depth == 3) x = i, y = j;
+                        if (depth == 2) x = i, y = j;
                     }
                     if (alpha < eval) alpha = eval;
                     if (beta <= alpha) // alpha-beta pruning
@@ -209,7 +209,7 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
                     if (minEval > eval)
                     {
                         minEval = eval;
-                        if (depth == 3) x = i, y = j;
+                        if (depth == 2) x = i, y = j;
                     }
                     if (beta > eval) beta = eval;
                     if (beta <= alpha)
@@ -243,7 +243,7 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
         x += dx[r];
         y += dy[r];
     }
-    else minimax(3, (long long)-1e11, (long long)1e11, -1, x, y);
+    else minimax(2, (long long)-1e11, (long long)1e11, -1, x, y);
     assert(status[x][y].opt == 0);
     // bot mặc định là o
 }
