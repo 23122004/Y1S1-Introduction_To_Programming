@@ -249,7 +249,7 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
         x += dx[r];
         y += dy[r];
     }
-    else minimax(2, (long long)-1e11, (long long)1e11, -1, x, y);
+    else minimax(3, (long long)-1e11, (long long)1e11, -1, x, y);
     assert(status[x][y].opt == 0);
     // bot mặc định là o
 }
@@ -270,11 +270,11 @@ void addNeighbor(int x, int y)
         for (int j = Upy; j <= Lowy; j++)
             if (valid(i, j) && status[i][j].opt == 0)
                 Neighbor.insert({ i, j });
-    for (auto x : Neighbor)
+   /* for (auto x : Neighbor)
     {
         moveTo(x.F, x.S);
         cout << '.';
-    }
+    }*/
 }
 
 void makeMove(int Turn, int x, int y)
@@ -306,6 +306,7 @@ void startGame(bool vsBot)
     drawBoard(0, 0);
     ShowCur(1);
     Cache.clear();
+    Neighbor.clear();
     int x = 8, y = 8;
     moveTo(x, y);
 

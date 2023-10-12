@@ -114,13 +114,11 @@ void drawBoardWithValues(int XX, int YY, int** a) {
 				cout << 'o';  // Draw 'o' if a[i][j] is -1
 			}
 			else {
-				cout << '.';  // Draw '.' if a[i][j] is 0
+				cout << ' ';  // Draw '.' if a[i][j] is 0
 			}
 		}
 	}
 }
-
-
 
 
 
@@ -136,7 +134,7 @@ void Add_NewFile_to_vector_fileNames(string fileName) {
 
 
 // Step 2 :: Write history game to file : file name of game, matrix a, turn, lastX, lastY, BOARD_SIZE
-void Overwrite_information_to_file(const std::string& fileName_with_txt, int** a, int turn, int lastX, int lastY, int BOARD_SIZE) {
+void Overwrite_information_to_file(const std::string& fileName_with_txt, int** a, int turn, int lastX, int lastY, int BOARD_SIZE = 12) {
 	std::ofstream file(fileName_with_txt, std::ios::trunc); // Open and Delete data of file.
 	if (file.is_open()) {
 
