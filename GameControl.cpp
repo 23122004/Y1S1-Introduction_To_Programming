@@ -8,7 +8,7 @@ set<ii> Neighbor;
 const int BOARD_SIZE = 15;
 _Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
 int Turn;
-
+int maxDepth = 3;
 #define moveTo(x, y) gotoXY(status[x][y].X, status[x][y].Y)
 
 long long consecutiveScore(int len, int openEnds, bool currentTurn) // tính điểm
@@ -190,7 +190,7 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
                 if (maxEval < eval)
                 {
                     maxEval = eval;
-                    if (depth == 3) x = i, y = j;
+                    if (depth == maxDepth) x = i, y = j;
                 }
                 if (alpha < eval) alpha = eval;
                 if (beta <= alpha) // alpha-beta pruning
@@ -214,7 +214,7 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
                 if (minEval > eval)
                 {
                     minEval = eval;
-                    if (depth == 3) x = i, y = j;
+                    if (depth == maxDepth) x = i, y = j;
                 }
                 if (beta > eval) beta = eval;
                 if (beta <= alpha)
@@ -249,7 +249,7 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
         x += dx[r];
         y += dy[r];
     }
-    else minimax(3, (long long)-1e11, (long long)1e11, -1, x, y);
+    else minimax(maxDepth = (Neighbor.size() <= 110 ? 3 : 2), (long long)-1e11, (long long)1e11, -1, x, y);
     assert(status[x][y].opt == 0);
     // bot mặc định là o
 }
@@ -265,16 +265,16 @@ void loadGameBoardUpdate(int **a, int turn, int lastX, int lastY)
 void addNeighbor(int x, int y)
 {
     if (Neighbor.count({ x, y })) Neighbor.erase({ x, y });
-    int Upx = x - 2, Upy = y - 2, Lowx = x + 2, Lowy = y + 2;
+    int Upx = x - 3, Upy = y - 3, Lowx = x + 3, Lowy = y + 3;
     for (int i = Upx; i <= Lowx; i++)
         for (int j = Upy; j <= Lowy; j++)
             if (valid(i, j) && status[i][j].opt == 0)
                 Neighbor.insert({ i, j });
-   /* for (auto x : Neighbor)
+    for (auto x : Neighbor)
     {
         moveTo(x.F, x.S);
         cout << '.';
-    }*/
+    }
 }
 
 void makeMove(int Turn, int x, int y)
