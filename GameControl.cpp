@@ -340,6 +340,7 @@ void startGame(bool vsBot)
         Cache.push_back({ x, y });
         makeMove(Turn, x, y);
         Turn *= -1;
+        //if (Cache.size() == BOARD_SIZE * BOARD_SIZE) Draw();
     }
     ShowCur(0);
     // nguoi choi [Turn] thua
