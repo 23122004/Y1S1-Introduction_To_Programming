@@ -45,7 +45,7 @@ int nextMove() {  // Nhận các thao tác chức năng cơ bản
 		if (_kbhit()) {
 			char c = _getch();
 
-			if (c == 13) return 0;
+			if (c == 13 || c == ' ') return 0;
 			if (c == 27) return 5;
 
 			if (c == -32) {

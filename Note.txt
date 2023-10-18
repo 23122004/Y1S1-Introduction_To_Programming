@@ -47,7 +47,7 @@
 	205 : ═
 
 * Các mã số lệnh trong hàm nextMove
-	0: Enter
+	0 : Enter
 	1 : MoveUp
 	2 : MoveLeft
 	3 : MoveDown
@@ -78,3 +78,5 @@
  - Load game có chức năng: play, delete, rename
  - Nếu ô đó đã đánh thì tô đậm + không đánh được nữa
  - Tung đồng xu, xem ai đánh trước
+
+ https://en.wikipedia.org/wiki/Gomoku

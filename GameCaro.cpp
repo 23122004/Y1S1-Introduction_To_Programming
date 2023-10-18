@@ -36,6 +36,67 @@ void about() {
 void help() {
 	system("cls");
 	drawHELP(41, 3);
+
+	int XX = 19, YY = 11;
+	int h = 16, w = 76;
+
+	drawPopUp(XX, YY, h, w);
+	setColor(co_theme);
+	for (int i = 1; i < h - 4; ++i) {
+		gotoXY(XX + 37, YY + i); 
+		cout << "|";
+	}
+
+	setColor(11, 0);
+	gotoXY(XX + 12, YY + 1);
+	cout << "KEYBOARD GUIDE";
+
+	gotoXY(XX + 53, YY + 1);
+	cout << "RUDE";
+
+	setColor(co_theme);
+	gotoXY(XX + 14, YY + 3);
+	cout << "Player 1    Player 2";
+	gotoXY(XX + 3, YY + 4);
+	cout << "Go up:        W           " << char(30);
+	gotoXY(XX + 3, YY + 5);
+	cout << "Go left:      A           " << char(17);
+	gotoXY(XX + 3, YY + 6);
+	cout << "Go down:      S           " << char(31);
+	gotoXY(XX + 3, YY + 7);
+	cout << "Go right:     D           " << char(16);
+	gotoXY(XX + 3, YY + 8);
+	cout << "Mark    :   Space       Enter";
+	gotoXY(XX + 6, YY + 10);
+	cout << "         Other";
+	gotoXY(XX + 3, YY + 11);
+	cout << "Undo: U    Save: I    Exit: Esc";
+
+	gotoXY(XX + 39, YY + 3);
+	cout << "  Players alternate turns putting";
+	gotoXY(XX + 39, YY + 4);
+	cout << "their marks on an empty intersection";
+	gotoXY(XX + 39, YY + 5);
+	cout << "  X plays first. The winner is the";
+	gotoXY(XX + 39, YY + 6);
+	cout << "  first player to form an unbroken";
+	gotoXY(XX + 39, YY + 7);
+	cout << "   line of 5 marks horizontally,";
+	gotoXY(XX + 39, YY + 8);
+	cout << " vertically, or diagonally. If the";
+	gotoXY(XX + 39, YY + 9);
+	cout << " board is completely filled and no";
+	gotoXY(XX + 39, YY + 10);
+	cout << "  one can make a line of 5 marks,";
+	gotoXY(XX + 39, YY + 11);
+	cout << "   then the game ends in a draw.";
+	
+
+	setColor(14, 0);
+	gotoXY(XX + 27, YY + 13); cout << "<< Press ESC to exit >>";
+	setColor(co_theme);
+
+	while (nextMove() != 5);
 }
 
 void exit() {
