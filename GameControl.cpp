@@ -280,7 +280,7 @@ void addNeighbor(int x, int y)
 void makeMove(int Turn, int x, int y)
 {
     status[x][y].opt = Turn;
-    addNeighbor(x, y);
+    if (Turn != 0) addNeighbor(x, y);
     moveTo(x, y);
     if (Turn == 1)
     {
@@ -330,8 +330,8 @@ void startGame(bool vsBot)
                         x = Cache.back().F;
                         y = Cache.back().S;
                         Cache.pop_back();
-                        status[x][y].opt = 0;
                         makeMove(0, x, y);
+                        Turn *= -1;
                     }
                 }
                 moveTo(x, y);
