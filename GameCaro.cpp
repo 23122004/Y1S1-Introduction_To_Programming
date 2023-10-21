@@ -13,10 +13,10 @@ void newGame(int XX,int YY ) {
 	drawNewGameMenu(XX, YY);	
 }
 
-void about() {
+void about(int Xi, int Yi) {
 	system("cls");
-	drawABOUT(36, 3);
-	int XX = 40, YY = 13;
+	drawABOUT(Xi - 10, Yi - 9);
+	int XX = Xi - 6, YY = Yi + 1;
 
 	drawPopUp(XX - 9, YY - 2, 17, 52);
 	gotoXY(XX, YY);      cout << "HCMUS - 23TNT1 - Group 5:";
@@ -33,16 +33,16 @@ void about() {
 	while (nextMove() != 5);
 }
 
-void help() {
+void help(int Xi, int Yi) {
 	system("cls");
-	drawHELP(41, 3);
+	drawHELP(Xi - 5, Yi - 9);
 
-	int XX = 19, YY = 11;
-	int h = 16, w = 76;
+	int XX = Xi - 27, YY = Yi - 1;
+	int h = 15, w = 76;
 
 	drawPopUp(XX, YY, h, w);
 	setColor(co_theme);
-	for (int i = 1; i < h - 4; ++i) {
+	for (int i = 1; i < h - 3; ++i) {
 		gotoXY(XX + 37, YY + i); 
 		cout << "|";
 	}
@@ -51,8 +51,8 @@ void help() {
 	gotoXY(XX + 12, YY + 1);
 	cout << "KEYBOARD GUIDE";
 
-	gotoXY(XX + 53, YY + 1);
-	cout << "RUDE";
+	gotoXY(XX + 54, YY + 1);
+	cout << "RULE";
 
 	setColor(co_theme);
 	gotoXY(XX + 14, YY + 3);
@@ -90,7 +90,6 @@ void help() {
 	cout << "  one can make a line of 5 marks,";
 	gotoXY(XX + 39, YY + 11);
 	cout << "   then the game ends in a draw.";
-	
 
 	setColor(14, 0);
 	gotoXY(XX + 27, YY + 13); cout << "<< Press ESC to exit >>";
@@ -127,10 +126,10 @@ void drawMenu(int XX, int YY) {
 	s2[2] = { XX, YY + 6, 20, 14, ">>     ABOUT    <<"};
 	s2[3] = { XX, YY + 9, 20, 14, ">>     HELP     <<" };
 	s2[4] = { XX, YY + 12, 20, 14, ">>     EXIT     <<" };
-	
+
 	int S = 0;  // Con trỏ hiển thị mục đang chọn
 	while (true) {
-		drawCARO(40, 3);
+		drawCARO(XX - 6, YY - 9);
 		for (int i = 0; i < 5; ++i)
 			s1[i].draw();
 		s2[S].draw();
@@ -139,10 +138,10 @@ void drawMenu(int XX, int YY) {
 		if (_in == 1) S = (S + 4) % 5;
 		else if (_in == 3) S = (S + 1) % 5;
 		else if (_in == 0) {
-			if (S == 0) newGame(XX,YY);
-			else if (S == 1) loadGame();
-			else if (S == 2) about();
-			else if (S == 3) help();
+			if (S == 0) newGame(XX, YY);
+			else if (S == 1) loadGame(XX, YY);
+			else if (S == 2) about(XX, YY);
+			else if (S == 3) help(XX, YY);
 			else if (S == 4) exit();
 			else assert(false);
 			system("cls");
@@ -151,7 +150,7 @@ void drawMenu(int XX, int YY) {
 }
 
 int32_t main() {
-	fixConsoleWindow(1100, 710);
+	fixConsoleWindow(1200, 700);
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
 
 	ShowCur(0);

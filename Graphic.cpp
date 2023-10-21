@@ -721,3 +721,7 @@ void drawPopUp(int XX, int YY, int h, int w) {
 		for (int i = 0; i < w - 6; ++i) cout << char(205);
 		cout << char(188);
 }
+
+void drawDisplay() {
+
+}

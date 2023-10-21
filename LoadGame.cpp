@@ -10,11 +10,11 @@
 //       next : 2-dimensional matrix a
 vector<string> fileNames;
 
-void loadGame() {
+void loadGame(int XX, int YY) {
 	// new screen LoadGame
 	system("cls");
-	drawLOAD_GAME(20, 3);
-	drawBoard(15, 20);
+	drawLOAD_GAME(XX - 26, YY - 9);
+	drawBoard(XX - 41, YY + 8);
 
 	fileNames.push_back("game1.txt");
 	fileNames.push_back("game2.txt");

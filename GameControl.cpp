@@ -1,4 +1,5 @@
 ﻿#include "GameControl.h"
+#include "Graphic.h"
 
 #define F first
 #define S second
@@ -303,7 +304,7 @@ void makeMove(int Turn, int x, int y)
 void startGame(bool vsBot)
 {
     system("cls");
-    drawBoard(0, 0);
+    drawDisplay();
     ShowCur(1);
     Cache.clear();
     Neighbor.clear();
