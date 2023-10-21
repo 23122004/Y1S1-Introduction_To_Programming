@@ -1,7 +1,9 @@
 ﻿#include "Graphic.h"
+#include "GameControl.h"
 #define co_theme 15,0
 const int BOARD_SIZE = 15;
 
+extern _Point status[15 + 5][15 + 5];
 void drawA(int XX, int YY) { // 6 * 8
 	gotoXY(XX + 1, YY);
 	setColor(0, 0); cout << "     ";
@@ -699,6 +701,14 @@ void drawBoard(int XX, int YY) {  // Vẽ bảng caro 12*12
 			} else cout << " ";
 		} cout << "\n";
 	}
+
+	for (int y = 1; y <= BOARD_SIZE; ++y)
+		for (int x = 1; x <= BOARD_SIZE; ++x)
+		{
+			status[y][x].Y = XX + (y - 1) * 2 + 1;
+			status[y][x].X = YY + (x - 1) * 4 + 2;
+			status[y][x].opt = 0;
+		}
 }
 
 void drawPopUp(int XX, int YY, int h, int w) {

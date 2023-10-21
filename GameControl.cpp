@@ -226,18 +226,6 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
     }
 }
 
-void resetData(int startX, int startY) 
-{
-    for (int y = 1; y <= BOARD_SIZE; ++y)
-        for (int x = 1; x <= BOARD_SIZE; ++x) 
-        {
-            status[y][x].Y = startY + (y - 1) * 2 + 1;
-            status[y][x].X = startX + (x - 1) * 4 + 2;
-            status[y][x].opt = 0;
-        }
-    Turn = 1;
-}
-
 void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của người chơi
 // máy chơi trả về tham chiếu x, y là tọa độ vừa được đặt
 {
@@ -255,14 +243,6 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
     assert(status[x][y].opt == 0);
     ShowCur(1);
     // bot mặc định là o
-}
-
-void loadGameBoardUpdate(int **a, int turn, int lastX, int lastY)
-{
-    for (int i = 1; i <= BOARD_SIZE; i++)
-        for (int j = 1; j <= BOARD_SIZE; j++)
-            status[i][j].opt = a[i][j];
-    Turn = turn;
 }
 
 void addNeighbor(int x, int y)
@@ -303,6 +283,29 @@ void makeMove(int Turn, int x, int y)
     moveTo(x, y);
 }
 
+void startGame(bool vsBot, bool isNewGame)
+{
+    int x, y;
+    if (isNewGame)
+    {
+        system("cls");
+        drawDisplay();
+        ShowCur(1);
+        Cache.clear();
+        Neighbor.clear();
+        //drawBoard(5, 5);
+        Turn = 1;
+        x = 8, y = 8;
+        moveTo(x, y);
+    }
+    /*else
+    {
+        for (int i = 1; i <= BOARD_SIZE; i++)
+            for (int j = 1; j <= BOARD_SIZE; j++) if (status[i][j].opt != 0)
+            {
+                makeMove(status[i][j].opt, i, j);
+            }
+    }*/
 void startGame(bool vsBot, int XX, int YY)
 {
     system("cls");
@@ -352,4 +355,13 @@ void startGame(bool vsBot, int XX, int YY)
     else
         drawX_WIN(0, 0);*/
     _getch();
+}
+
+void loadGameBoardUpdate(int** a, int turn, int lastX, int lastY)
+{
+    for (int i = 1; i <= BOARD_SIZE; i++)
+        for (int j = 1; j <= BOARD_SIZE; j++)
+            status[i][j].opt = a[i][j];
+    Turn = turn;
+    //startGame(0, false);
 }
