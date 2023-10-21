@@ -7,7 +7,7 @@ using namespace std;
 void drawA(int XX, int YY);
 void drawB(int XX, int YY);
 void drawC(int XX, int YY);
-void drawO(int XX, int YY);
+void drawO(int XX, int YY, int co_txt);
 void drawR(int XX, int YY);
 void drawU(int XX, int YY);
 void drawT(int XX, int YY);
@@ -21,7 +21,7 @@ void drawN(int XX, int YY);
 void drawW(int XX, int YY);
 void drawH(int XX, int YY);
 void drawP(int XX, int YY);
-void drawX(int XX, int YY);
+void drawX(int XX, int YY, int co_txt);
 void drawI(int XX, int YY);
 
 void drawCARO(int XX, int YY);
@@ -33,10 +33,10 @@ void drawIN_MATCH(int XX, int YY);
 void drawX_WIN(int XX, int YY);
 void drawO_WIN(int XX, int YY);
 
-void drawBoard(int startX, int startY);
+void drawBoard(int startX, int startY, string name1, string name2);
 void drawBoardMenu(int XX, int YY, int size, int b_color, string str);
 void drawBoardSize(int XX, int YY, int h, int w);
 void drawPopUp(int XX, int YY, int h, int w);
-void drawDisplay(int XX, int YY);
+void drawDisplay(int XX, int YY, string name1, string name2);
 
 #endif

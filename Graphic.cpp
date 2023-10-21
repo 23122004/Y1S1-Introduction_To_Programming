@@ -97,38 +97,39 @@ void drawC(int XX, int YY) { // 6 * 8
 	cout << char(188);
 }
 
-void drawO(int XX, int YY) { // 6 * 9
+void drawO(int XX, int YY, int co_txt = 0) { // 6 * 9
 	gotoXY(XX + 1, YY);
-	setColor(0, 0); cout << "      ";
-	setColor(co_theme); cout << char(187);
+	setColor(co_txt, 0); cout << "      ";
+	setColor(15, co_txt); cout << char(187);
 
 	gotoXY(XX, YY + 1);
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(201) << char(205) << char(205) << char(205);
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(187);
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(201) << char(205) << char(205) << char(205);
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(187);
 
 	gotoXY(XX, YY + 2);
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(186) << "   ";
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(186);
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(186) << "   ";
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(186);
 
 	gotoXY(XX, YY + 3);
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(186) << "   ";
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(186);
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(186) << "   ";
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(186);
 
 	gotoXY(XX, YY + 4);
 	cout << char(200);
-	setColor(0, 0); cout << "      ";
-	setColor(co_theme); cout << char(201) << char(188);
+	setColor(co_txt, 0); cout << "      ";
+	setColor(15, co_txt); cout << char(201) << char(188);
 
 	gotoXY(XX + 1, YY + 5);
 	cout << char(200);
 	for (int i = 1; i <= 5; ++i) cout << char(205);
 	cout << char(188);
+	setColor(co_theme);
 }
 
 void drawR(int XX, int YY) { // 6 * 8
@@ -511,40 +512,41 @@ void drawP(int XX, int YY) {  // 6 * 8
 	cout << char(200) << char(205) << char(188);
 }
 
-void drawX(int XX, int YY) {  // 6 * 8
+void drawX(int XX, int YY, int co_txt = 0) {  // 6 * 8
 	gotoXY(XX, YY);
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(187) << "  ";
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(187);
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(187) << "  ";
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(187);
 
 	gotoXY(XX, YY + 1);
 	cout << char(200);
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(187);
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(201) << char(188);
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(187);
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(201) << char(188);
 
 	gotoXY(XX, YY + 2);
 	cout << " " << char(200);
-	setColor(0, 0); cout << "   ";
-	setColor(co_theme); cout << char(201) << char(188);
+	setColor(co_txt, 0); cout << "   ";
+	setColor(15, co_txt); cout << char(201) << char(188);
 
 	gotoXY(XX, YY + 3);
 	cout << " ";
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(201);
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(187);
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(201);
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(187);
 
 	gotoXY(XX, YY + 4);
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(201) << char(188) << " ";
-	setColor(0, 0); cout << "  ";
-	setColor(co_theme); cout << char(187);
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(201) << char(188) << " ";
+	setColor(co_txt, 0); cout << "  ";
+	setColor(15, co_txt); cout << char(187);
 
 	gotoXY(XX, YY + 5);
 	cout << char(200) << char(205) << char(188) << "  " << char(200) << char(205) << char(188);
+	setColor(co_theme);
 }
 
 void drawI(int XX, int YY) {  // 6 * 3
@@ -675,7 +677,7 @@ void drawBoardSize(int XX, int YY, int h, int w) { // h * w, vẽ bảng viền 
 	cout << char(188);
 }
 
-void drawBoard(int XX, int YY) {  // Vẽ bảng caro 12*12
+void drawBoard(int XX, int YY, string name1, string name2) {  // Vẽ bảng caro 12*12
 	setColor(co_theme);
 	for (int y = 0; y <= 2 * BOARD_SIZE; ++y) {
 		for (int x = 0; x <= 4 * BOARD_SIZE; ++x) {
@@ -683,8 +685,15 @@ void drawBoard(int XX, int YY) {  // Vẽ bảng caro 12*12
 
 			if (x == 0 && y == 0) cout << char(201);
 			else if (x == 0 && y == 2 * BOARD_SIZE) cout << char(200);
-			else if (x == 4 * BOARD_SIZE && y == 0) cout << char(203);
-			else if (x == 4 * BOARD_SIZE && y == 2 * BOARD_SIZE) cout << char(202);
+			else if (x == 4 * BOARD_SIZE && y == 0) {
+				cout << char(203);
+				for (int i = 0; i < 20; ++i) cout << char(205);
+				cout << char(187);
+			} else if (x == 4 * BOARD_SIZE && y == 2 * BOARD_SIZE) {
+				cout << char(202);
+				for (int i = 0; i < 20; ++i) cout << char(205);
+				cout << char(188);
+			}
 
 			else if (x % 4 == 0 && y == 0) cout << char(209);
 			else if (x % 4 == 0 && y == 2 * BOARD_SIZE) cout << char(207);
@@ -699,16 +708,30 @@ void drawBoard(int XX, int YY) {  // Vẽ bảng caro 12*12
 				if (y == 0 || y == 2 * BOARD_SIZE) cout << char(205);
 				else cout << char(196);
 			} else cout << " ";
-		} cout << "\n";
+		} 
+		
+		if (y != 0 && y != 2 * BOARD_SIZE)
+			cout << "                    " << char(186);
 	}
 
+	gotoXY(XX + 4 * BOARD_SIZE, YY + BOARD_SIZE); 
+	cout << char(204);
+	for (int i = 0; i < 20; ++i) cout << char(205);
+	cout << char(185);
+
 	for (int y = 1; y <= BOARD_SIZE; ++y)
-		for (int x = 1; x <= BOARD_SIZE; ++x)
-		{
-			status[y][x].Y = XX + (y - 1) * 2 + 1;
-			status[y][x].X = YY + (x - 1) * 4 + 2;
+		for (int x = 1; x <= BOARD_SIZE; ++x) {
+			status[y][x].Y = YY + (y - 1) * 2 + 1;
+			status[y][x].X = XX + (x - 1) * 4 + 2;
 			status[y][x].opt = 0;
 		}
+
+	setColor(11, 0); 
+	gotoXY(XX + 4 * BOARD_SIZE + 10 - ((int)name1.size() + 1) / 2 , YY + 2); cout << " " << name1 << " ";
+	gotoXY(XX + 4 * BOARD_SIZE + 10 - ((int)name2.size() + 1) / 2 , YY + 17); cout << " " << name2 << " ";
+
+	drawX(XX + 4 * BOARD_SIZE + 7, YY + 5, 8);
+	drawO(XX + 4 * BOARD_SIZE + 6, YY + 20, 8);
 }
 
 void drawPopUp(int XX, int YY, int h, int w) {
@@ -742,9 +765,7 @@ void drawPopUp(int XX, int YY, int h, int w) {
 		cout << char(188);
 }
 
-void drawDisplay(int XX, int YY) {
+void drawDisplay(int XX, int YY, string name1, string name2) {
 	drawIN_MATCH(XX - 20, YY - 9);
-	drawBoard(XX - 40, YY - 2);
-
-	
+	drawBoard(XX - 31, YY - 2, name1, name2);
 }

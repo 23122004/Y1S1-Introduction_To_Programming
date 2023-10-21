@@ -14,7 +14,7 @@ void loadGame(int XX, int YY) {
 	// new screen LoadGame
 	system("cls");
 	drawLOAD_GAME(XX - 26, YY - 9);
-	drawBoard(XX - 41, YY + 8);
+	drawBoard(XX - 41, YY + 8, "player1", "player2");
 
 	fileNames.push_back("game1.txt");
 	fileNames.push_back("game2.txt");

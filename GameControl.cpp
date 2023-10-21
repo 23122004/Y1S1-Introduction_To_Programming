@@ -283,17 +283,16 @@ void makeMove(int Turn, int x, int y)
     moveTo(x, y);
 }
 
-void startGame(bool vsBot, bool isNewGame)
+void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2)
 {
     int x, y;
     if (isNewGame)
     {
         system("cls");
-        drawDisplay();
+        drawDisplay(XX, YY, name1, name2);
         ShowCur(1);
         Cache.clear();
         Neighbor.clear();
-        //drawBoard(5, 5);
         Turn = 1;
         x = 8, y = 8;
         moveTo(x, y);
@@ -306,18 +305,17 @@ void startGame(bool vsBot, bool isNewGame)
                 makeMove(status[i][j].opt, i, j);
             }
     }*/
-void startGame(bool vsBot, int XX, int YY)
-{
-    system("cls");
-    drawDisplay(XX, YY);
-    ShowCur(1);
-    Cache.clear();
-    Neighbor.clear();
-    int x = 8, y = 8;
-    moveTo(x, y);
 
     while (abs(evaluation(1)) < 1e8)
     {
+        if (Turn == 1) {
+            drawX(XX - 24 + 4 * BOARD_SIZE, YY + 3, 4);
+            drawO(XX - 25 + 4 * BOARD_SIZE, YY + 18, 8);
+        } else {
+            drawO(XX - 25 + 4 * BOARD_SIZE, YY + 18, 1);
+            drawX(XX - 24 + 4 * BOARD_SIZE, YY + 3, 8);
+        } moveTo(x, y);
+
         if (Turn == -1 && vsBot) botMove(x, y);
         else
         {

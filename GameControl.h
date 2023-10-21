@@ -19,7 +19,6 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
 void botMove(int& x, int& y); // nước đi của bot
 void loadGameBoardUpdate(int** a, int turn, int lastX, int lastY); // cập nhật bảng hiện tại nếu load game
 // sửa lại bằng mảng động hoặc vector đều được
-void startGame(bool vsBot, bool isNewGame);
-void startGame(bool vsBot, int XX, int YY);
+void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2);
 
 #endif

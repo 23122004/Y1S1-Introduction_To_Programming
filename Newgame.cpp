@@ -41,10 +41,7 @@ void player2(int XX, int YY) {
 
 	drawBoardMenu(XX, YY + 3, 29, 15, " NAME PLAYER 2: ");
 	if (!putname(XX + 17, YY + 4, name2 = "[player2]")) return;
-	startGame(false, true);
-
-	resetData(0, 0);
-	startGame(false, XX + 3, YY);
+	startGame(false, true, XX + 3, YY, name1, name2);
 }
 
 void player1(int XX, int YY) {
@@ -53,10 +50,7 @@ void player1(int XX, int YY) {
 
 	drawBoardMenu(XX, YY, 27, 15, " NAME PLAYER:   ");
 	if (!putname(XX + 15, YY + 1, name = "[player]")) return;
-	startGame(true, true);
-
-	resetData(0, 0);
-	startGame(true, XX + 2, YY);
+	startGame(true, true, XX + 2, YY, name, "BOT");
 }
 	
 void drawNewGameMenu(int XX, int YY) {
