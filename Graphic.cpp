@@ -641,6 +641,13 @@ void drawO_WIN(int XX, int YY) {
 	drawN(XX + 26, YY);
 }
 
+void drawDRAW(int XX, int YY) {
+	drawD(XX, YY);
+	drawR(XX + 8, YY);
+	drawA(XX + 16, YY);
+	drawW(XX + 24, YY);
+}
+
 void drawBoardMenu(int XX, int YY, int size, int b_color, string str = "") { // 3 * size, vẽ bảng menu chọn
 	setColor(co_theme);
 
@@ -677,8 +684,11 @@ void drawBoardSize(int XX, int YY, int h, int w) { // h * w, vẽ bảng viền 
 	cout << char(188);
 }
 
-void drawBoard(int XX, int YY, string name1, string name2) {  // Vẽ bảng caro 12*12
+void drawBoard(int Xi, int Yi, string name1, string name2) {  // Vẽ bảng caro 12*12
 	setColor(co_theme);
+	drawIN_MATCH(Xi - 20, Yi - 9);
+
+	int XX = Xi - 31, YY = Yi - 2;
 	for (int y = 0; y <= 2 * BOARD_SIZE; ++y) {
 		for (int x = 0; x <= 4 * BOARD_SIZE; ++x) {
 			gotoXY(XX + x, YY + y);
@@ -743,29 +753,29 @@ void drawPopUp(int XX, int YY, int h, int w) {
 		cout << char(187);
 
 	gotoXY(XX + 1, YY + 1); cout << char(201) << char(188);
-	gotoXY(XX + w - 3, YY + 1); cout << char(200) << char(187) << "\n";
+	for (int i = 2; i < w - 4; ++i) cout << " ";
+	cout << char(200) << char(187);
 
 	gotoXY(XX, YY + 2); cout << char(201) << char(188);
-	gotoXY(XX + w - 2, YY + 2); cout << char(200) << char(187) << "\n";
+	for (int i = 3; i < w - 1; ++i) cout << " ";
+	cout << char(200) << char(187);
 
 	for (int i = 0; i < h - 6; ++i) {
 		gotoXY(XX, YY + 3 + i); cout << char(186);
-		gotoXY(XX + w - 1, YY + 3 + i); cout << char(186);
+		for (int j = 1; j < w - 1; ++j) cout << " ";
+		cout << char(186);
 	}
 
 	gotoXY(XX, YY + h - 3); cout << char(200) << char(187);
-	gotoXY(XX + w - 2, YY + h - 3); cout << char(201) << char(188);
+	for (int i = 3; i < w - 1; ++i) cout << " ";
+	cout << char(201) << char(188);
 
 	gotoXY(XX + 1, YY + h - 2); cout << char(200) << char(187);
-	gotoXY(XX + w - 3, YY + h - 2); cout << char(201) << char(188);
+	for (int i = 2; i < w - 4; ++i) cout << " ";
+	cout << char(201) << char(188);
 
 	gotoXY(XX + 2, YY + h - 1);
 		cout << char(200); 
 		for (int i = 0; i < w - 6; ++i) cout << char(205);
 		cout << char(188);
-}
-
-void drawDisplay(int XX, int YY, string name1, string name2) {
-	drawIN_MATCH(XX - 20, YY - 9);
-	drawBoard(XX - 31, YY - 2, name1, name2);
 }

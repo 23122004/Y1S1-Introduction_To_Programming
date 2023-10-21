@@ -289,7 +289,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     if (isNewGame)
     {
         system("cls");
-        drawDisplay(XX, YY, name1, name2);
+        drawBoard(XX, YY, name1, name2);
         ShowCur(1);
         Cache.clear();
         Neighbor.clear();
@@ -344,14 +344,24 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         Cache.push_back({ x, y });
         makeMove(Turn, x, y);
         Turn *= -1;
-        //if (Cache.size() == BOARD_SIZE * BOARD_SIZE) Draw();
+        
+        if (Cache.size() == BOARD_SIZE * BOARD_SIZE) {
+            Turn = 0;
+            break;
+        }
     }
+
     ShowCur(0);
-    // nguoi choi [Turn] thua
-    /*if (Turn == 1)
-        drawO_WIN(0, 0);
-    else
-        drawX_WIN(0, 0);*/
+    // Nháy nháy hàng mà [Turn] win rồi mới chuyển cảnh sau
+
+    drawPopUp(XX - 14, YY + 8, 10, 49);
+    if (Turn == -1)drawX_WIN(XX - 7, YY + 10);
+    else if(Turn == 1) drawO_WIN(XX - 7, YY + 10);
+    else drawDRAW(XX - 6, YY + 10);
+
+    // Hỏi có tiếp tục nữa không, nếu có thì có lưu game không
+    // Thêm mục điểm số
+
     _getch();
 }
 
