@@ -21,6 +21,6 @@ void resetData(int startX, int startY); // reset bảng
 void botMove(int& x, int& y); // nước đi của bot
 void loadGameBoardUpdate(int** a, int turn, int lastX, int lastY); // cập nhật bảng hiện tại nếu load game
 // sửa lại bằng mảng động hoặc vector đều được
-void startGame(bool vsBot);
+void startGame(bool vsBot, int XX, int YY);
 
 #endif

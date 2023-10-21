@@ -43,7 +43,7 @@ void player2(int XX, int YY) {
 	if (!putname(XX + 17, YY + 4, name2 = "[player2]")) return;
 
 	resetData(0, 0);
-	startGame(false);
+	startGame(false, XX + 3, YY);
 }
 
 void player1(int XX, int YY) {
@@ -54,7 +54,7 @@ void player1(int XX, int YY) {
 	if (!putname(XX + 15, YY + 1, name = "[player]")) return;
 
 	resetData(0, 0);
-	startGame(true);
+	startGame(true, XX + 2, YY);
 }
 	
 void drawNewGameMenu(int XX, int YY) {

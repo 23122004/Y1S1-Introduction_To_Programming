@@ -303,10 +303,10 @@ void makeMove(int Turn, int x, int y)
     moveTo(x, y);
 }
 
-void startGame(bool vsBot)
+void startGame(bool vsBot, int XX, int YY)
 {
     system("cls");
-    drawDisplay();
+    drawDisplay(XX, YY);
     ShowCur(1);
     Cache.clear();
     Neighbor.clear();

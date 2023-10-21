@@ -150,11 +150,11 @@ void drawMenu(int XX, int YY) {
 }
 
 int32_t main() {
-	fixConsoleWindow(1200, 700);
+	fixConsoleWindow(1200, 800);
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
 
 	ShowCur(0);
-	drawMenu(46, 12);
+	drawMenu(60, 12);
 
 	_getch();
 

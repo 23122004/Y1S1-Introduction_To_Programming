@@ -29,6 +29,7 @@ void drawABOUT(int XX, int YY);
 void drawLOAD_GAME(int XX, int YY);
 void drawNEW_GAME(int XX, int YY);
 void drawHELP(int XX, int YY);
+void drawIN_MATCH(int XX, int YY);
 void drawX_WIN(int XX, int YY);
 void drawO_WIN(int XX, int YY);
 
@@ -36,6 +37,6 @@ void drawBoard(int startX, int startY);
 void drawBoardMenu(int XX, int YY, int size, int b_color, string str);
 void drawBoardSize(int XX, int YY, int h, int w);
 void drawPopUp(int XX, int YY, int h, int w);
-void drawDisplay();
+void drawDisplay(int XX, int YY);
 
 #endif

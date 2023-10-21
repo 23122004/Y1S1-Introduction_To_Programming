@@ -613,6 +613,16 @@ void drawHELP(int XX, int YY) {
 	drawP(XX + 24, YY);
 }
 
+void drawIN_MATCH(int XX, int YY) {
+	drawI(XX, YY);
+	drawN(XX + 3, YY);
+	drawM(XX + 17, YY);
+	drawA(XX + 28, YY);
+	drawT(XX + 36, YY);
+	drawC(XX + 45, YY);
+	drawH(XX + 53, YY);
+}
+
 void drawX_WIN(int XX, int YY) {
 	drawX(XX, YY);
 	drawW(XX + 12, YY);
@@ -627,7 +637,7 @@ void drawO_WIN(int XX, int YY) {
 	drawN(XX + 26, YY);
 }
 
-void drawBoardMenu(int XX, int YY, int size, int b_color, string str) { // 3 * size, vẽ bảng menu chọn
+void drawBoardMenu(int XX, int YY, int size, int b_color, string str = "") { // 3 * size, vẽ bảng menu chọn
 	setColor(co_theme);
 
 	gotoXY(XX, YY); cout << char(201);
@@ -671,8 +681,8 @@ void drawBoard(int XX, int YY) {  // Vẽ bảng caro 12*12
 
 			if (x == 0 && y == 0) cout << char(201);
 			else if (x == 0 && y == 2 * BOARD_SIZE) cout << char(200);
-			else if (x == 4 * BOARD_SIZE && y == 0) cout << char(187);
-			else if (x == 4 * BOARD_SIZE && y == 2 * BOARD_SIZE) cout << char(188);
+			else if (x == 4 * BOARD_SIZE && y == 0) cout << char(203);
+			else if (x == 4 * BOARD_SIZE && y == 2 * BOARD_SIZE) cout << char(202);
 
 			else if (x % 4 == 0 && y == 0) cout << char(209);
 			else if (x % 4 == 0 && y == 2 * BOARD_SIZE) cout << char(207);
@@ -722,6 +732,9 @@ void drawPopUp(int XX, int YY, int h, int w) {
 		cout << char(188);
 }
 
-void drawDisplay() {
+void drawDisplay(int XX, int YY) {
+	drawIN_MATCH(XX - 20, YY - 9);
+	drawBoard(XX - 40, YY - 2);
 
+	
 }
