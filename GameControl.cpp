@@ -359,7 +359,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     else if(Turn == 1) drawO_WIN(XX - 7, YY + 10);
     else drawDRAW(XX - 6, YY + 10);
 
-    // Hỏi có tiếp tục nữa không, nếu có thì có lưu game không
+    // Hỏi có tiếp tục nữa không, nếu không thì có lưu game không
     // Thêm mục điểm số
 
     _getch();
