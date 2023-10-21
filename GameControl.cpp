@@ -241,6 +241,7 @@ void resetData(int startX, int startY)
 void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của người chơi
 // máy chơi trả về tham chiếu x, y là tọa độ vừa được đặt
 {
+    ShowCur(0);
     if (Cache.size() == 1) // nước đi đầu tiên của bot là random
     {
         int dx[] = { -1, 1, 0, 0 };
@@ -252,6 +253,7 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
     }
     else minimax(maxDepth = (Neighbor.size() <= 110 ? 3 : 2), (long long)-1e11, (long long)1e11, -1, x, y);
     assert(status[x][y].opt == 0);
+    ShowCur(1);
     // bot mặc định là o
 }
 
