@@ -286,13 +286,13 @@ void makeMove(int Turn, int x, int y)
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2)
 {
     int x, y;
+    system("cls");
+    Cache.clear();
+    Neighbor.clear();
+    ShowCur(1);
+    drawBoard(XX, YY, name1, name2);
     if (isNewGame)
     {
-        system("cls");
-        drawBoard(XX, YY, name1, name2);
-        ShowCur(1);
-        Cache.clear();
-        Neighbor.clear();
         Turn = 1;
         x = 8, y = 8;
         moveTo(x, y);
