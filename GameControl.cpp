@@ -1,5 +1,6 @@
 ﻿#include "GameControl.h"
 #include "Graphic.h"
+#include "Newgame.h"
 
 #define F first
 #define S second
@@ -327,6 +328,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                 if (Key == 2 && y > 1) y -= 1;
                 if (Key == 3 && x < BOARD_SIZE) x += 1;
                 if (Key == 4 && y < BOARD_SIZE) y += 1;
+                if (Key == 5) return;
                 if (Key == 6) // undo
                 {
                     for (int i = 0; i < (vsBot ? 2 : 1); i++) if(!Cache.empty())
@@ -337,6 +339,9 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                         makeMove(0, x, y);
                         Turn *= -1;
                     }
+                }
+                if (Key == 7) {
+
                 }
                 moveTo(x, y);
             }

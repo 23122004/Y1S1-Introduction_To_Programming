@@ -129,6 +129,7 @@ void drawMenu(int XX, int YY) {
 
 	int S = 0;  // Con trỏ hiển thị mục đang chọn
 	while (true) {
+		ShowCur(0);
 		drawCARO(XX - 6, YY - 9);
 		for (int i = 0; i < 5; ++i)
 			s1[i].draw();

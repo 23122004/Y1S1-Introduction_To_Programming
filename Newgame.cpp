@@ -3,9 +3,12 @@
 using namespace std;
 
 bool putname(int XX, int YY, string &str) {  // Insert name
-	setColor(15, 0);
+	int sz = 0, Xi = XX, Yi = YY;
 	string tmp = str;
-	str = "";
+
+	setColor(15, 8);
+	gotoXY(Xi, Yi);
+	cout << str;
 
 	while (true) {
 		char ch = _getch();
@@ -14,21 +17,29 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 
 		if (ch == 27) return 0;  // if "esc" then back to menu
 
-		if (ch == '\b' && (int)str.size()) {  // nếu là ký tự backspace thì xóa
-			str.pop_back();
+		if (ch == '\b' && sz) {  // nếu là ký tự backspace thì xóa
+			str.pop_back(); --sz;
 			--XX; gotoXY(XX, YY); cout << " ";
 
-		} else if ((int)str.size() < 10) {  // giới hạn 10 ký tự
-			str.push_back(ch);
+			if (sz == 0) {
+				str = tmp;
+				setColor(15, 8);
+				gotoXY(Xi, Yi);
+				cout << str;
+			}
+
+		} else if ((('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z') || isdigit(ch)) && sz < 10) {  // giới hạn 10 ký tự
+			if (sz == 0) {
+				str = "";
+				setColor(15, 0);
+				gotoXY(Xi, Yi);
+				cout << "          ";
+			}
+
+			str.push_back(ch); ++sz;
 			gotoXY(XX, YY);
 			cout << ch; ++XX;
 		}
-	} 
-	
-	if (!(int)str.size()) {
-		str = tmp;
-		gotoXY(XX, YY);
-		cout << str;
 	} return 1;
 }
 	
