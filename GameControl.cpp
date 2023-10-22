@@ -253,17 +253,12 @@ void addNeighbor(int x, int y)
         for (int j = Upy; j <= Lowy; j++)
             if (valid(i, j) && status[i][j].opt == 0)
                 Neighbor.insert({ i, j });
-    /*for (auto x : Neighbor)
-    {
-        moveTo(x.F, x.S);
-        cout << '.';
-    }*/
 }
 
 void makeMove(int Turn, int x, int y)
 {
     status[x][y].opt = Turn;
-    if (Turn != 0) addNeighbor(x, y);
+    
     moveTo(x, y);
     if (Turn == 1)
     {
@@ -283,12 +278,28 @@ void makeMove(int Turn, int x, int y)
     moveTo(x, y);
 }
 
+void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
+{
+    Neighbor.clear();
+    for(int i = 1; i <= BOARD_SIZE; i++)
+        for(int j = 1; j <= BOARD_SIZE; j++)
+            if (status[i][j].opt != 0) addNeighbor(i, j);
+    for (auto x : Neighbor)
+    {
+        moveTo(x.F, x.S);
+        cout << '.';
+    }
+}
+
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2)
 {
-    int x, y;
+    int Xscore = 0, Oscore = 0;
+    moveTo(0, 0);
+playAgain:
     system("cls");
+    //cout << Xscore << ' ' << Oscore << '\n'; // hiển thị điểm số
+    int x, y;
     Cache.clear();
-    Neighbor.clear();
     ShowCur(1);
     drawBoard(XX, YY, name1, name2);
     if (isNewGame)
@@ -297,17 +308,19 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         x = 8, y = 8;
         moveTo(x, y);
     }
-    /*else
+    /*else // nếu không phải newgame mà là loadgame
     {
         for (int i = 1; i <= BOARD_SIZE; i++)
-            for (int j = 1; j <= BOARD_SIZE; j++) if (status[i][j].opt != 0)
-            {
-                makeMove(status[i][j].opt, i, j);
-            }
+            for (int j = 1; j <= BOARD_SIZE; j++) 
+                if (status[i][j].opt != 0)
+                    {
+                        makeMove(status[i][j].opt, i, j);
+                    }
     }*/
 
     while (abs(evaluation(1)) < 1e8)
     {
+        updateNeighbor();
         if (Turn == 1) {
             drawX(XX - 24 + 4 * BOARD_SIZE, YY + 3, 4);
             drawO(XX - 25 + 4 * BOARD_SIZE, YY + 18, 8);
@@ -336,6 +349,14 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                         Cache.pop_back();
                         makeMove(0, x, y);
                         Turn *= -1;
+                        if (Turn == 1) {
+                            drawX(XX - 24 + 4 * BOARD_SIZE, YY + 3, 4);
+                            drawO(XX - 25 + 4 * BOARD_SIZE, YY + 18, 8);
+                        }
+                        else {
+                            drawO(XX - 25 + 4 * BOARD_SIZE, YY + 18, 1);
+                            drawX(XX - 24 + 4 * BOARD_SIZE, YY + 3, 8);
+                        } moveTo(x, y);
                     }
                 }
                 moveTo(x, y);
@@ -355,21 +376,28 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     // Nháy nháy hàng mà [Turn] win rồi mới chuyển cảnh sau
 
     drawPopUp(XX - 14, YY + 8, 10, 49);
-    if (Turn == -1)drawX_WIN(XX - 7, YY + 10);
-    else if(Turn == 1) drawO_WIN(XX - 7, YY + 10);
+    if (Turn == -1)
+        drawX_WIN(XX - 7, YY + 10), Xscore++;
+    else if(Turn == 1) 
+            drawO_WIN(XX - 7, YY + 10), Oscore++;
     else drawDRAW(XX - 6, YY + 10);
 
     // Hỏi có tiếp tục nữa không, nếu không thì có lưu game không
     // Thêm mục điểm số
-
     _getch();
+    bool continuePlaying = true;
+    if (continuePlaying)
+    {
+        isNewGame = true; // nếu loadgame mà chơi tiếp thì trở thành newgame
+        goto playAgain;
+    }
 }
 
-void loadGameBoardUpdate(int** a, int turn, int lastX, int lastY)
+void loadGameBoardUpdate(int** a, int turn, int lastX, int lastY) // thêm phần vsbot và tên của người chơi
 {
     for (int i = 1; i <= BOARD_SIZE; i++)
         for (int j = 1; j <= BOARD_SIZE; j++)
             status[i][j].opt = a[i][j];
     Turn = turn;
-    //startGame(0, false);
+    //startGame(vsbot, false);
 }
