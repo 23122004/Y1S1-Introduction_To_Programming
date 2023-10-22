@@ -284,20 +284,19 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
     for(int i = 1; i <= BOARD_SIZE; i++)
         for(int j = 1; j <= BOARD_SIZE; j++)
             if (status[i][j].opt != 0) addNeighbor(i, j);
-    for (auto x : Neighbor)
+    /*for (auto x : Neighbor)
     {
         moveTo(x.F, x.S);
         cout << '.';
-    }
+    }*/
 }
 
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2)
 {
     int Xscore = 0, Oscore = 0;
-    moveTo(0, 0);
 playAgain:
     system("cls");
-    //cout << Xscore << ' ' << Oscore << '\n'; // hiển thị điểm số
+    //moveTo(0, 0); cout << Xscore << ' ' << Oscore << '\n'; // hiển thị điểm số
     int x, y;
     Cache.clear();
     ShowCur(1);
