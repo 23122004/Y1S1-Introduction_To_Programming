@@ -8,7 +8,7 @@
 // each fileName have some particular information : 
 // First line : turn, lastX, lastY
 //       next : 2-dimensional matrix a
-vector<string> fileNames = { "day" , "day2", "day1" , "day2", "day1" , "day2", "day1" , "day2", "day1" , "day2", "day1" , "day2", "day1" };
+vector<string> fileNames = { "day1" , "day2", "day1" , "day2", "day1" , "day2", "day1" , "day2", "day1" , "day2"};
 
 void loadGame(int XX, int YY) {
 	struct _aboutMenu {
@@ -93,7 +93,7 @@ void loadGame(int XX, int YY) {
 				else if (_in == 4) Sj = (Sj + 1) % 3;
 				else if (_in == 0) {
 					if (Sj == 0) {
-						// Play Game
+						// Play Game (open file filesNames[S])
 						return;
 					}
 
@@ -133,7 +133,7 @@ void loadGame(int XX, int YY) {
 						s2[S].str = ">>" + tmp + "<<";
 					} break;
 				}
-			} s2[S].draw();
+			} if (S != -1) s2[S].draw();
 
 		} else {
 			int col = S / 5, nxt_S;

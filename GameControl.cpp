@@ -295,7 +295,7 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2)
 {
     int Xscore = 0, Oscore = 0;
-playAgain:
+    playAgain:
     system("cls");
     //moveTo(0, 0); cout << Xscore << ' ' << Oscore << '\n'; // hiển thị điểm số
     int x, y;
