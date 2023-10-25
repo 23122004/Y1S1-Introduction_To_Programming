@@ -318,8 +318,11 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         } 
         
         Cache = Data;
-        x = Data.back().F;
-        y = Data.back().S;
+        if (Data.empty()) x = y = 8;
+        else {
+            x = Data.back().F;
+            y = Data.back().S;
+        }
     }
 
     while (abs(evaluation(1)) < 1e8)
