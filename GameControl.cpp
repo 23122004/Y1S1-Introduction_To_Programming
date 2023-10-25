@@ -297,7 +297,6 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
 
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName)
 {
-    
     int Xscore = 0, Oscore = 0;
     playAgain:
     system("cls");
@@ -366,7 +365,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                     }
                 }
                 if (Key == 7) {
-                    saveGame(XX, YY, Cache, Xscore, Oscore, name1, name2, fileName);
+                    saveGame(XX, YY, Cache, Xscore, Oscore, name1, name2, fileName, vsBot);
                 }
                 moveTo(x, y);
             }
@@ -406,7 +405,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
 
         check_2:
         key = _getch();
-        if (key == 'Y' || key == 'y') saveGame(XX, YY, Cache, Xscore, Oscore, name1, name2, fileName);
+        if (key == 'Y' || key == 'y') saveGame(XX, YY, Cache, Xscore, Oscore, name1, name2, fileName, vsBot);
         else if (key != 'N' && key != 'n') goto check_2;
     } else goto Check;
 

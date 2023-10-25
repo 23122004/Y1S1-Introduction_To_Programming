@@ -6,7 +6,7 @@
 #define co_theme 15,0
 
 const int BOARD_SIZE = 15;
-vector<string> fileNames = { "day1" , "day2", "day1" , "day2", "day1" , "day2", "day1" , "day2", "day1" , "day2"};
+vector<string> fileNames = {"game1", "game2", "game3"};
 
 void loadGame(int XX, int YY) {
 	// Đọc các fileNames trong .txt
@@ -94,9 +94,9 @@ void loadGame(int XX, int YY) {
 				else if (_in == 0) {
 					if (Sj == 0) {
 						// Play Game (open file filesNames[S])
-						loadFromFile(fileNames[S], vsBot, name1, name2, Data);
+						//loadFromFile(fileNames[S], vsBot, name1, name2, Data);
 						vector<pair<int, int>> tmp = { {3, 2}, {3, 3}, {5, 5}, {6, 6}, {7, 6}, }; // demo
-						startGame(1, 0, XX, YY, name1, name2, Data, fileNames[S]);					
+						startGame(1, 0, XX, YY, "name1", "name2", tmp, fileNames[S]);  // demo
 						return;
 					}
 
@@ -149,7 +149,7 @@ void loadGame(int XX, int YY) {
 	}
 }
 
-void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string name1, string name2, string nameFile) {
+void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string name1, string name2, string nameFile, bool vsBot) {
 	if (nameFile == "") {
 		insertName:
 		drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 2);
@@ -173,20 +173,34 @@ void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string n
 				} else if (key == 'Y' || key == 'y') break;
 			}
 		}
-	} drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
+	} 
+	
+	drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
+	drawName_Board(XX + 4 * BOARD_SIZE - 33, YY + 2 * BOARD_SIZE - 1, nameFile);
 
 	while ((int)fileNames.size() > 15) 
 		fileNames.erase(fileNames.begin());
 
 	fileNames.push_back(nameFile);  // - update lại fileNames vào txt
-	// - tạo file tên "nameFile" và lưu Xscore, Oscore, name1, name2, Cache
+	// - tạo file tên "nameFile" và lưu vsBot, Xscore, Oscore, name1, name2, Cache
+
+	nameFile += ".txt";
+	ofstream File(nameFile);
+
+	// Ghi dữ liệu vào file
+	File << int(vsBot) << " " << Xscore << " " << Oscore << '\n';
+	File << name1 << " " << name2 << '\n';
+
+	for (const auto& tmp : Cache) {
+		File << tmp.first << " " << tmp.second << " ";
+	} File.close();
 }
 
 void deleteFile(string nameFile) {
 	// - Xóa file tên nameFile
 }
 
-/*   - Dinh Duc Tao -
+/*   - Dinh Duc Tai -
 void CurrentGame(string filename, int XX, int YY, int index_file_name) {
 	//load filegame to a[i][j]
 	int turn = 0, lastX = 0, lastY = 0;
@@ -255,13 +269,12 @@ void Write_File(string fileName, bool vsBot, string name1, string name2, vector<
 // LOAD GAME FROM FILE
 
 void loadFromFile(string filename, bool& vsBot, string& name1, string& name2, vector<ii>& Data) {
-	/*
-	Play Game (open file filesNames[S])
-	vector<pair<int, int>> tmp = { {3, 2}, {3, 3}, {5, 5}, {6, 6}, {7, 6}, }; // demo
-	startGame(1, 0, XX, YY, "trung", "khoa", tmp, "file1");					// demo
-	*/
-	filename += ".txt";
 	
+	// Play Game (open file filesNames[S])
+	// vector<pair<int, int>> tmp = { {3, 2}, {3, 3}, {5, 5}, {6, 6}, {7, 6}, }; // demo
+	//startGame(1, 0, XX, YY, "trung", "khoa", tmp, "file1");					// demo
+	
+	filename += ".txt";
 	ifstream file(filename);
 
 	// Read first line
@@ -272,9 +285,9 @@ void loadFromFile(string filename, bool& vsBot, string& name1, string& name2, ve
 	int first, second;
 	while (file >> first >> second) {
 		Data.emplace_back(first, second);
-	}
-	delete[] a;
+	} delete[] a;
 
-} */
+	} 
 	file.close();
 }
+*/
