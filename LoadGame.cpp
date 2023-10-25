@@ -147,49 +147,7 @@ void loadGame(int XX, int YY) {
 			if (nxt_S <= sz) S = nxt_S;
 		}
 	}
-	
-	/*
-	drawBoard(XX, YY, "player1", "player2");
-
-	fileNames.push_back("game1.txt");
-	fileNames.push_back("game2.txt");
-	fileNames.push_back("game3.txt");
-
-	string Current_game = "game1.txt";
-	
-	CurrentGame(Current_game, 15, 20, 0);
-	
-	int index = 0;
-	int move = 0;
-	while ((move = nextMove()) != 5) {
-		if (move == 1) {
-			Current_game = fileNames[index];
-			index = (index + 1) % fileNames.size();
-			CurrentGame(Current_game, 15, 20, index);
-			//check again 
-			gotoXY(70, 20);
-			cout << index ;
-			gotoXY(70, 22);
-			cout << fileNames[index];
-			//
-		}
-		if (move == 3) {
-			Current_game = fileNames[index];
-			index = (fileNames.size() + index - 1) % fileNames.size();
-			CurrentGame(Current_game, 15, 20, index);
-			//check again 
-			gotoXY(70, 20);
-			cout << index;
-			gotoXY(70, 22);
-			cout << fileNames[index];
-			//
-		}
-	}
-	// press ESC to exit
-	*/
-	
 }
-
 
 void CurrentGame(string filename, int XX, int YY, int index_file_name) {
 	//load filegame to a[i][j]

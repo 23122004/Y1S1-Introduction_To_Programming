@@ -684,7 +684,7 @@ void drawBoardSize(int XX, int YY, int h, int w) { // h * w, vẽ bảng viền 
 	cout << char(188);
 }
 
-void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscore) {  // Vẽ bảng caro 12*12
+void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscore, string fileName) {  // Vẽ bảng caro 12*12
 	setColor(co_theme);
 	drawIN_MATCH(Xi - 20, Yi - 9);
 
@@ -747,6 +747,16 @@ void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscor
 	cout << "Score: " << Xscore;
 	gotoXY(XX + 4 * BOARD_SIZE + 7, YY + 27);
 	cout << "Score: " << Oscore;
+
+	drawName_Board(XX, YY, fileName);
+}
+
+void drawName_Board(int XX, int YY, string fileName) {
+	gotoXY(XX, YY + 2 * BOARD_SIZE + 1);
+	setColor(0, 15);  cout << " BOARD NAME: ";
+	if ((int)fileName.size() == 0) fileName = "[NULL]";
+	while ((int)fileName.size() < 10) fileName.push_back(' ');
+	cout << fileName;
 }
 
 void drawPopUp(int XX, int YY, int h, int w) {

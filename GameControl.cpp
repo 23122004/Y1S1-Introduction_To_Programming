@@ -301,7 +301,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     int x, y;
     Cache.clear();
     ShowCur(1);
-    drawBoard(XX, YY, name1, name2, Xscore, Oscore);
+    drawBoard(XX, YY, name1, name2, Xscore, Oscore, fileName);
     if (isNewGame)
     {
         Turn = 1;
