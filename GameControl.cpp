@@ -321,7 +321,6 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
 
     while (abs(evaluation(1)) < 1e8)
     {
-        break;
         updateNeighbor();
         if (Turn == 1) {
             drawX(XX - 24 + 4 * BOARD_SIZE, YY + 3, 4);
