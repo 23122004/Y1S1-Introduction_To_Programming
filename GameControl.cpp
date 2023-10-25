@@ -261,6 +261,7 @@ void makeMove(int Turn, int x, int y)
     status[x][y].opt = Turn;
     
     moveTo(x, y);
+    
     if (Turn == 1)
     {
         setColor(15, 4);
@@ -294,6 +295,7 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
 
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName)
 {
+    
     int Xscore = 0, Oscore = 0;
     playAgain:
     system("cls");
@@ -362,6 +364,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                     }
                 }
                 if (Key == 7) {
+                    Write_File(fileName, vsBot, name1, name2, Cache);
                     // - Save Game
                 }
                 moveTo(x, y);
@@ -404,7 +407,18 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
 
         check_2:
         key = _getch();
-        if (key == 'Y' || key == 'y'); // save game
+        if (key == 'Y' || key == 'y') {
+        //Write_File(string fileName, bool vsBot, string name1, string name2, vector<ii> Data);
+            if (!isNewGame) {
+                //Khúc này xử lý filename kiểu j ? (game mới nên k có filename (NULL))
+                //Write_File(fileName, vsBot, name1, name2, CurrentData);
+            }
+            else {
+                Write_File(fileName, vsBot, name1, name2, Cache);
+            }
+        //Write_File(string fileName, bool vsBot, string name1, string name2, vector<ii> Data)
+
+        } // save game
         else if (key != 'N' && key != 'n') goto check_2;
     } else goto Check;
 
