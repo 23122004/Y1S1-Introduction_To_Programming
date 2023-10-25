@@ -366,7 +366,8 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                 }
                 if (Key == 7) {
                     Write_File(fileName, vsBot, name1, name2, Cache);
-                    // - Save Game
+                    // - Save Game lúc đang chơi game
+                    // add tí đồ họa vào nhá
                 }
                 moveTo(x, y);
             }
@@ -411,8 +412,9 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         if (key == 'Y' || key == 'y') {
         //Write_File(string fileName, bool vsBot, string name1, string name2, vector<ii> Data);
             if (!isNewGame) {
-                //Khúc này xử lý filename kiểu j ? (game mới nên k có filename (NULL))
-                //Write_File(fileName, vsBot, name1, name2, CurrentData);
+                // Khúc này xử lý filename kiểu j ? (game mới nên k có filename (NULL))
+                // với lại xử lí ntn để ko bị tràn fileNames ( danh sách slot save game)
+                //Write_File(fileName, vsBot, name1, name2, Cache);
             }
             else {
                 Write_File(fileName, vsBot, name1, name2, Cache);
