@@ -235,6 +235,7 @@ void pushList() {
 }
 
 void deleteFile(string nameFile) {
-	// - Xóa file tên nameFile
+	nameFile += ".txt";
+	remove(nameFile.c_str());
 }
 
