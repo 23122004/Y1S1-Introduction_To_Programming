@@ -6,6 +6,8 @@
 #include "Graphic.h"
 #include <fstream>
 #include <utility>
+#include <cstdio>
+#include <string>
 
 #define F first
 #define S second
