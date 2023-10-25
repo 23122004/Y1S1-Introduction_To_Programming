@@ -4,6 +4,8 @@
 #include "GameControl.h"
 #include "Console.h"
 #include "Graphic.h"
+#include <fstream>
+#include <utility>
 
 #define F first
 #define S second
@@ -11,12 +13,16 @@ typedef pair<int, int> ii;
 
 using namespace std;
 
+//main
 void loadGame(int XX, int YY);
-void Add_NewFile_to_vector_fileNames(string fileName);
-void Overwrite_information_to_file(const std::string& fileName, int** a, int turn, int lastX, int lastY, int BOARD_SIZE);
-void loadFromFile(string filename);
-void CurrentGame(string filename, int XX, int YY, int index_file_name);
-void drawBoardWithValues(int XX, int YY, int** a);
+
+//savegame
+void Write_File(string fileName, bool vsBot, string name1, string name2, vector<ii> Data);
+
+//loadgame
+void loadFromFile(string filename, bool& vsBot, string& name1, string& name2, vector<ii>& Data);
+
+//??
 void drawNameOfGame(int XX, int YY, int index_file_name);
 
 #endif
