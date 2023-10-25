@@ -78,5 +78,6 @@
  - Load game có chức năng: play, delete, rename
  - Nếu ô đó đã đánh thì tô đậm + không đánh được nữa
  - Tung đồng xu, xem ai đánh trước
+ - Lưu điểm X-0, tên ng chơi 1-2, có đang đánh với bot không rồi lưu các bước đánh
 
  https://en.wikipedia.org/wiki/Gomoku

@@ -34,7 +34,7 @@ void drawX_WIN(int XX, int YY);
 void drawO_WIN(int XX, int YY);
 void drawDRAW(int XX, int YY);
 
-void drawBoard(int startX, int startY, string name1, string name2);
+void drawBoard(int startX, int startY, string name1, string name2, int Xscore, int Oscore);
 void drawBoardMenu(int XX, int YY, int size, int b_color, string str);
 void drawBoardSize(int XX, int YY, int h, int w);
 void drawPopUp(int XX, int YY, int h, int w);

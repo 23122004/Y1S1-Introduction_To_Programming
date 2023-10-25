@@ -2,6 +2,7 @@
 #include "GameControl.h"
 #include "Newgame.h"
 #include "Graphic.h"
+#include "library.h"
 #define co_theme 15,0
 
 // vector fileNames include name of files that save the game
@@ -94,6 +95,8 @@ void loadGame(int XX, int YY) {
 				else if (_in == 0) {
 					if (Sj == 0) {
 						// Play Game (open file filesNames[S])
+						vector<pair<int, int>> tmp = { {3, 2}, {3, 3}, {5, 5}, {6, 6} }; // demo
+						startGame(1, 0, XX, YY, "trung", "khoa", tmp, "file1");					// demo
 						return;
 					}
 

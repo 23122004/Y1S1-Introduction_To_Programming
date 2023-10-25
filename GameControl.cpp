@@ -292,34 +292,36 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
     }*/
 }
 
-void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2)
+void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName)
 {
     int Xscore = 0, Oscore = 0;
     playAgain:
     system("cls");
-    //moveTo(0, 0); cout << Xscore << ' ' << Oscore << '\n'; // hiển thị điểm số
+    
     int x, y;
     Cache.clear();
     ShowCur(1);
-    drawBoard(XX, YY, name1, name2);
+    drawBoard(XX, YY, name1, name2, Xscore, Oscore);
     if (isNewGame)
     {
         Turn = 1;
         x = 8, y = 8;
         moveTo(x, y);
+    } else {
+        Turn = 1;
+        for (ii tmp : Data) {
+            makeMove(Turn, tmp.F, tmp.S);
+            Turn *= -1;
+        } 
+        
+        Cache = Data;
+        x = Data.back().F;
+        y = Data.back().S;
     }
-    /*else // nếu không phải newgame mà là loadgame
-    {
-        for (int i = 1; i <= BOARD_SIZE; i++)
-            for (int j = 1; j <= BOARD_SIZE; j++) 
-                if (status[i][j].opt != 0)
-                    {
-                        makeMove(status[i][j].opt, i, j);
-                    }
-    }*/
 
     while (abs(evaluation(1)) < 1e8)
     {
+        break;
         updateNeighbor();
         if (Turn == 1) {
             drawX(XX - 24 + 4 * BOARD_SIZE, YY + 3, 4);
@@ -335,7 +337,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
             while (true)
             {
                 int Key = nextMove();
-                if (Key == 0 && status[x][y].opt == 0) break;
+                if (Key == 0 && status[x][y].opt == 0) break; 
                 if (Key == 1 && x > 1) x -= 1;
                 if (Key == 2 && y > 1) y -= 1;
                 if (Key == 3 && x < BOARD_SIZE) x += 1;
@@ -361,7 +363,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                     }
                 }
                 if (Key == 7) {
-
+                    // - Save Game
                 }
                 moveTo(x, y);
             }
@@ -379,7 +381,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     ShowCur(0);
     // Nháy nháy hàng mà [Turn] win rồi mới chuyển cảnh sau
 
-    drawPopUp(XX - 14, YY + 8, 10, 49);
+    drawPopUp(XX - 14, YY + 8, 11, 49);
     if (Turn == -1)
         drawX_WIN(XX - 7, YY + 10), Xscore++;
     else if(Turn == 1) 
@@ -387,9 +389,27 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     else drawDRAW(XX - 6, YY + 10);
 
     // Hỏi có tiếp tục nữa không, nếu không thì có lưu game không
-    // Thêm mục điểm số
-    _getch();
+    
     bool continuePlaying = true;
+    char key;
+
+    gotoXY(XX - 8, YY + 17);
+    setColor(15, 8);  cout << "<< Press Y to continue or N to exit >>";
+    
+    Check:
+    key = _getch();
+    if (key == 'N' || key == 'n') continuePlaying = false;
+    else if (key == 'Y' || key == 'y') {
+        gotoXY(XX - 8, YY + 17);
+        setColor(15, 8); cout << " << Do you want to save? Press Y/N >> ";
+
+        check_2:
+        key = _getch();
+        if (key == 'Y' || key == 'y'); // save game
+        else if (key != 'N' && key != 'n') goto check_2;
+    } else goto Check;
+
+    setColor(15, 0);
     if (continuePlaying)
     {
         isNewGame = true; // nếu loadgame mà chơi tiếp thì trở thành newgame

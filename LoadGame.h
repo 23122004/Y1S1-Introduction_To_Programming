@@ -5,6 +5,10 @@
 #include "Console.h"
 #include "Graphic.h"
 
+#define F first
+#define S second
+typedef pair<int, int> ii;
+
 using namespace std;
 
 void loadGame(int XX, int YY);
