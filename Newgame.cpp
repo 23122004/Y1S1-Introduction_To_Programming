@@ -12,7 +12,11 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 
 	while (true) {
 		char ch = _getch();
-		if ((int)ch < 0) continue;
+		if ((int)ch < 0)
+		{
+			ch = _getch();
+			continue;
+		}
 
 		if (ch == 13) break;  // if "enter" then exit
 
