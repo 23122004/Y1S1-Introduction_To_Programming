@@ -6,10 +6,10 @@
 #define co_theme 15,0
 
 const int BOARD_SIZE = 15;
-vector<string> fileNames = {"game1", "game2", "game3"};
+vector<string> fileNames;
 
 void loadGame(int XX, int YY) {
-	// Đọc các fileNames trong .txt
+	pullList();
 
 	struct _aboutMenu {
 		int X, Y, size, b_color;
@@ -93,10 +93,13 @@ void loadGame(int XX, int YY) {
 				else if (_in == 4) Sj = (Sj + 1) % 3;
 				else if (_in == 0) {
 					if (Sj == 0) {
-						// Play Game (open file filesNames[S])
-						//loadFromFile(fileNames[S], vsBot, name1, name2, Data);
-						vector<pair<int, int>> tmp = { {3, 2}, {3, 3}, {5, 5}, {6, 6}, {7, 6}, }; // demo
-						startGame(1, 0, XX, YY, "name1", "name2", tmp, fileNames[S]);  // demo
+						vector<ii> Cache;
+						int Xscore, Oscore;
+						string name1, name2;
+						bool vsBot;
+
+						loadFromFile(fileNames[S], Cache, Xscore, Oscore, name1, name2, vsBot);
+						startGame(vsBot, 0, XX, YY, name1, name2, Cache, fileNames[S]);  
 						return;
 					}
 
@@ -115,15 +118,29 @@ void loadGame(int XX, int YY) {
 						--sz;  S = min(S, sz);
 
 					} else {
-						// - Nhớ cập nhật lại fileNames vào file .txt
 						setColor(co_theme);
 						gotoXY(XX - 29, YY + 15); cout << "                                                                               ";
 						gotoXY(XX - 29, YY + 16); cout << "                                                                               ";
 						gotoXY(XX - 29, YY + 17); cout << "                                                                               ";
 
+						renameFile:
 						string tmp;
-						gotoXY(XX - 24, YY + 16); cout << " New Name: ";
+						gotoXY(XX - 24, YY + 16); cout << " New Name:                                                         ";
 						if (!putname(XX - 13, YY + 16, tmp = fileNames[S])) continue;
+
+						bool checkSame = 0;
+						for (int t = 0; t <= sz; ++t)
+							if (t != S && fileNames[t] == tmp)
+								checkSame = 1;
+
+						if (checkSame) {
+							gotoXY(XX - 24, YY + 16); cout << ">> It already exists, do you want to change another name? Press Y/N";
+							while (true) {
+								char key = _getch();
+								if (key == 'N' || key == 'n') break;
+								else if (key == 'Y' || key == 'y') goto renameFile;
+							} break;
+						}
 
 						fileNames[S] = tmp;
 						int siz = 14 - (int)tmp.size();
@@ -134,7 +151,9 @@ void loadGame(int XX, int YY) {
 
 						s1[S].str = "  " + tmp + "  ";
 						s2[S].str = ">>" + tmp + "<<";
-					} break;
+					} 
+					pushList();
+					break;
 				}
 			} if (S != -1) s2[S].draw();
 
@@ -178,11 +197,10 @@ void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string n
 	drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
 	drawName_Board(XX + 4 * BOARD_SIZE - 33, YY + 2 * BOARD_SIZE - 1, nameFile);
 
-	while ((int)fileNames.size() > 15) 
+	while ((int)fileNames.size() >= 15) 
 		fileNames.erase(fileNames.begin());
-
-	fileNames.push_back(nameFile);  // - update lại fileNames vào txt
-	// - tạo file tên "nameFile" và lưu vsBot, Xscore, Oscore, name1, name2, Cache
+	fileNames.push_back(nameFile); 
+	pushList();
 
 	nameFile += ".txt";
 	ofstream File(nameFile);
@@ -192,8 +210,32 @@ void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string n
 	File << name1 << " " << name2 << '\n';
 
 	for (const auto& tmp : Cache) {
-		File << tmp.first << " " << tmp.second << " ";
+		File << tmp.first << " " << tmp.second << "\n";
 	} File.close();
+}
+
+void loadFromFile(string nameFile, vector<ii>& Cache, int& Xscore, int& Oscore, string& name1, string& name2, bool& vsBot) {
+	Cache.clear();
+	nameFile += ".txt";
+	ifstream file(nameFile);
+	int x, y;
+
+	file >> vsBot >> Xscore >> Oscore >> name1 >> name2;
+	while (file >> x >> y) Cache.emplace_back(x, y);
+	file.close();
+}
+
+void pullList() {
+	string s; fileNames.clear();
+	ifstream file("ListNameFiles.txt");
+	while (file >> s) fileNames.emplace_back(s);
+	file.close();
+}
+
+void pushList() {
+	ofstream File("ListNameFiles.txt");
+	for (string s : fileNames) File << s << '\n';
+	File.close();
 }
 
 void deleteFile(string nameFile) {
