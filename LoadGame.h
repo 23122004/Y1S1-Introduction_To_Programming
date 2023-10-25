@@ -4,13 +4,24 @@
 #include "GameControl.h"
 #include "Console.h"
 #include "Graphic.h"
+#include <fstream>
+#include <utility>
 
 #define F first
 #define S second
 typedef pair<int, int> ii;
 using namespace std;
 
+//main
 void loadGame(int XX, int YY);
+
+//savegame
+void Write_File(string fileName, bool vsBot, string name1, string name2, vector<ii> Data);
+
+//loadgame
+void loadFromFile(string filename, bool& vsBot, string& name1, string& name2, vector<ii>& Data);
+
+//??
 void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string name1, string name2, string nameFile);
 void deleteFile(string nameFile);
 
