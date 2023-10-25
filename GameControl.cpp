@@ -399,30 +399,14 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     else if(Turn == 1) 
             drawO_WIN(XX - 7, YY + 10), Oscore++;
     else drawDRAW(XX - 6, YY + 10);
-    
-    bool continuePlaying = true;
-    char key;
 
     gotoXY(XX - 8, YY + 17);
     setColor(15, 8);  cout << "<< Press Y to continue or N to exit >>";
-    
-    Check:
-    key = _getch();
-    if (key == 'N' || key == 'n') continuePlaying = false;
-    else if (key == 'Y' || key == 'y') {
-        gotoXY(XX - 8, YY + 17);
-        setColor(15, 8); cout << " << Do you want to save? Press Y/N >> ";
-
-        check_2:
-        key = _getch();
-        if (key == 'Y' || key == 'y') saveGame(XX, YY, Cache, Xscore, Oscore, name1, name2, fileName, vsBot);
-        else if (key != 'N' && key != 'n') goto check_2;
-    } else goto Check;
-
     setColor(15, 0);
-    if (continuePlaying)
-    {
-        isNewGame = true; // nếu loadgame mà chơi tiếp thì trở thành newgame
-        goto playAgain;
+    
+    while (true) {
+        char key = _getch();
+        if (key == 'N' || key == 'n') break;
+        else if (key == 'Y' || key == 'y') goto playAgain;
     }
 }

@@ -239,4 +239,3 @@ void deleteFile(string nameFile) {
 	nameFile += ".txt";
 	remove(nameFile.c_str());
 }
-
