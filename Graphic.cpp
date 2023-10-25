@@ -754,9 +754,20 @@ void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscor
 
 void drawStatus(int XX, int YY, int opt) {
 	gotoXY(XX - 3, YY); setColor(15, 0);
-	if (opt == 1) cout << ">> Playing      | 'I'-Save  | 'U'-Undo  | 'Esc'-Exit  |   ";
-	if (opt == 2) cout << ">> File's name:                                           ";
-	if (opt == 3) cout << ">> It already exists, do you want to replace it? Press Y/N";
+	if (opt == 1) {
+		cout << ">> Playing      | 'I'-Save  | 'U'-Undo  | 'Esc'-Exit  |   ";
+		ShowCur(1);
+	}
+
+	if (opt == 2) {
+		cout << ">> File's name:                                           ";
+		ShowCur(1);
+	}
+
+	if (opt == 3) {
+		cout << ">> It already exists, do you want to replace it? Press Y/N";
+		ShowCur(0);
+	}
 }
 
 void drawName_Board(int XX, int YY, string fileName) {

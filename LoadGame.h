@@ -18,7 +18,7 @@ void loadGame(int XX, int YY);
 //loadgame
 //void loadFromFile(string filename, bool& vsBot, string& name1, string& name2, vector<ii>& Data);
 
-void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string name1, string name2, string nameFile, bool vsBot);
+void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string name1, string name2, string& nameFile, bool vsBot);
 void loadFromFile(string nameFile, vector<ii>& Cache, int& Xscore, int& Oscore, string& name1, string& name2, bool& vsBot);
 void deleteFile(string nameFile);
 void pullList();
