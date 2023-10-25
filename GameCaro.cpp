@@ -157,8 +157,6 @@ int32_t main() {
 	ShowCur(0);
 	drawMenu(60, 12);
 
-	_getch();
-
 	return 0;
 }
 
