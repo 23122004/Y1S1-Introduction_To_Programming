@@ -250,7 +250,7 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
 void addNeighbor(int x, int y)
 {
     if (Neighbor.count({ x, y })) Neighbor.erase({ x, y });
-    int radius = 2;
+    int radius = 3;
     int Upx = x - radius, Upy = y - radius, Lowx = x + radius, Lowy = y + radius;
     for (int i = Upx; i <= Lowx; i++)
         for (int j = Upy; j <= Lowy; j++)
