@@ -225,14 +225,23 @@ void drawNameOfGame(int XX, int YY, int index_file_name) {
 // Step 2 :: Write history game to file : filename, name1, name2, vector<pair<int,int>> Data
 
 void Write_File(string fileName, bool vsBot, string name1, string name2, vector<ii> Data) {
+
+	for (const auto& element : fileNames) {
+		if (fileName == element) {
+			goto GhiDe;
+		}
+	}
+
 	fileNames.push_back(fileName);
+
+	GhiDe:
 	fileName += ".txt";
 	
 	ofstream File(fileName); 
 
 	// Ghi dữ liệu vào file
 	File << int(vsBot) << "\n";
-	File << name1 << " " << name2;
+	File << name1 << " " << name2 << '\n';
 	
 	for (const auto& pair : Data) {
 		File << pair.first << " " << pair.second << " ";

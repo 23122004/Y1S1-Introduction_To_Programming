@@ -263,6 +263,7 @@ void makeMove(int Turn, int x, int y)
     status[x][y].opt = Turn;
     
     moveTo(x, y);
+    
     if (Turn == 1)
     {
         setColor(15, 4);
@@ -296,6 +297,7 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
 
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName)
 {
+    
     int Xscore = 0, Oscore = 0;
     playAgain:
     system("cls");
