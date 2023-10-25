@@ -308,15 +308,13 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         x = 8, y = 8;
         moveTo(x, y);
     }
-    /*else // nếu không phải newgame mà là loadgame
+    else // nếu không phải newgame mà là loadgame
     {
         for (int i = 1; i <= BOARD_SIZE; i++)
             for (int j = 1; j <= BOARD_SIZE; j++) 
                 if (status[i][j].opt != 0)
-                    {
                         makeMove(status[i][j].opt, i, j);
-                    }
-    }*/
+    }
 
     while (abs(evaluation(1)) < 1e8)
     {
