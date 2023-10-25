@@ -347,7 +347,14 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                 if (Key == 2 && y > 1) y -= 1;
                 if (Key == 3 && x < BOARD_SIZE) x += 1;
                 if (Key == 4 && y < BOARD_SIZE) y += 1;
-                if (Key == 5) return;
+                if (Key == 5) {
+                    drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 4);
+                    while (true) {
+                        char key = _getch();
+                        if (key == 'N' || key == 'n') break;
+                        else if (key == 'Y' || key == 'y') return;
+                    } drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
+                }
                 if (Key == 6) // undo
                 {
                     for (int i = 0; i < (vsBot ? 2 : 1); i++) if(!Cache.empty())

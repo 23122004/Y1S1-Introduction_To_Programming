@@ -755,7 +755,7 @@ void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscor
 void drawStatus(int XX, int YY, int opt) {
 	gotoXY(XX - 3, YY); setColor(15, 0);
 	if (opt == 1) {
-		cout << ">> Playing      | 'I'-Save  | 'U'-Undo  | 'Esc'-Exit  |   ";
+		cout << ">> Playing    | 'I'- Save  | 'U'- Undo  | 'Esc'- Exit  |  ";
 		ShowCur(1);
 	}
 
@@ -766,6 +766,11 @@ void drawStatus(int XX, int YY, int opt) {
 
 	if (opt == 3) {
 		cout << ">> It already exists, do you want to replace it? Press Y/N";
+		ShowCur(0);
+	}
+
+	if (opt == 4) {
+		cout << ">> Do you want to exit? Press Y/N (Remember to save game) ";
 		ShowCur(0);
 	}
 }
