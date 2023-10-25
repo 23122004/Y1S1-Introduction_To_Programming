@@ -748,15 +748,24 @@ void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscor
 	gotoXY(XX + 4 * BOARD_SIZE + 7, YY + 27);
 	cout << "Score: " << Oscore;
 
-	drawName_Board(XX, YY, fileName);
+	drawName_Board(XX + 4 * BOARD_SIZE - 2, YY + 2 * BOARD_SIZE + 1, fileName);
+	drawStatus(XX, YY + 2 * BOARD_SIZE + 1, 1);
+}
+
+void drawStatus(int XX, int YY, int opt) {
+	gotoXY(XX - 3, YY); setColor(15, 0);
+	if (opt == 1) cout << ">> Playing      | 'I'-Save  | 'U'-Undo  | 'Esc'-Exit  |   ";
+	if (opt == 2) cout << ">> File's name:                                           ";
+	if (opt == 3) cout << ">> It already exists, do you want to replace it? Press Y/N";
 }
 
 void drawName_Board(int XX, int YY, string fileName) {
-	gotoXY(XX, YY + 2 * BOARD_SIZE + 1);
+	gotoXY(XX, YY);
 	setColor(0, 15);  cout << " BOARD NAME: ";
 	if ((int)fileName.size() == 0) fileName = "[NULL]";
-	while ((int)fileName.size() < 10) fileName.push_back(' ');
-	cout << fileName;
+	while ((int)fileName.size() <= 10) fileName.push_back(' ');
+	cout << fileName; 
+	setColor(15, 0);
 }
 
 void drawPopUp(int XX, int YY, int h, int w) {

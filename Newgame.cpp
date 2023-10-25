@@ -12,6 +12,7 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 
 	while (true) {
 		char ch = _getch();
+		if ((int)ch < 0) continue;
 
 		if (ch == 13) break;  // if "enter" then exit
 
@@ -20,6 +21,7 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 		if (ch == '\b' && sz) {  // nếu là ký tự backspace thì xóa
 			str.pop_back(); --sz;
 			--XX; gotoXY(XX, YY); cout << " ";
+			gotoXY(XX, YY);
 
 			if (sz == 0) {
 				str = tmp;

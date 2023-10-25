@@ -5,13 +5,12 @@
 #include "library.h"
 #define co_theme 15,0
 
-// vector fileNames include name of files that save the game
-// each fileName have some particular information : 
-// First line : turn, lastX, lastY
-//       next : 2-dimensional matrix a
+const int BOARD_SIZE = 15;
 vector<string> fileNames = { "day1" , "day2", "day1" , "day2", "day1" , "day2", "day1" , "day2", "day1" , "day2"};
 
 void loadGame(int XX, int YY) {
+	// Đọc các fileNames trong .txt
+
 	struct _aboutMenu {
 		int X, Y, size, b_color;
 		string str;
@@ -21,8 +20,8 @@ void loadGame(int XX, int YY) {
 		}
 	};
 
-	int sz = min((int)fileNames.size() - 1, 14);  // Con trỏ hiển thị mục đang chọn
-	_aboutMenu s1[15], s2[15];  // s1: phông thường, s2: phông highlight
+	int sz = min((int)fileNames.size() - 1, 14);  
+	_aboutMenu s1[15], s2[15]; 
 	for (int i = 0; i < 15; ++i) {
 		s1[i] = { XX - 30 + 30 * (i / 5), YY + (i % 5) * 3, 20, 12, "      EMPTY       "};
 		s2[i] = { XX - 30 + 30 * (i / 5), YY + (i % 5) * 3, 20, 14, "" };
@@ -96,12 +95,12 @@ void loadGame(int XX, int YY) {
 					if (Sj == 0) {
 						// Play Game (open file filesNames[S])
 						vector<pair<int, int>> tmp = { {3, 2}, {3, 3}, {5, 5}, {6, 6} }; // demo
-						startGame(1, 0, XX, YY, "trung", "khoa", tmp, "file1");					// demo
+						startGame(1, 0, XX, YY, "trung", "khoa", tmp, "gamefileto");					// demo
 						return;
 					}
 
 					if (Sj == 1) {
-						// DELETE
+						deleteFile(fileNames[S]);
 						for (int t = S + 1; t <= sz; ++t) {
 							fileNames[t - 1] = fileNames[t];
 							s1[t - 1].str = s1[t].str;
@@ -115,7 +114,7 @@ void loadGame(int XX, int YY) {
 						--sz;  S = min(S, sz);
 
 					} else {
-						// Nhớ cập nhật lại fileNames vào file .txt
+						// - Nhớ cập nhật lại fileNames vào file .txt
 						setColor(co_theme);
 						gotoXY(XX - 29, YY + 15); cout << "                                                                               ";
 						gotoXY(XX - 29, YY + 16); cout << "                                                                               ";
@@ -149,6 +148,44 @@ void loadGame(int XX, int YY) {
 	}
 }
 
+void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string name1, string name2, string nameFile) {
+	if (nameFile == "") {
+		insertName:
+		drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 2);
+		if (!putname(XX - 18, YY + 2 * BOARD_SIZE - 1, nameFile)) {
+			drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
+			return;
+		}
+		if (nameFile == "") goto insertName;
+
+		bool checkSame = 0;
+		for (string tmp : fileNames)
+			if (tmp == nameFile) checkSame = 1;
+
+		if(checkSame) {
+			drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 3);
+			while (true) {
+				char key = _getch();
+				if (key == 'N' || key == 'n') {
+					nameFile = "";
+					goto insertName;
+				} else if (key == 'Y' || key == 'y') break;
+			}
+		}
+	} drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
+
+	while ((int)fileNames.size() > 15) 
+		fileNames.erase(fileNames.begin());
+
+	fileNames.push_back(nameFile);  // - update lại fileNames vào txt
+	// - tạo file tên "nameFile" và lưu Xscore, Oscore, name1, name2, Cache
+}
+
+void deleteFile(string nameFile) {
+	// - Xóa file tên nameFile
+}
+
+/*   - Dinh Duc Tao -
 void CurrentGame(string filename, int XX, int YY, int index_file_name) {
 	//load filegame to a[i][j]
 	int turn = 0, lastX = 0, lastY = 0;
@@ -289,4 +326,4 @@ void loadFromFile(string filename) {
 	}
 	delete[] a;
 
-}
+} */

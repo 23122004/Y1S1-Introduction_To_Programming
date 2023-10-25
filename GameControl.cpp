@@ -1,6 +1,7 @@
 ﻿#include "GameControl.h"
 #include "Graphic.h"
 #include "Newgame.h"
+#include "LoadGame.h"
 
 #define F first
 #define S second
@@ -362,7 +363,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                     }
                 }
                 if (Key == 7) {
-                    // - Save Game
+                    saveGame(XX, YY, Cache, Xscore, Oscore, name1, name2, fileName);
                 }
                 moveTo(x, y);
             }
@@ -378,7 +379,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     }
 
     ShowCur(0);
-    // Nháy nháy hàng mà [Turn] win rồi mới chuyển cảnh sau
+    // - Nháy nháy hàng mà [Turn] win rồi mới chuyển cảnh sau
 
     drawPopUp(XX - 14, YY + 8, 11, 49);
     if (Turn == -1)
@@ -386,8 +387,6 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     else if(Turn == 1) 
             drawO_WIN(XX - 7, YY + 10), Oscore++;
     else drawDRAW(XX - 6, YY + 10);
-
-    // Hỏi có tiếp tục nữa không, nếu không thì có lưu game không
     
     bool continuePlaying = true;
     char key;
@@ -404,7 +403,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
 
         check_2:
         key = _getch();
-        if (key == 'Y' || key == 'y'); // save game
+        if (key == 'Y' || key == 'y') saveGame(XX, YY, Cache, Xscore, Oscore, name1, name2, fileName);
         else if (key != 'N' && key != 'n') goto check_2;
     } else goto Check;
 
@@ -414,13 +413,4 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         isNewGame = true; // nếu loadgame mà chơi tiếp thì trở thành newgame
         goto playAgain;
     }
-}
-
-void loadGameBoardUpdate(int** a, int turn, int lastX, int lastY) // thêm phần vsbot và tên của người chơi
-{
-    for (int i = 1; i <= BOARD_SIZE; i++)
-        for (int j = 1; j <= BOARD_SIZE; j++)
-            status[i][j].opt = a[i][j];
-    Turn = turn;
-    //startGame(vsbot, false);
 }
