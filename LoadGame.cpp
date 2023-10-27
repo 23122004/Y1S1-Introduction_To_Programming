@@ -100,7 +100,7 @@ void loadGame(int XX, int YY) {
 						bool vsBot;
 
 						loadFromFile(fileNames[S], Cache, Xscore, Oscore, name1, name2, vsBot);
-						startGame(vsBot, 0, XX, YY, name1, name2, Cache, fileNames[S]);  
+						startGame(vsBot, 0, XX, YY, name1, name2, Cache, fileNames[S], Xscore, Oscore);  
 						return;
 					}
 

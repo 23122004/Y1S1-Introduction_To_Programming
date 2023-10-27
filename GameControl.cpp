@@ -295,9 +295,8 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
     }*/
 }
 
-void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName)
+void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName, int Xscore, int Oscore)
 {
-    int Xscore = 0, Oscore = 0;
     playAgain:
     system("cls");
     
@@ -397,7 +396,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     if (Turn == -1)
         drawX_WIN(XX - 7, YY + 10), Xscore++;
     else if(Turn == 1) 
-            drawO_WIN(XX - 7, YY + 10), Oscore++;
+        drawO_WIN(XX - 7, YY + 10), Oscore++;
     else drawDRAW(XX - 6, YY + 10);
 
     gotoXY(XX - 8, YY + 17);
