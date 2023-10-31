@@ -234,8 +234,8 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
     ShowCur(0);
     if (Cache.size() == 1) // nước đi đầu tiên của bot là random
     {
-        int dx[] = { -1, 1, 0, 0 };
-        int dy[] = { 0, 0, -1, 1 };
+        int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
+        int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
         int r = rand() % 4;
         while (!valid(x + dx[r], y + dy[r])) r = rand() % 4;
         x += dx[r];
@@ -244,8 +244,8 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
     else minimax(maxDepth = (Neighbor.size() <= 110 ? 3 : 2), (long long)-1e11, (long long)1e11, -1, x, y);
     if (status[x][y].opt != 0)
     {
-        int dx[] = { -1, 1, 0, 0 };
-        int dy[] = { 0, 0, -1, 1 };
+        int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
+        int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
         int r = rand() % 4;
         while (!valid(x + dx[r], y + dy[r]) && status[x][y].opt != 0) r = rand() % 4;
         x += dx[r];
