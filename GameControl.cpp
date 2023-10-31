@@ -236,7 +236,7 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
     {
         int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
         int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
-        int r = rand() % 4;
+        int r = rand() % 8;
         while (!valid(x + dx[r], y + dy[r])) r = rand() % 4;
         x += dx[r];
         y += dy[r];
@@ -246,7 +246,7 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
     {
         int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
         int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
-        int r = rand() % 4;
+        int r = rand() % 8;
         while (!valid(x + dx[r], y + dy[r]) && status[x][y].opt != 0) r = rand() % 4;
         x += dx[r];
         y += dy[r];
@@ -305,7 +305,8 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
 
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName, int Xscore, int Oscore)
 {
-    playAgain:
+playAgain:
+    srand(time(0));
     system("cls");
     
     int x, y;
