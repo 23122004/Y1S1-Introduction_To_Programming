@@ -379,6 +379,7 @@ void displayWinLine() // nháy nháy chỗ thắng
                     }
                     Sleep(300);
                 }
+                return;
             }
         }
     }
