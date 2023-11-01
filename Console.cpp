@@ -14,10 +14,6 @@ void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình conso
 	// Di chuyển cửa sổ console đến vị trí mới
 	MoveWindow(console, consoleWidth, consoleHeight, WIDTH, HEIGHT, TRUE);
 
-	RECT ConsoleRect;
-	GetWindowRect(console, &ConsoleRect);
-	MoveWindow(console, ConsoleRect.left, ConsoleRect.top, WIDTH, HEIGHT, TRUE);
-
 	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_SCREEN_BUFFER_INFO info;
 	GetConsoleScreenBufferInfo(consoleHandle, &info);
