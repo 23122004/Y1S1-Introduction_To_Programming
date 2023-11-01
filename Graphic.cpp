@@ -820,90 +820,151 @@ void drawPopUp(int XX, int YY, int h, int w) {
 		cout << char(188);
 }
 void drawIronman(int XX, int YY) {
-	gotoXY(XX + 2, YY);
-	setColor(4, 0); cout << "     ";
+	gotoXY(XX + 4, YY);
+	setColor(4, 0); cout << "          ";
 
-	gotoXY(XX + 1, YY + 1);
-	setColor(4, 0); cout << "       ";
-	//3
-	gotoXY(XX + 1, YY + 2);
-	setColor(4, 0); cout << " ";
+	gotoXY(XX + 2, YY + 1);
+	setColor(4, 0); cout << "              ";
+
 	gotoXY(XX + 2, YY + 2);
-	setColor(6, 0); cout << " ";
-	gotoXY(XX + 3, YY + 2);
-	setColor(4, 0); cout << "   ";
-	gotoXY(XX + 6, YY + 2);
-	setColor(6, 0); cout << " ";
-	gotoXY(XX + 7, YY + 2);
-	setColor(4, 0); cout << " ";
-	//4
-	gotoXY(XX + 1, YY + 3);
-	setColor(4, 0); cout << " ";
+	setColor(4, 0); cout << "              ";
+	//3
 	gotoXY(XX + 2, YY + 3);
-	setColor(6, 0); cout << " ";
-	gotoXY(XX + 3, YY + 3);
-	setColor(7, 0); cout << " ";
-	gotoXY(XX + 4, YY + 3);
-	setColor(6, 0); cout << " ";
-	gotoXY(XX + 5, YY + 3);
-	setColor(7, 0); cout << " ";
-	gotoXY(XX + 6, YY + 3);
-	setColor(6, 0); cout << " ";
-	gotoXY(XX + 7, YY + 3);
-	setColor(4, 0); cout << " "; //&
-	//5
-	gotoXY(XX + 1, YY + 4);
-	setColor(4, 0); cout << " ";
-	gotoXY(XX + 2, YY + 4);
-	setColor(6, 0); cout << "     ";
-	gotoXY(XX + 7, YY + 4);
-	setColor(4, 0); cout << " ";
-	//6
-	gotoXY(XX + 2, YY + 5);
-	setColor(4, 0); cout << " ";
-	gotoXY(XX + 3, YY + 5);
-	setColor(6, 0); cout << "   ";
-	gotoXY(XX + 6, YY + 5);
-	setColor(4, 0); cout << " ";
-	//7 
-	gotoXY(XX, YY + 6);
-	setColor(4, 0); cout << "    ";
-	gotoXY(XX + 4, YY + 6);
-	setColor(7, 0); cout << " ";
-	gotoXY(XX + 5, YY + 6);
-	setColor(4, 0); cout << "    ";
-	//8 
-	gotoXY(XX, YY + 7);
-	setColor(4, 0); cout << " ";
-	gotoXY(XX + 1, YY + 7);
-	setColor(6, 0); cout << " ";
-	gotoXY(XX + 2, YY + 7);
-	setColor(4, 0); cout << " ";
-	gotoXY(XX + 3, YY + 7);
-	setColor(6, 0); cout << " ";
-	gotoXY(XX + 4, YY + 7);
-	setColor(4, 0); cout << " ";
-	gotoXY(XX + 5, YY + 7);
-	setColor(6, 0); cout << " ";
-	gotoXY(XX + 6, YY + 7);
-	setColor(4, 0); cout << " ";
-	gotoXY(XX + 7, YY + 7);
-	setColor(6, 0); cout << " ";
-	gotoXY(XX + 8, YY + 7);
-	setColor(4, 0); cout << " ";
-	//9
-	gotoXY(XX + 2, YY + 8);
-	setColor(4, 0); cout << "     ";
-	// 10 
-	gotoXY(XX + 2, YY + 9);
-	setColor(6, 0); cout << "  ";
-	gotoXY(XX + 4, YY + 9);
-	setColor(4, 0); cout << " ";
-	gotoXY(XX + 5, YY + 9);
-	setColor(6, 0); cout << "  ";
-	//11
-	gotoXY(XX + 2, YY + 10);
 	setColor(4, 0); cout << "  ";
-	gotoXY(XX + 5, YY + 10);
-	setColor(4, 0); cout << " ";
+	gotoXY(XX + 4, YY + 3);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 6, YY + 3);
+	setColor(4, 0); cout << "      ";
+	gotoXY(XX + 12, YY + 3);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 14, YY + 3);
+	setColor(4, 0); cout << "  ";
+	//4
+	gotoXY(XX + 2, YY + 4);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 4, YY + 4);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 6, YY + 4);
+	setColor(7, 0); cout << "  ";
+	gotoXY(XX + 8, YY + 4);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 10, YY + 4);
+	setColor(7, 0); cout << "  ";
+	gotoXY(XX + 12, YY + 4);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 14, YY + 4);
+	setColor(4, 0); cout << "  "; //&
+
+	gotoXY(XX + 2, YY + 5);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 4, YY + 5);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 6, YY + 5);
+	setColor(7, 0); cout << "  ";
+	gotoXY(XX + 8, YY + 5);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 10, YY + 5);
+	setColor(7, 0); cout << "  ";
+	gotoXY(XX + 12, YY + 5);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 14, YY + 5);
+	setColor(4, 0); cout << "  "; //&
+	//5
+	gotoXY(XX + 2, YY + 6);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 4, YY + 6);
+	setColor(6, 0); cout << "          ";
+	gotoXY(XX + 14, YY + 6);
+	setColor(4, 0); cout << "  ";
+	//6
+	gotoXY(XX + 2, YY + 7);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 4, YY + 7);
+	setColor(6, 0); cout << "          ";
+	gotoXY(XX + 14, YY + 7);
+	setColor(4, 0); cout << "  ";
+
+	gotoXY(XX + 4, YY + 8);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 6, YY + 8);
+	setColor(6, 0); cout << "      ";
+	gotoXY(XX + 12, YY + 8);
+	setColor(4, 0); cout << "  ";
+	//7 
+	gotoXY(XX, YY + 9);
+	setColor(4, 0); cout << "        ";
+	gotoXY(XX + 8, YY + 9);
+	setColor(7, 0); cout << "  ";
+	gotoXY(XX + 10, YY + 9);
+	setColor(4, 0); cout << "        ";
+	//8 
+
+
+	gotoXY(XX, YY + 10);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 2, YY + 10);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 4, YY + 10);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 6, YY + 10);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 8, YY + 10);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 10, YY + 10);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 12, YY + 10);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 14, YY + 10);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 16, YY + 10);
+	setColor(4, 0); cout << "  ";
+	//9
+	gotoXY(XX, YY + 11);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 2, YY + 11);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 4, YY + 11);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 6, YY + 11);
+	setColor(7, 0); cout << "  ";
+	gotoXY(XX + 8, YY + 11);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 10, YY + 11);
+	setColor(7, 0); cout << "  ";
+	gotoXY(XX + 12, YY + 11);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 14, YY + 11);
+	setColor(6, 0); cout << "  ";
+	gotoXY(XX + 16, YY + 11);
+
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 4, YY + 12);
+	setColor(4, 0); cout << "          ";
+	//10 
+	gotoXY(XX + 4, YY + 13);
+	setColor(6, 0); cout << "    ";
+	gotoXY(XX + 8, YY + 13);
+	setColor(4, 0); cout << "   ";
+	gotoXY(XX + 10, YY + 13);
+	setColor(6, 0); cout << "    ";
+	//11
+	gotoXY(XX + 4, YY + 14);
+	setColor(6, 0); cout << "    ";
+	gotoXY(XX + 8, YY + 14);
+	setColor(4, 0); cout << "  ";
+	gotoXY(XX + 10, YY + 14);
+	setColor(4, 0); cout << "    ";
+
+	gotoXY(XX + 4, YY + 15);
+	setColor(4, 0); cout << "    ";
+	gotoXY(XX + 10, YY + 15);
+	setColor(4, 0); cout << "    ";
+	gotoXY(XX + 4, YY + 16);
+	setColor(6, 0); cout << "    ";
+	gotoXY(XX + 10, YY + 16);
+	setColor(6, 0); cout << "   ";
+
+
+
+
 }
