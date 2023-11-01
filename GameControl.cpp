@@ -365,7 +365,7 @@ void displayWinLine() // nháy nháy chỗ thắng
                         int XX = status[winLine[k].F][winLine[k].S].X;
                         int YY = status[winLine[k].F][winLine[k].S].Y;
                         gotoXY(XX - 1, YY);
-                        setColor(14, getVal(k) == 1 ? 4 : 1);
+                        setColor(getVal(k) == 1 ? 4 : 1, 15);
                         cout << " " << (getVal(k) == 1 ? 'X' : 'O') << " ";
                     }
                     Sleep(500);
