@@ -13,6 +13,7 @@ _Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
 int Turn;
 int maxDepth = 3;
 #define moveTo(x, y) gotoXY(status[x][y].X, status[x][y].Y)
+vector<ii> winLine;
 
 long long consecutiveScore(int len, int openEnds, bool currentTurn) // tính điểm
 {
@@ -108,6 +109,13 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ i, k });
+            return score;
+        }
     }
 
     for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá hàng dọc
@@ -120,6 +128,13 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ k, j });
+            return score;
+        }
     }
 
     for (int i = 0; i <= BOARD_SIZE; i++) // đánh giá đường chéo chính
@@ -132,6 +147,13 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ i + k, k });
+            return score;
+        }
     }
     for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá đường chéo chính
     {
@@ -143,6 +165,13 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ k, j + k });
+            return score;
+        }
     }
 
     for (int i = 1; i <= BOARD_SIZE + 1; i++) // đánh giá đường chéo phụ
@@ -155,6 +184,13 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ i - k, k });
+            return score;
+        }
     }
     for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá đường chéo phụ
     {
@@ -166,8 +202,14 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ BOARD_SIZE + 1 - k, j + k });
+            return score;
+        }
     }
-
     return score;
 }
 
@@ -303,6 +345,37 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
     }*/
 }
 
+void displayWinLine() // nháy nháy chỗ thắng 
+{
+#define getVal(i) status[winLine[i].F][winLine[i].S].opt
+    
+    for (int i = 0; i < winLine.size(); i++)
+    {
+        if (abs(getVal(i)) == 1) 
+        {
+            int j = i;
+            while (j + 1 < (int)winLine.size() - 1 && getVal(i) == getVal(j + 1)) j++;
+            int len = j - i + 1;
+            if (len >= 5) // nếu đủ 5 để thắng thì đi nháy nháy
+            {
+                for (int T = 0; T < 3; T++) // nháy 3 lần
+                {
+                    for (int k = i; k <= j; k++) // tô ký tự vàng 
+                    {
+                        moveTo(winLine[k].F, winLine[k].S);
+                        setColor(15, 6);
+                        cout << (getVal(k) == 1 ? 'X' : 'O');
+                    }
+                    Sleep(500);
+                    for (int k = i; k <= j; k++) // tô lại mặc định
+                        makeMove(getVal(k), winLine[k].F, winLine[k].S);
+                    Sleep(300);
+                }
+            }
+        }
+    }
+}
+
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName, int Xscore, int Oscore)
 {
 playAgain:
@@ -399,7 +472,7 @@ playAgain:
     }
 
     ShowCur(0);
-    // - Nháy nháy hàng mà [Turn] win rồi mới chuyển cảnh sau
+    displayWinLine(); // nháy nháy các thứ
 
     drawPopUp(XX - 14, YY + 8, 11, 49);
     if (Turn == -1)
