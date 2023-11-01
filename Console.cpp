@@ -1,25 +1,21 @@
 ﻿#include "Console.h"
 
 void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình console
-	HWND consoleWindow = GetConsoleWindow();
 	system("COLOR f0");
+	HWND console = GetConsoleWindow();
+	RECT ConsoleRect;
+	GetWindowRect(console, &ConsoleRect);
+	MoveWindow(console, ConsoleRect.left, ConsoleRect.top, WIDTH, HEIGHT, TRUE);
 
-	LONG style = GetWindowLong(consoleWindow, GWL_STYLE);
-	style = style & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
-	SetWindowLong(consoleWindow, GWL_STYLE, style);
-
-	SMALL_RECT r;
-	r.Top = r.Left = 0;
-	r.Right = WIDTH;
-	r.Bottom = HEIGHT;
-
-	COORD NewSize;
-	NewSize.X = WIDTH;
-	NewSize.Y = HEIGHT;
-
-	HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleWindowInfo(Handle, TRUE, &r);
-	SetConsoleScreenBufferSize(Handle, NewSize);
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO info;
+	GetConsoleScreenBufferInfo(consoleHandle, &info);
+	COORD new_size = {
+		info.srWindow.Right - info.srWindow.Left + 1,
+		info.srWindow.Bottom - info.srWindow.Top + 1
+	};
+	SetConsoleScreenBufferSize(consoleHandle, new_size);
+	HWND consoleWindow = GetConsoleWindow();
 	ShowScrollBar(consoleWindow, SB_BOTH, 0);
 }
 

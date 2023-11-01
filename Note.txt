@@ -97,4 +97,6 @@ void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình conso
 		info.srWindow.Bottom - info.srWindow.Top + 1
 	};
 	SetConsoleScreenBufferSize(consoleHandle, new_size);
+	HWND consoleWindow = GetConsoleWindow();
+	ShowScrollBar(consoleWindow, SB_BOTH, 0);
 }
