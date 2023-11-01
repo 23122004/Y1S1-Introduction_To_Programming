@@ -13,6 +13,7 @@ _Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
 int Turn;
 int maxDepth = 3;
 #define moveTo(x, y) gotoXY(status[x][y].X, status[x][y].Y)
+vector<ii> winLine;
 
 long long consecutiveScore(int len, int openEnds, bool currentTurn) // tính điểm
 {
@@ -108,6 +109,13 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ i, k });
+            return score;
+        }
     }
 
     for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá hàng dọc
@@ -120,6 +128,13 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ k, j });
+            return score;
+        }
     }
 
     for (int i = 0; i <= BOARD_SIZE; i++) // đánh giá đường chéo chính
@@ -132,6 +147,13 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ i + k, k });
+            return score;
+        }
     }
     for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá đường chéo chính
     {
@@ -143,6 +165,13 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ k, j + k });
+            return score;
+        }
     }
 
     for (int i = 1; i <= BOARD_SIZE + 1; i++) // đánh giá đường chéo phụ
@@ -155,6 +184,13 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ i - k, k });
+            return score;
+        }
     }
     for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá đường chéo phụ
     {
@@ -166,8 +202,14 @@ long long evaluation(int player) // hàm đánh giá trạng thái
                 b[k] = 2;
         }
         score += get_score(b, player);
+        if (abs(score) >= 1e8)
+        {
+            winLine.clear();
+            for (int k = 0; k < BOARD_SIZE + 2; k++)
+                winLine.push_back({ BOARD_SIZE + 1 - k, j + k });
+            return score;
+        }
     }
-
     return score;
 }
 
@@ -234,9 +276,9 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
     ShowCur(0);
     if (Cache.size() == 1) // nước đi đầu tiên của bot là random
     {
-        int dx[] = { -1, 1, 0, 0 };
-        int dy[] = { 0, 0, -1, 1 };
-        int r = rand() % 4;
+        int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
+        int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
+        int r = rand() % 8;
         while (!valid(x + dx[r], y + dy[r])) r = rand() % 4;
         x += dx[r];
         y += dy[r];
@@ -244,9 +286,9 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
     else minimax(maxDepth = (Neighbor.size() <= 110 ? 3 : 2), (long long)-1e11, (long long)1e11, -1, x, y);
     if (status[x][y].opt != 0)
     {
-        int dx[] = { -1, 1, 0, 0 };
-        int dy[] = { 0, 0, -1, 1 };
-        int r = rand() % 4;
+        int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
+        int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
+        int r = rand() % 8;
         while (!valid(x + dx[r], y + dy[r]) && status[x][y].opt != 0) r = rand() % 4;
         x += dx[r];
         y += dy[r];
@@ -303,9 +345,50 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
     }*/
 }
 
+void displayWinLine() // nháy nháy chỗ thắng 
+{
+#define getVal(i) status[winLine[i].F][winLine[i].S].opt
+    
+    for (int i = 0; i < winLine.size(); i++)
+    {
+        if (abs(getVal(i)) == 1) 
+        {
+            int j = i;
+            while (j + 1 < (int)winLine.size() - 1 && getVal(i) == getVal(j + 1)) j++;
+            int len = j - i + 1;
+            if (len >= 5) // nếu đủ 5 để thắng thì đi nháy nháy
+            {
+                for (int T = 0; T < 3; T++) // nháy 3 lần
+                {
+                    for (int k = i; k <= j; k++) // tô ký tự vàng 
+                    {
+                        int XX = status[winLine[k].F][winLine[k].S].X;
+                        int YY = status[winLine[k].F][winLine[k].S].Y;
+                        gotoXY(XX - 1, YY);
+                        setColor(getVal(k) == 1 ? 4 : 1, 15);
+                        cout << " " << (getVal(k) == 1 ? 'X' : 'O') << " ";
+                    }
+                    Sleep(500);
+                    for (int k = i; k <= j; k++) // tô lại mặc định
+                    {
+                        int XX = status[winLine[k].F][winLine[k].S].X;
+                        int YY = status[winLine[k].F][winLine[k].S].Y;
+                        gotoXY(XX - 1, YY);
+                        setColor(15, getVal(k) == 1 ? 4 : 1);
+                        cout << " " << (getVal(k) == 1 ? 'X' : 'O') << " ";
+                    }
+                    Sleep(300);
+                }
+                return;
+            }
+        }
+    }
+}
+
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName, int Xscore, int Oscore)
 {
-    playAgain:
+playAgain:
+    srand(time(0));
     system("cls");
     
     int x, y;
@@ -398,7 +481,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     }
 
     ShowCur(0);
-    // - Nháy nháy hàng mà [Turn] win rồi mới chuyển cảnh sau
+    displayWinLine(); // nháy nháy các thứ
 
     drawPopUp(XX - 14, YY + 8, 11, 49);
     if (Turn == -1)
