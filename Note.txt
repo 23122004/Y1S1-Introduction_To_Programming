@@ -81,3 +81,20 @@
  - Lưu điểm X-0, tên ng chơi 1-2, có đang đánh với bot không rồi lưu các bước đánh
 
  https://en.wikipedia.org/wiki/Gomoku
+
+void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình console
+	system("COLOR f0");
+	HWND console = GetConsoleWindow();
+	RECT ConsoleRect;
+	GetWindowRect(console, &ConsoleRect);
+	MoveWindow(console, ConsoleRect.left, ConsoleRect.top, WIDTH, HEIGHT, TRUE);
+
+	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	CONSOLE_SCREEN_BUFFER_INFO info;
+	GetConsoleScreenBufferInfo(consoleHandle, &info);
+	COORD new_size = {
+		info.srWindow.Right - info.srWindow.Left + 1,
+		info.srWindow.Bottom - info.srWindow.Top + 1
+	};
+	SetConsoleScreenBufferSize(consoleHandle, new_size);
+}
