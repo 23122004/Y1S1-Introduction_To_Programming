@@ -10,8 +10,8 @@ void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình conso
 
 	SMALL_RECT r;
 	r.Top = r.Left = 0;
-	r.Right = WIDTH;
-	r.Bottom = HEIGHT;
+	r.Right = WIDTH - 1;
+	r.Bottom = HEIGHT - 1;
 
 	COORD NewSize;
 	NewSize.X = WIDTH;
