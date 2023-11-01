@@ -8,9 +8,19 @@ void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình conso
 	style = style & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
 	SetWindowLong(consoleWindow, GWL_STYLE, style);
 
-	RECT r;
-	GetWindowRect(consoleWindow, &r);
-	MoveWindow(consoleWindow, 0, 0, WIDTH, HEIGHT, TRUE);
+	SMALL_RECT r;
+	r.Top = r.Left = 0;
+	r.Right = WIDTH;
+	r.Bottom = HEIGHT;
+
+	COORD NewSize;
+	NewSize.X = WIDTH;
+	NewSize.Y = HEIGHT;
+
+	HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleWindowInfo(Handle, TRUE, &r);
+	SetConsoleScreenBufferSize(Handle, NewSize);
+	ShowScrollBar(consoleWindow, SB_BOTH, 0);
 }
 
 void gotoXY(int x, int y) { // Di chuyển con trỏ đến vị trí (y, x)
