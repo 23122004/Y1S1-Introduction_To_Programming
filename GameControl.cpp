@@ -362,13 +362,21 @@ void displayWinLine() // nháy nháy chỗ thắng
                 {
                     for (int k = i; k <= j; k++) // tô ký tự vàng 
                     {
-                        moveTo(winLine[k].F, winLine[k].S);
-                        setColor(15, 6);
-                        cout << (getVal(k) == 1 ? 'X' : 'O');
+                        int XX = status[winLine[k].F][winLine[k].S].X;
+                        int YY = status[winLine[k].F][winLine[k].S].Y;
+                        gotoXY(XX - 1, YY);
+                        setColor(14, getVal(k) == 1 ? 4 : 1);
+                        cout << " " << (getVal(k) == 1 ? 'X' : 'O') << " ";
                     }
                     Sleep(500);
                     for (int k = i; k <= j; k++) // tô lại mặc định
-                        makeMove(getVal(k), winLine[k].F, winLine[k].S);
+                    {
+                        int XX = status[winLine[k].F][winLine[k].S].X;
+                        int YY = status[winLine[k].F][winLine[k].S].Y;
+                        gotoXY(XX - 1, YY);
+                        setColor(15, getVal(k) == 1 ? 4 : 1);
+                        cout << " " << (getVal(k) == 1 ? 'X' : 'O') << " ";
+                    }
                     Sleep(300);
                 }
             }
