@@ -387,7 +387,7 @@ void displayWinLine() // nháy nháy chỗ thắng
 
 void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName, int Xscore, int Oscore)
 {
-playAgain:
+    playAgain:
     srand(time(0));
     system("cls");
     
@@ -483,20 +483,23 @@ playAgain:
     ShowCur(0);
     displayWinLine(); // nháy nháy các thứ
 
-    drawPopUp(XX - 14, YY + 8, 11, 49);
+    drawPopUp(XX - 14, YY + 5, 11, 49);
     if (Turn == -1)
-        drawX_WIN(XX - 7, YY + 10), Xscore++;
+        drawX_WIN(XX - 7, YY + 7), Xscore++;
     else if(Turn == 1) 
-        drawO_WIN(XX - 7, YY + 10), Oscore++;
-    else drawDRAW(XX - 6, YY + 10);
+        drawO_WIN(XX - 7, YY + 7), Oscore++;
+    else drawDRAW(XX - 6, YY + 7);
 
-    gotoXY(XX - 8, YY + 17);
+    gotoXY(XX - 8, YY + 14);
     setColor(15, 8);  cout << "<< Press Y to continue or N to exit >>";
     setColor(15, 0);
     
     while (true) {
         char key = _getch();
         if (key == 'N' || key == 'n') break;
-        else if (key == 'Y' || key == 'y') goto playAgain;
+        else if (key == 'Y' || key == 'y') {
+            isNewGame = 1;
+            goto playAgain;
+        }
     }
 }

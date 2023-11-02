@@ -753,26 +753,30 @@ void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscor
 }
 
 void drawStatus(int XX, int YY, int opt) {
-	gotoXY(XX - 3, YY); setColor(15, 0);
+	gotoXY(XX - 3, YY); 
 	if (opt == 1) {
-		cout << ">> Playing    | 'I'- Save  | 'U'- Undo  | 'Esc'- Exit  |  ";
+		setColor(11, 0); cout << ">> Playing";
+		setColor(15, 0); cout << "    | 'I'- Save  | 'U'- Undo  | 'Esc'- Exit  |  ";
 		ShowCur(1);
 	}
 
 	if (opt == 2) {
-		cout << ">> File's name:                                           ";
+		setColor(11, 0);  cout << ">> File's name:";
+		setColor(15, 0);  cout << "                                           ";
 		ShowCur(1);
 	}
 
 	if (opt == 3) {
+		setColor(11, 0);
 		cout << ">> It already exists, do you want to replace it? Press Y/N";
 		ShowCur(0);
 	}
 
 	if (opt == 4) {
+		setColor(11, 0);
 		cout << ">> Do you want to exit? Press Y/N (Remember to save game) ";
 		ShowCur(0);
-	}
+	} setColor(15, 0);
 }
 
 void drawName_Board(int XX, int YY, string fileName) {

@@ -2,29 +2,25 @@
 
 void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình console
 	system("COLOR f0");
-
-	HWND console = GetConsoleWindow();
-
-	// Lấy thông tin về màn hình
-	RECT r;
-	SystemParametersInfo(SPI_GETWORKAREA, 0, &r, 0);
-	int consoleWidth = r.right / 2 - WIDTH / 2;
-	int consoleHeight = r.bottom / 2 - HEIGHT / 2;
-
-	// Di chuyển cửa sổ console đến vị trí mới
-	MoveWindow(console, consoleWidth, consoleHeight, WIDTH, HEIGHT, TRUE);
-
-	HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_SCREEN_BUFFER_INFO info;
-	GetConsoleScreenBufferInfo(consoleHandle, &info);
-	COORD new_size = {
-		info.srWindow.Right - info.srWindow.Left + 1,
-		info.srWindow.Bottom - info.srWindow.Top + 1
-	};
-	SetConsoleScreenBufferSize(consoleHandle, new_size);
 	HWND consoleWindow = GetConsoleWindow();
-	ShowScrollBar(consoleWindow, SB_BOTH, 0);
 
+	LONG style = GetWindowLong(consoleWindow, GWL_STYLE);
+	style = style & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
+	SetWindowLong(consoleWindow, GWL_STYLE, style);
+
+	SMALL_RECT r;
+	r.Top = r.Left = 0;
+	r.Right = WIDTH;
+	r.Bottom = HEIGHT;
+
+	COORD NewSize;
+	NewSize.X = WIDTH;
+	NewSize.Y = HEIGHT;
+
+	HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleWindowInfo(Handle, TRUE, &r);
+	SetConsoleScreenBufferSize(Handle, NewSize);
+	ShowScrollBar(consoleWindow, SB_BOTH, 0);
 }
 
 void gotoXY(int x, int y) { // Di chuyển con trỏ đến vị trí (y, x)

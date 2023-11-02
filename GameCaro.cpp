@@ -149,15 +149,14 @@ void drawMenu(int XX, int YY) {
 		}
 	}
 }
-const int WIDTH = 1049, HEIGHT = 750;
+
 int32_t main() {
-	fixConsoleWindow(WIDTH, HEIGHT);
+	fixConsoleWindow(140, 45);  // 1044, 737
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
 
 	ShowCur(0);
-	drawMenu(61, 13);
+	drawMenu(61, 12);
 
-	// drawIronman(10, 10);
 
 	return 0;
 }
