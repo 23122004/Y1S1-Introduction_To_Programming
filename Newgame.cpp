@@ -51,6 +51,7 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 	
 void player2(int XX, int YY) {
 	system("cls"); drawNEW_GAME(XX - 20, YY - 9);
+	decorate_draw(48, 21, "pixel_art/swords.txt");
 	string name1, name2;
 
 	drawBoardMenu(XX, YY, 29, 15, " NAME PLAYER 1: ");
@@ -63,6 +64,7 @@ void player2(int XX, int YY) {
 
 void player1(int XX, int YY) {
 	system("cls"); drawNEW_GAME(XX - 21, YY - 9);
+	decorate_draw(48, 21, "pixel_art/swords.txt");
 	string name;
 
 	drawBoardMenu(XX, YY, 27, 15, " NAME PLAYER:   ");
@@ -77,7 +79,6 @@ void drawNewGameMenu(int XX, int YY) {
 
 		void draw() {
 			drawBoardMenu(X1, Y1, size1, b_color1, str1);
-			decorate_draw(48, 21, "pixel_art/swords.txt");
 		}
 	};
 
@@ -93,6 +94,7 @@ void drawNewGameMenu(int XX, int YY) {
 
 	while (true) {
 		drawNEW_GAME(XX - 23, YY - 9);
+		decorate_draw(48, 21, "pixel_art/swords.txt");
 		for (int i = 0; i < 2; ++i)
 			s1[i].draw();
 		s2[S].draw();
