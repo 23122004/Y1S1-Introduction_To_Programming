@@ -82,11 +82,11 @@ void drawNewGameMenu(int XX, int YY) {
 	};
 
 	_aboutMenu1 s1[2], s2[2];  // s1: phông thường, s2: phông highlight
-	s1[0] = { XX, YY, 20, 15, "     1 PLAYER     " };
-	s1[1] = { XX, YY + 3, 20, 15, "     2 PLAYERS    " };
+	s1[0] = { XX, YY + 1, 21, 15, "     1 PLAYER      " };
+	s1[1] = { XX, YY + 4, 21, 15, "     2 PLAYERS     " };
 
-	s2[0] = { XX, YY, 20, 14, ">>   1 PLAYER   <<" };
-	s2[1] = { XX, YY + 3, 20, 14, ">>   2 PLAYERS  <<" };
+	s2[0] = { XX, YY + 1, 21, 14, ">>   1 PLAYER    <<" };
+	s2[1] = { XX, YY + 4, 21, 14, ">>   2 PLAYERS   <<" };
 
 	system("cls");
 	int S = 0;  // Con trỏ hiển thị mục đang chọn
