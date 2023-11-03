@@ -962,7 +962,7 @@ void drawIronman(int XX, int YY) {
 	gotoXY(XX + 4, YY + 16);
 	setColor(6, 0); cout << "    ";
 	gotoXY(XX + 10, YY + 16);
-	setColor(6, 0); cout << "   ";
+	setColor(6, 0); cout << "    ";
 
 
 

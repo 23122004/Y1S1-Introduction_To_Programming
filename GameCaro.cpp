@@ -106,14 +106,16 @@ void exit() {
 // Main
 void drawMenu(int XX, int YY) { 
 	struct _aboutMenu {
+
 		int X, Y, size, b_color;
 		string str;
-
+		
 		void draw() {
 			drawBoardMenu(X, Y, size, b_color, str);
 		}
 	};
-	
+	 drawIronman(40, 10);
+	 drawIronman(85 , 10); 
 	_aboutMenu s1[5], s2[5];  // s1: phông thường, s2: phông highlight
 	s1[0] = { XX, YY, 20, 15, "     NEW GAME     " };
 	s1[1] = { XX, YY + 3, 20, 15, "     LOAD GAME    " };
@@ -156,6 +158,7 @@ int32_t main() {
 
 	ShowCur(0);
 	drawMenu(60, 12);
+
 
 	return 0;
 }
