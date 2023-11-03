@@ -77,7 +77,7 @@ void drawNewGameMenu(int XX, int YY) {
 
 		void draw() {
 			drawBoardMenu(X1, Y1, size1, b_color1, str1);
-			decorate_draw(24, 21, "pixel_art/swords.txt");
+			decorate_draw(48, 21, "pixel_art/swords.txt");
 		}
 	};
 
