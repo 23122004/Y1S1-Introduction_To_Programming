@@ -36,6 +36,34 @@ void setColor(int background_color, int text_color) { // Chỉnh màu của con 
 	SetConsoleTextAttribute(hconsole, color_code);
 }
 
+void draw(int x, int y, int color)
+{
+	x = (x - 1) * 2 + 1;
+	gotoXY(x, y);
+	setColor(color, color);
+	cout << "  ";
+	setColor(15, 15);
+}
+
+void decorate_draw(int x, int y, const string& nameFile)
+{
+	ifstream file(nameFile.c_str());
+	string s;
+	int i = 0;
+	while (getline(file, s))
+	{
+		i++;
+		stringstream ss(s);
+		int j = 0;
+		while (!ss.eof())
+		{
+			j++;
+			int color;
+			ss >> color;
+			draw(x + j, y + i, color);
+		}
+	}
+}
 void ShowCur(bool CursorVisibility) {  // Ẩn hiện con trỏ; 0: ẩn, 1: hiện
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };

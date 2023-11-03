@@ -10,7 +10,7 @@ using namespace std;
 
 // Menu
 void newGame(int XX,int YY ) {
-	drawNewGameMenu(XX, YY);	
+	drawNewGameMenu(XX, YY);
 }
 
 void about(int Xi, int Yi) {
