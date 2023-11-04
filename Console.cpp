@@ -1,16 +1,26 @@
 ﻿#include "Console.h"
 
 void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình console
-	HWND consoleWindow = GetConsoleWindow();
 	system("COLOR f0");
+	HWND consoleWindow = GetConsoleWindow();
 
 	LONG style = GetWindowLong(consoleWindow, GWL_STYLE);
 	style = style & ~(WS_MAXIMIZEBOX) & ~(WS_THICKFRAME);
 	SetWindowLong(consoleWindow, GWL_STYLE, style);
 
-	RECT r;
-	GetWindowRect(consoleWindow, &r);
-	MoveWindow(consoleWindow, 0, 0, WIDTH, HEIGHT, TRUE);
+	SMALL_RECT r;
+	r.Top = r.Left = 0;
+	r.Right = WIDTH;
+	r.Bottom = HEIGHT;
+
+	COORD NewSize;
+	NewSize.X = WIDTH;
+	NewSize.Y = HEIGHT;
+
+	HANDLE Handle = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleWindowInfo(Handle, TRUE, &r);
+	SetConsoleScreenBufferSize(Handle, NewSize);
+	ShowScrollBar(consoleWindow, SB_BOTH, 0);
 }
 
 void gotoXY(int x, int y) { // Di chuyển con trỏ đến vị trí (y, x)
@@ -26,6 +36,34 @@ void setColor(int background_color, int text_color) { // Chỉnh màu của con 
 	SetConsoleTextAttribute(hconsole, color_code);
 }
 
+void draw(int x, int y, int color)
+{
+	x = (x - 1) * 2 + 1;
+	gotoXY(x, y);
+	setColor(color, color);
+	cout << "  ";
+	setColor(15, 15);
+}
+
+void decorate_draw(int x, int y, const string& nameFile)
+{
+	ifstream file(nameFile.c_str());
+	string s;
+	int i = 0;
+	while (getline(file, s))
+	{
+		i++;
+		stringstream ss(s);
+		int j = 0;
+		while (!ss.eof())
+		{
+			j++;
+			int color;
+			ss >> color;
+			draw(x + j, y + i, color);
+		}
+	}
+}
 void ShowCur(bool CursorVisibility) {  // Ẩn hiện con trỏ; 0: ẩn, 1: hiện
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };

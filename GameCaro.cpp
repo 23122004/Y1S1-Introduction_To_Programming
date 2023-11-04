@@ -10,7 +10,7 @@ using namespace std;
 
 // Menu
 void newGame(int XX,int YY ) {
-	drawNewGameMenu(XX, YY);	
+	drawNewGameMenu(XX, YY);
 }
 
 void about(int Xi, int Yi) {
@@ -153,11 +153,12 @@ void drawMenu(int XX, int YY) {
 }
 
 int32_t main() {
-	fixConsoleWindow(1200, 800);
+	fixConsoleWindow(140, 45);  // 1044, 737
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
 
 	ShowCur(0);
-	drawMenu(60, 12);
+	drawMenu(61, 12);
+
 
 
 	return 0;

@@ -143,6 +143,10 @@ void loadGame(int XX, int YY) {
 							} break;
 						}
 
+						string old_name = fileNames[S] + ".txt";
+						string new_name = tmp + ".txt";
+						rename(old_name.c_str(), new_name.c_str());
+
 						fileNames[S] = tmp;
 						int siz = 14 - (int)tmp.size();
 
