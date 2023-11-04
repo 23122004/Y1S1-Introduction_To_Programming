@@ -36,10 +36,10 @@ void setColor(int background_color, int text_color) { // Chỉnh màu của con 
 	SetConsoleTextAttribute(hconsole, color_code);
 }
 
-void draw(int x, int y, int color)
+void draw_square(int i, int j, int x, int y, int color)
 {
 	x = (x - 1) * 2 + 1;
-	gotoXY(x, y);
+	gotoXY(x + i, y + j);
 	setColor(color, color);
 	cout << "  ";
 	setColor(15, 15);
@@ -60,7 +60,7 @@ void decorate_draw(int x, int y, const string& nameFile)
 			j++;
 			int color;
 			ss >> color;
-			draw(x + j, y + i, color);
+			draw_square(x, y, j, i, color);
 		}
 	}
 }
