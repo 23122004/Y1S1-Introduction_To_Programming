@@ -40,6 +40,5 @@ void drawBoardSize(int XX, int YY, int h, int w);
 void drawPopUp(int XX, int YY, int h, int w);
 void drawName_Board(int XX, int YY, string fileName);
 void drawStatus(int XX, int YY, int opt);
-void drawIronman(int XX, int YY); 
 
 #endif

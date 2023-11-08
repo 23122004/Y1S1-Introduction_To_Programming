@@ -115,7 +115,7 @@ void drawMenu(int XX, int YY) {
 			drawBoardMenu(X, Y, size, b_color, str);
 		}
 	};
-	decorate_draw(8 , 8 , "pixel_art/deadpool.txt" );
+
 	_aboutMenu s1[5], s2[5];  // s1: phông thường, s2: phông highlight
 	s1[0] = { XX, YY, 20, 15, "     NEW GAME     " };
 	s1[1] = { XX, YY + 3, 20, 15, "     LOAD GAME    " };
@@ -153,13 +153,12 @@ void drawMenu(int XX, int YY) {
 }
 
 int32_t main() {
-	fixConsoleWindow(140, 45);  // 1044, 737
+	fixConsoleWindow(200, 55);  // 1044, 737  ||  140, 45
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
 
-	ShowCur(0);
-	drawMenu(61, 12);
-
-
+	decorate_draw(8, 8, "pixel_art/minion.txt");
+	//ShowCur(0);
+	//drawMenu(61, 12);
 
 	return 0;
 }
