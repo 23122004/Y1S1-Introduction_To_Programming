@@ -56,9 +56,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Note.txt" />
-    <Text Include="game1.txt" />
-    <Text Include="game2.txt" />
-    <Text Include="game3.txt" />
     <Text Include="ListNameFiles.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>
