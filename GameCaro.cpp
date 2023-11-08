@@ -153,12 +153,14 @@ void drawMenu(int XX, int YY) {
 }
 
 int32_t main() {
-	fixConsoleWindow(200, 55);  // 1044, 737  ||  140, 45
+	fixConsoleWindow(200, 80);  // 1044, 737  ||  140, 45
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
 
-	decorate_draw(8, 8, "pixel_art/minion.txt");
-	//ShowCur(0);
-	//drawMenu(61, 12);
+	//decorate_draw(70, 8, "pixel_art/minion.txt");
+	//decorate_draw(8, 8, "pixel_art/deadpool.txt");
+	
+	ShowCur(0);
+	drawMenu(61, 12);
 
 	return 0;
 }
