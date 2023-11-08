@@ -15,6 +15,7 @@ void newGame(int XX,int YY ) {
 
 void about(int Xi, int Yi) {
 	system("cls");
+	decorate_draw(1, 3, "pixel_art/sonic.txt");
 	drawABOUT(Xi - 10, Yi - 9);
 	int XX = Xi - 6, YY = Yi + 1;
 
@@ -114,8 +115,7 @@ void drawMenu(int XX, int YY) {
 			drawBoardMenu(X, Y, size, b_color, str);
 		}
 	};
-	 drawIronman(40, 10);
-	 drawIronman(85 , 10); 
+	decorate_draw(8 , 8 , "pixel_art/deadpool.txt" );
 	_aboutMenu s1[5], s2[5];  // s1: phông thường, s2: phông highlight
 	s1[0] = { XX, YY, 20, 15, "     NEW GAME     " };
 	s1[1] = { XX, YY + 3, 20, 15, "     LOAD GAME    " };
