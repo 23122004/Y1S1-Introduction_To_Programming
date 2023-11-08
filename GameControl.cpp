@@ -301,11 +301,16 @@ void addNeighbor(int x, int y)
 {
     if (Neighbor.count({ x, y })) Neighbor.erase({ x, y });
     int radius = 3;
-    int Upx = x - radius, Upy = y - radius, Lowx = x + radius, Lowy = y + radius;
-    for (int i = Upx; i <= Lowx; i++)
-        for (int j = Upy; j <= Lowy; j++)
+
+    int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
+    int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
+    for (int iter = 0; iter < 8; iter++)
+        for (int times = 1; times <= 3; times++)
+        {
+            int i = x + dx[iter] * times, j = y + dy[iter] * times;
             if (valid(i, j) && status[i][j].opt == 0)
                 Neighbor.insert({ i, j });
+        }
 }
 
 void makeMove(int Turn, int x, int y)
