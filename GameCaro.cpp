@@ -131,12 +131,12 @@ void drawMenu(int XX, int YY) {
 	s2[2] = { XX, YY + 6, 20, 14, ">>     ABOUT    <<"};
 	s2[3] = { XX, YY + 9, 20, 14, ">>     HELP     <<" };
 	s2[4] = { XX, YY + 12, 20, 14, ">>     EXIT     <<" };
-	decorate_draw(6, 6, "pixel_art/deadpool.txt");
 
 	int S = 0;  // Con trỏ hiển thị mục đang chọn
 	while (true) {
 		ShowCur(0);
 		drawCARO(XX - 6, YY - 9);
+		decorate_draw(6, 1, "pixel_art/deadpool.txt");
 		for (int i = 0; i < 5; ++i)
 			s1[i].draw();
 		s2[S].draw();
