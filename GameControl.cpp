@@ -302,12 +302,10 @@ void addNeighbor(int x, int y)
     if (Neighbor.count({ x, y })) Neighbor.erase({ x, y });
     int radius = 3;
 
-    int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
-    int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
-    for (int iter = 0; iter < 8; iter++)
-        for (int times = 1; times <= 3; times++)
+    int Upx = x - radius, Upy = y - radius, Lowx = x + radius, Lowy = y + radius;
+    for (int i = Upx; i <= Lowx; i++)
+        for (int j = Upy; j <= Lowy; j++)
         {
-            int i = x + dx[iter] * times, j = y + dy[iter] * times;
             if (valid(i, j) && status[i][j].opt == 0)
                 Neighbor.insert({ i, j });
         }
@@ -488,14 +486,15 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     ShowCur(0);
     displayWinLine(); // nháy nháy các thứ
 
-    drawPopUp(XX - 14, YY + 5, 11, 49);
+    drawPopUp(XX - 27, YY + 3, 16, 74);
+    decorate_draw(XX - 25, YY + 3, "pixel_art/cup.txt");
     if (Turn == -1)
-        drawX_WIN(XX - 7, YY + 7), Xscore++;
+        drawX_WIN(XX + 7, YY + 7), Xscore++;
     else if(Turn == 1) 
-        drawO_WIN(XX - 7, YY + 7), Oscore++;
-    else drawDRAW(XX - 6, YY + 7);
+        drawO_WIN(XX + 7, YY + 7), Oscore++;
+    else drawDRAW(XX + 8, YY + 7);
 
-    gotoXY(XX - 8, YY + 14);
+    gotoXY(XX + 6, YY + 14);
     setColor(15, 8);  cout << "<< Press Y to continue or N to exit >>";
     setColor(15, 0);
     

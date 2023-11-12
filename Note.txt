@@ -123,3 +123,8 @@ void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình conso
 	SetConsoleWindowInfo(Handle, TRUE, &r);
 	SetConsoleScreenBufferSize(Handle, NewSize);
 	ShowScrollBar(consoleWindow, SB_BOTH, 0);
+
+cavoi
+cup
+swords
+pokemon2

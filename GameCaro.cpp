@@ -15,8 +15,7 @@ void newGame(int XX,int YY ) {
 
 void about(int Xi, int Yi) {
 	system("cls");
-	decorate_draw(1, 3, "pixel_art/sonic.txt");
-	decorate_draw(58, 28, "pixel_art/cup.txt");
+	decorate_draw(0, 5, "pixel_art/pokemon2.txt");
 	drawABOUT(Xi - 10, Yi - 9);
 	int XX = Xi - 6, YY = Yi + 1;
 
@@ -43,8 +42,7 @@ void help(int Xi, int Yi) {
 	int h = 15, w = 76;
 
 	drawPopUp(XX, YY, h, w);
-	decorate_draw(50, 30 , "pixel_art/cavoi.txt");
-	//decorate_draw(70 , 28, "pixel_art/charizard.txt");
+	decorate_draw(31, 25 , "pixel_art/cavoi.txt");
 	setColor(co_theme);
 	for (int i = 1; i < h - 3; ++i) {
 		gotoXY(XX + 37, YY + i); 
@@ -131,15 +129,18 @@ void drawMenu(int XX, int YY) {
 	s2[2] = { XX, YY + 6, 20, 14, ">>     ABOUT    <<"};
 	s2[3] = { XX, YY + 9, 20, 14, ">>     HELP     <<" };
 	s2[4] = { XX, YY + 12, 20, 14, ">>     EXIT     <<" };
-	decorate_draw(6, 6, "pixel_art/deadpool.txt");
 
 	int S = 0;  // Con trỏ hiển thị mục đang chọn
 	while (true) {
 		ShowCur(0);
 		drawCARO(XX - 6, YY - 9);
+		decorate_draw(6, 1, "pixel_art/deadpool.txt");
 		for (int i = 0; i < 5; ++i)
 			s1[i].draw();
 		s2[S].draw();
+
+		decorate_draw(8, 8, "pixel_art/deadpool.txt");
+		decorate_draw(90, 8, "pixel_art/Captain_America.txt");
 
 		int _in = nextMove();
 		if (_in == 1) S = (S + 4) % 5;
@@ -157,11 +158,8 @@ void drawMenu(int XX, int YY) {
 }
 
 int32_t main() {
-	fixConsoleWindow(200, 80);  // 1044, 737  ||  140, 45
+	fixConsoleWindow(140, 45);  // 1044, 737  ||  140, 45
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
-
-	//decorate_draw(70, 8, "pixel_art/minion.txt");
-	//decorate_draw(8, 8, "pixel_art/deadpool.txt");
 	
 	ShowCur(0);
 	drawMenu(61, 12);
