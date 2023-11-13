@@ -15,7 +15,7 @@ void newGame(int XX,int YY ) {
 
 void about(int Xi, int Yi) {
 	system("cls");
-	decorate_draw(0, 5, "pixel_art/pokemon2.txt");
+	decorate_draw(0, 1, "pixel_art/Sonic.txt");
 	drawABOUT(Xi - 10, Yi - 9);
 	int XX = Xi - 6, YY = Yi + 1;
 
@@ -42,7 +42,7 @@ void help(int Xi, int Yi) {
 	int h = 15, w = 76;
 
 	drawPopUp(XX, YY, h, w);
-	decorate_draw(31, 25 , "pixel_art/cavoi.txt");
+	decorate_draw(31, 25 , "pixel_art/Whale.txt");
 	setColor(co_theme);
 	for (int i = 1; i < h - 3; ++i) {
 		gotoXY(XX + 37, YY + i); 
@@ -138,7 +138,7 @@ void drawMenu(int XX, int YY) {
 			s1[i].draw();
 		s2[S].draw();
 
-		decorate_draw(8, 8, "pixel_art/deadpool.txt");
+		decorate_draw(8, 8, "pixel_art/Deadpool.txt");
 		decorate_draw(90, 8, "pixel_art/Captain_America.txt");
 
 		int _in = nextMove();
@@ -160,10 +160,8 @@ int32_t main() {
 	fixConsoleWindow(140, 45);  // 1044, 737  ||  140, 45
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
 	
-	decorate_draw(8, 8, "pixel_art/hinh1.txt");
-
 	ShowCur(0);
-	//drawMenu(61, 12);
+	drawMenu(61, 12);
 
 	return 0;
 }

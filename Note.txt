@@ -128,3 +128,7 @@ cavoi
 cup
 swords
 pokemon2
+sonic
+sonic2
+baymax
+minion

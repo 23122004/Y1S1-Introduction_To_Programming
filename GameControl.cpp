@@ -487,7 +487,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     displayWinLine(); // nháy nháy các thứ
 
     drawPopUp(XX - 27, YY + 3, 16, 74);
-    decorate_draw(XX - 24, YY + 3, "pixel_art/cup.txt");
+    decorate_draw(XX - 24, YY + 3, "pixel_art/Cup.txt");
     if (Turn == -1)
         drawX_WIN(XX + 6, YY + 7), Xscore++;
     else if(Turn == 1) 

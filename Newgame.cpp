@@ -51,7 +51,7 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 	
 void player2(int XX, int YY) {
 	system("cls"); drawNEW_GAME(XX - 20, YY - 9);
-	decorate_draw(48, 21, "pixel_art/swords.txt");
+	decorate_draw(48, 21, "pixel_art/Swords.txt");
 	string name1, name2;
 
 	drawBoardMenu(XX, YY, 29, 15, " NAME PLAYER 1: ");
@@ -64,7 +64,7 @@ void player2(int XX, int YY) {
 
 void player1(int XX, int YY) {
 	system("cls"); drawNEW_GAME(XX - 21, YY - 9);
-	decorate_draw(48, 21, "pixel_art/swords.txt");
+	decorate_draw(48, 21, "pixel_art/Swords.txt");
 	string name;
 
 	drawBoardMenu(XX, YY, 27, 15, " NAME PLAYER:   ");
