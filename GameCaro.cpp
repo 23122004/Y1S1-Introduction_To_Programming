@@ -134,7 +134,6 @@ void drawMenu(int XX, int YY) {
 	while (true) {
 		ShowCur(0);
 		drawCARO(XX - 6, YY - 9);
-		decorate_draw(6, 1, "pixel_art/deadpool.txt");
 		for (int i = 0; i < 5; ++i)
 			s1[i].draw();
 		s2[S].draw();
@@ -161,8 +160,10 @@ int32_t main() {
 	fixConsoleWindow(140, 45);  // 1044, 737  ||  140, 45
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
 	
+	decorate_draw(8, 8, "pixel_art/hinh1.txt");
+
 	ShowCur(0);
-	drawMenu(61, 12);
+	//drawMenu(61, 12);
 
 	return 0;
 }

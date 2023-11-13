@@ -487,14 +487,14 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     displayWinLine(); // nháy nháy các thứ
 
     drawPopUp(XX - 27, YY + 3, 16, 74);
-    decorate_draw(XX - 25, YY + 3, "pixel_art/cup.txt");
+    decorate_draw(XX - 24, YY + 3, "pixel_art/cup.txt");
     if (Turn == -1)
-        drawX_WIN(XX + 7, YY + 7), Xscore++;
+        drawX_WIN(XX + 6, YY + 7), Xscore++;
     else if(Turn == 1) 
-        drawO_WIN(XX + 7, YY + 7), Oscore++;
-    else drawDRAW(XX + 8, YY + 7);
+        drawO_WIN(XX + 6, YY + 7), Oscore++;
+    else drawDRAW(XX + 7, YY + 7);
 
-    gotoXY(XX + 6, YY + 14);
+    gotoXY(XX + 5, YY + 14);
     setColor(15, 8);  cout << "<< Press Y to continue or N to exit >>";
     setColor(15, 0);
     

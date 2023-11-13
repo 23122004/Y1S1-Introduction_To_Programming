@@ -194,6 +194,7 @@ void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string n
 			char key = _getch();
 			if (key == 'N' || key == 'n') {
 				drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
+				nameFile = "";
 				return;
 			} else if (key == 'Y' || key == 'y') break;
 		} 
