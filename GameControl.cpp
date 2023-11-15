@@ -494,7 +494,11 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         drawO_WIN(XX + 6, YY + 7), Oscore++;
     else drawDRAW(XX + 7, YY + 7);
 
-    gotoXY(XX + 5, YY + 14);
+    gotoXY(XX + 5 - (Turn == -1), YY + 13);
+    for (int i = 0; i < 38; ++i)
+        cout << char(196);
+
+    gotoXY(XX + 5 - (Turn == -1), YY + 14);
     setColor(15, 8);  cout << "<< Press Y to continue or N to exit >>";
     setColor(15, 0);
     

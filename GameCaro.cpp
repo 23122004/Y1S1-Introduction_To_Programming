@@ -16,6 +16,7 @@ void newGame(int XX,int YY ) {
 void about(int Xi, int Yi) {
 	system("cls");
 	decorate_draw(0, 1, "pixel_art/Sonic.txt");
+	decorate_draw(95, 17, "pixel_art/Minion.txt");
 	drawABOUT(Xi - 10, Yi - 9);
 	int XX = Xi - 6, YY = Yi + 1;
 
@@ -159,7 +160,7 @@ void drawMenu(int XX, int YY) {
 int32_t main() {
 	fixConsoleWindow(140, 45);  // 1044, 737  ||  140, 45
 	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
-	
+
 	ShowCur(0);
 	drawMenu(61, 12);
 
