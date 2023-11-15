@@ -45,9 +45,9 @@ void loadGame(int XX, int YY) {
 	system("cls");
 	decorate_draw(5, 15, "pixel_art/Octopus.txt");
 	decorate_draw(117, 15, "pixel_art/Octopus.txt");
-	decorate_draw(20, 30, "pixel_art/Turtle.txt");
-	decorate_draw(60, 30, "pixel_art/Turtle.txt");
-	decorate_draw(100, 30, "pixel_art/Turtle.txt");
+	decorate_draw(20, 32, "pixel_art/Turtle.txt");
+	decorate_draw(60, 32, "pixel_art/Turtle.txt");
+	decorate_draw(100, 32, "pixel_art/Turtle.txt");
 	drawLOAD_GAME(XX - 26, YY - 9);
 	drawPopUp(XX - 33, YY - 1, 20, 86);
 
