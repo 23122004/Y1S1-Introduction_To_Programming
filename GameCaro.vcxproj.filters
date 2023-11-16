@@ -55,7 +55,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="Note.txt" />
     <Text Include="ListNameFiles.txt" />
   </ItemGroup>
   <ItemGroup>

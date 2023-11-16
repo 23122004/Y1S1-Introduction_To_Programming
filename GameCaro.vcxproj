@@ -144,7 +144,6 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="ListNameFiles.txt" />
-    <Text Include="Note.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Include="README.md" />
