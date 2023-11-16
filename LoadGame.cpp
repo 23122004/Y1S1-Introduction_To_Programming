@@ -5,13 +5,10 @@
 #include "library.h"
 #define co_theme 15,0
 
-
 const int BOARD_SIZE = 15;
 vector<string> fileNames;
 
 void loadGame(int XX, int YY) {
-	pullList();
-
 	struct _aboutMenu {
 		int X, Y, size, b_color;
 		string str;

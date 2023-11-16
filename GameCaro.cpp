@@ -131,6 +131,7 @@ void drawMenu(int XX, int YY) {
 	s2[3] = { XX, YY + 9, 20, 14, ">>     HELP     <<" };
 	s2[4] = { XX, YY + 12, 20, 14, ">>     EXIT     <<" };
 
+	pullList();
 	int S = 0;  // Con trỏ hiển thị mục đang chọn
 	while (true) {
 		ShowCur(0);
