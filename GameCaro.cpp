@@ -15,22 +15,37 @@ void newGame(int XX,int YY ) {
 
 void about(int Xi, int Yi) {
 	system("cls");
-	decorate_draw(0, 1, "pixel_art/Sonic.txt");
-	decorate_draw(95, 17, "pixel_art/Minion.txt");
 	drawABOUT(Xi - 10, Yi - 9);
 	int XX = Xi - 6, YY = Yi + 1;
 
-	drawPopUp(XX - 9, YY - 2, 17, 52);
-	gotoXY(XX, YY);      cout << "HCMUS - 23TNT1 - Group 5:";
-	gotoXY(XX, YY + 2);  cout << "   23122001 - Dinh Duc Anh Khoa";
-	gotoXY(XX, YY + 4);  cout << "   23122002 - Nguyen Dinh Ha Duong";
-	gotoXY(XX, YY + 6);  cout << "   23122013 - Dinh Duc Tai";
-	gotoXY(XX, YY + 8);  cout << "   23122004 - Nguyen Le Hoang Trung";
-	gotoXY(XX, YY + 10); cout << "Advisor: Dr.Truong Toan Thinh";
+	drawPopUp(XX - 28, YY - 2, 25, 90);
+	gotoXY(XX + 4, YY);      cout << "HCMUS - 23TNT1 - Group 5:";
+	gotoXY(XX + 3, YY + 18); cout << "Advisor: Dr.Truong Toan Thinh";
 
 	setColor(14, 0);
-	gotoXY(XX + 6, YY + 12); cout << "<< Press ESC to exit >>";
+	gotoXY(XX + 6, YY + 20); cout << "<< Press ESC to exit >>";
 	setColor(co_theme);
+
+	Xi = 29, Yi = 13;
+	decorate_draw(Xi, Yi, "pixel_art/Khoa.txt");
+	setColor(co_theme); 
+	gotoXY(Xi + 1, Yi + 15);  cout << "Dinh Duc Anh Khoa";
+	gotoXY(Xi + 6, Yi + 16); cout << "23122001";
+
+	decorate_draw(Xi + 21, Yi, "pixel_art/Duong.txt");
+	setColor(co_theme);
+	gotoXY(Xi + 21, Yi + 15);  cout << "Nguyen Dinh Ha Duong";
+	gotoXY(Xi + 27, Yi + 16); cout << "23122002";
+
+	decorate_draw(Xi + 42, Yi, "pixel_art/Tai.txt");
+	setColor(co_theme);
+	gotoXY(Xi + 46, Yi + 15);  cout << "Dinh Duc Tai";
+	gotoXY(Xi + 48, Yi + 16); cout << "23122013";
+
+	decorate_draw(Xi + 63, Yi, "pixel_art/Trung.txt");
+	setColor(co_theme);
+	gotoXY(Xi + 64, Yi + 15);  cout << "Nguyen Le Hoang Trung";
+	gotoXY(Xi + 70, Yi + 16); cout << "23122004";
 
 	while (nextMove() != 5);
 }
@@ -106,7 +121,6 @@ void exit() {
 	exit(0);
 }
 
-// Main
 void drawMenu(int XX, int YY) { 
 	struct _aboutMenu {
 
@@ -118,7 +132,7 @@ void drawMenu(int XX, int YY) {
 		}
 	};
 
-	_aboutMenu s1[5], s2[5];  // s1: phông thường, s2: phông highlight
+	_aboutMenu s1[5], s2[5];  // s1: unselect  ;  s2: select
 	s1[0] = { XX, YY, 20, 15, "     NEW GAME     " };
 	s1[1] = { XX, YY + 3, 20, 15, "     LOAD GAME    " };
 	s1[2] = { XX, YY + 6, 20, 15, "       ABOUT      " };
@@ -131,19 +145,23 @@ void drawMenu(int XX, int YY) {
 	s2[3] = { XX, YY + 9, 20, 14, ">>     HELP     <<" };
 	s2[4] = { XX, YY + 12, 20, 14, ">>     EXIT     <<" };
 
-	pullList();
-	int S = 0;  // Con trỏ hiển thị mục đang chọn
+	pullList();  // pull data to fileNames
+	int S = 0;   // pointer in menu
+	
 	while (true) {
-		ShowCur(0);
+		/*------------------ DECOR ---------------------------*/
 		drawCARO(XX - 6, YY - 9);
 		for (int i = 0; i < 5; ++i)
 			s1[i].draw();
 		s2[S].draw();
-
+		
 		decorate_draw(8, 8, "pixel_art/Deadpool.txt");
 		decorate_draw(90, 8, "pixel_art/Captain_America.txt");
+		/*----------------------------------------------------*/
 
+		ShowCur(0);
 		int _in = nextMove();
+
 		if (_in == 1) S = (S + 4) % 5;
 		else if (_in == 3) S = (S + 1) % 5;
 		else if (_in == 0) {
@@ -159,8 +177,8 @@ void drawMenu(int XX, int YY) {
 }
 
 int32_t main() {
-	fixConsoleWindow(140, 45);  // 1044, 737  ||  140, 45
-	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");
+	fixConsoleWindow(140, 45);						  // Fix window size
+	SetConsoleTitle(L"GameCaro - 23TNT1 - Group 5");  // Console's title
 
 	ShowCur(0);
 	drawMenu(61, 12);
