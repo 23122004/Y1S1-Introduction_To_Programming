@@ -22,7 +22,7 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 
 		if (ch == 27) return 0;  // if "esc" then back to menu
 
-		if (ch == '\b' && sz) {  // nếu là ký tự backspace thì xóa
+		if (ch == '\b' && sz) {  // if "backspace" then delete last char
 			str.pop_back(); --sz;
 			--XX; gotoXY(XX, YY); cout << " ";
 			gotoXY(XX, YY);
@@ -49,30 +49,39 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 	} return 1;
 }
 	
-void player2(int XX, int YY) {
+void mode_2(int XX, int YY) {
+	/*------------------ DECOR ---------------------------*/
 	system("cls"); drawNEW_GAME(XX - 20, YY - 9);
 	decorate_draw(48, 21, "pixel_art/Swords.txt");
-	string name1, name2;
+	/*----------------------------------------------------*/
 
+	/*----------------- Import Name  ---------------------*/
+	string name1, name2;
 	drawBoardMenu(XX, YY, 29, 15, " NAME PLAYER 1: ");
-	if (!putname(XX + 17, YY + 1, name1 = "[player1]")) return;
+	if (!putname(XX + 17, YY + 1, name1 = "[player1]")) return;   // Name of player 1
 
 	drawBoardMenu(XX, YY + 3, 29, 15, " NAME PLAYER 2: ");
-	if (!putname(XX + 17, YY + 4, name2 = "[player2]")) return;
+	if (!putname(XX + 17, YY + 4, name2 = "[player2]")) return;   // Name of player 2
+
 	startGame(false, true, XX + 3, YY, name1, name2, {}, "", 0, 0);
+	/*----------------------------------------------------*/
 }
 
-void player1(int XX, int YY) {
+void mode_1(int XX, int YY) {
+	/*------------------ DECOR ---------------------------*/
 	system("cls"); drawNEW_GAME(XX - 21, YY - 9);
 	decorate_draw(48, 21, "pixel_art/Swords.txt");
-	string name;
+	/*----------------------------------------------------*/
 
+	/*----------------- Import Name  ---------------------*/
+	string name;
 	drawBoardMenu(XX, YY, 27, 15, " NAME PLAYER:   ");
-	if (!putname(XX + 15, YY + 1, name = "[player]")) return;
-	startGame(true, true, XX + 2, YY, name, "BOT", {}, "", 0, 0);
+	if (!putname(XX + 15, YY + 1, name = "[player]")) return;       // If !putname then exit Menu Newgame
+	startGame(true, true, XX + 2, YY, name, "BOT", {}, "", 0, 0);   
+	/*----------------------------------------------------*/
 }
 	
-void drawNewGameMenu(int XX, int YY) {
+void newGame(int XX, int YY) {
 	struct _aboutMenu1 {
 		int X1, Y1, size1, b_color1;
 		string str1;
@@ -82,7 +91,7 @@ void drawNewGameMenu(int XX, int YY) {
 		}
 	};
 
-	_aboutMenu1 s1[2], s2[2];  // s1: phông thường, s2: phông highlight
+	_aboutMenu1 s1[2], s2[2];  // s1: unselect  ;  s2: select
 	s1[0] = { XX, YY + 1, 21, 15, "     1 PLAYER      " };
 	s1[1] = { XX, YY + 4, 21, 15, "     2 PLAYERS     " };
 
@@ -90,24 +99,28 @@ void drawNewGameMenu(int XX, int YY) {
 	s2[1] = { XX, YY + 4, 21, 14, ">>   2 PLAYERS   <<" };
 
 	system("cls");
-	int S = 0;  // Con trỏ hiển thị mục đang chọn
+	int S = 0;  // pointer in menu
 
 	while (true) {
+		/*------------------ DECOR ---------------------------*/
 		drawNEW_GAME(XX - 23, YY - 9);
 		decorate_draw(48, 21, "pixel_art/swords.txt");
 		for (int i = 0; i < 2; ++i)
 			s1[i].draw();
 		s2[S].draw();
+		/*----------------------------------------------------*/
 
+		/*------------- Menu Newgame selection ---------------*/
 		int _in1 = nextMove();
-		if (_in1 == 1 || _in1 == 3) S ^= 1;
-		else if (_in1 == 0) {
-			if (S == 0) player1(XX - 2, YY);
-			else if (S == 1) player2(XX - 3, YY);
+		if (_in1 == 1 || _in1 == 3) S ^= 1;       // Move
+		else if (_in1 == 0) {					  // Enter
+			if (S == 0) mode_1(XX - 2, YY);		  // Mode: 1 player
+			else if (S == 1) mode_2(XX - 3, YY);  // Mode: 2 player
 			else assert(false);
 			break;
-		} else if (_in1 == 5)
+		} else if (_in1 == 5)					  // Exit
 			break;
+		/*----------------------------------------------------*/
 	}
 }
 

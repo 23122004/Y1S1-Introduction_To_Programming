@@ -8,11 +8,7 @@
 #define co_theme 15, 0
 using namespace std;
 
-// Menu
-void newGame(int XX,int YY ) {
-	drawNewGameMenu(XX, YY);
-}
-
+/*-----------------------@- MENU ABOUT -@-------------------------------------*/
 void about(int Xi, int Yi) {
 	system("cls");
 	drawABOUT(Xi - 10, Yi - 9);
@@ -50,6 +46,7 @@ void about(int Xi, int Yi) {
 	while (nextMove() != 5);
 }
 
+/*-----------------------@- MENU HELP -@-------------------------------------*/
 void help(int Xi, int Yi) {
 	system("cls");
 	drawHELP(Xi - 5, Yi - 9);
@@ -116,6 +113,7 @@ void help(int Xi, int Yi) {
 	while (nextMove() != 5);
 }
 
+/*-----------------------@- MENU EXIT -@-------------------------------------*/
 void exit() {
 	system("cls");
 	exit(0);
@@ -162,9 +160,10 @@ void drawMenu(int XX, int YY) {
 		ShowCur(0);
 		int _in = nextMove();
 
-		if (_in == 1) S = (S + 4) % 5;
-		else if (_in == 3) S = (S + 1) % 5;
-		else if (_in == 0) {
+		/*----------------- Menu selection -------------------*/
+		if (_in == 1) S = (S + 4) % 5;        // Up
+		else if (_in == 3) S = (S + 1) % 5;   // Down
+		else if (_in == 0) {				  // Enter
 			if (S == 0) newGame(XX, YY);
 			else if (S == 1) loadGame(XX, YY);
 			else if (S == 2) about(XX, YY);
@@ -173,6 +172,7 @@ void drawMenu(int XX, int YY) {
 			else assert(false);
 			system("cls");
 		}
+		/*----------------------------------------------------*/
 	}
 }
 

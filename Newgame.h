@@ -6,7 +6,7 @@
 #include "Graphic.h"
 using namespace std;
 
-void drawNewGameMenu(int XX, int YY);
+void newGame(int XX, int YY);
 bool putname(int XX, int YY, string& str);
 
 #endif
