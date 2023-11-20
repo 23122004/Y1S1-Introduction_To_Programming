@@ -18,7 +18,6 @@ void loadGame(int XX, int YY) {
 		}
 	};
 
-
 	int sz = min((int)fileNames.size() - 1, 14);  
 	_aboutMenu s1[15], s2[15]; 
 	for (int i = 0; i < 15; ++i) {

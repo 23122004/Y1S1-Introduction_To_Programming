@@ -2,9 +2,10 @@
 #include "GameControl.h"
 using namespace std;
 
-bool putname(int XX, int YY, string &str) {  // Insert name
-	int sz = 0, Xi = XX, Yi = YY;
-	string tmp = str;
+/*-----------------@- Function Import name -@-----------------------*/
+bool putname(int XX, int YY, string &str) {   
+	int sz = 0, Xi = XX, Yi = YY;	// [Xi, Yi] is located of pointer in head line
+	string tmp = str;				// tmp is a origin name
 
 	setColor(15, 8);
 	gotoXY(Xi, Yi);
@@ -12,17 +13,16 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 
 	while (true) {
 		char ch = _getch();
-		if ((int)ch < 0)
-		{
+		if ((int)ch < 0) {			// If input is arrow, we must getchar one more
 			ch = _getch();
 			continue;
 		}
 
-		if (ch == 13) break;  // if "enter" then exit
+		if (ch == 13) break;		// If input is "enter" then exit with putname = 1
 
-		if (ch == 27) return 0;  // if "esc" then back to menu
+		if (ch == 27) return 0;		// If input is "esc" then back to menu with putname = 2
 
-		if (ch == '\b' && sz) {  // if "backspace" then delete last char
+		if (ch == '\b' && sz) {		// If input is "backspace" then delete last char
 			str.pop_back(); --sz;
 			--XX; gotoXY(XX, YY); cout << " ";
 			gotoXY(XX, YY);
@@ -34,7 +34,7 @@ bool putname(int XX, int YY, string &str) {  // Insert name
 				cout << str;
 			}
 
-		} else if ((('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z') || isdigit(ch)) && sz < 10) {  // giới hạn 10 ký tự
+		} else if ((('a' <= ch && ch <= 'z') || ('A' <= ch && ch <= 'Z') || isdigit(ch)) && sz < 10) {  // Length of name is less than or equal 10
 			if (sz == 0) {
 				str = "";
 				setColor(15, 0);
@@ -76,7 +76,7 @@ void mode_1(int XX, int YY) {
 	/*----------------- Import Name  ---------------------*/
 	string name;
 	drawBoardMenu(XX, YY, 27, 15, " NAME PLAYER:   ");
-	if (!putname(XX + 15, YY + 1, name = "[player]")) return;       // If !putname then exit Menu Newgame
+	if (!putname(XX + 15, YY + 1, name = "[player]")) return;       // Name of player
 	startGame(true, true, XX + 2, YY, name, "BOT", {}, "", 0, 0);   
 	/*----------------------------------------------------*/
 }

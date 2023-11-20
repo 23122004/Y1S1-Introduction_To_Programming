@@ -1,6 +1,6 @@
 ﻿#include "Console.h"
 
-void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình console
+void fixConsoleWindow(int WIDTH, int HEIGHT) {		// Fix console screen
 	system("COLOR f0");
 	HWND consoleWindow = GetConsoleWindow();
 
@@ -23,21 +23,21 @@ void fixConsoleWindow(int WIDTH, int HEIGHT) {  // Cố định màn hình conso
 	ShowScrollBar(consoleWindow, SB_BOTH, 0);
 }
 
-void gotoXY(int x, int y) { // Di chuyển con trỏ đến vị trí (y, x)
+void gotoXY(int x, int y) {		// Move pointer to (y, x)
 	COORD coord;
 	coord.X = x;
 	coord.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-void setColor(int background_color, int text_color) { // Chỉnh màu của con trỏ, background là màu nền, text là màu chữ
+void setColor(int background_color, int text_color) { // Setcolor of pointer
 	HANDLE hconsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	int color_code = background_color * 16 + text_color;
 	SetConsoleTextAttribute(hconsole, color_code);
 }
 
-void draw_square(int i, int j, int x, int y, int color)
-{
+/*---------------@- Function Draw Picture in "Pixel-art" -@------------------*/
+void draw_square(int i, int j, int x, int y, int color) {
 	x = (x - 1) * 2 + 1;
 	gotoXY(x + i, y + j);
 	setColor(color, color);
@@ -45,8 +45,7 @@ void draw_square(int i, int j, int x, int y, int color)
 	setColor(15, 15);
 }
 
-void decorate_draw(int x, int y, const string& nameFile)
-{
+void decorate_draw(int x, int y, const string& nameFile) {
 	ifstream file(nameFile.c_str());
 	string s;
 	int i = 0;
@@ -64,13 +63,15 @@ void decorate_draw(int x, int y, const string& nameFile)
 		}
 	}
 }
-void ShowCur(bool CursorVisibility) {  // Ẩn hiện con trỏ; 0: ẩn, 1: hiện
+/*---------------------------------------------------------------------------*/
+
+void ShowCur(bool CursorVisibility) {  // CursorVisibility = 0 is hide, = 1 is appear
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };
 	SetConsoleCursorInfo(handle, &cursor);
 }
 
-void curr_coordinate(int& x, int& y) // lấy vị trí hiện tại của con trỏ
+void curr_coordinate(int& x, int& y)	// Get the locate of pointer
 {
 	CONSOLE_SCREEN_BUFFER_INFO curr;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &curr);
@@ -78,30 +79,30 @@ void curr_coordinate(int& x, int& y) // lấy vị trí hiện tại của con t
 	y = curr.dwCursorPosition.Y;
 }
 
-int nextMove() {  // Nhận các thao tác chức năng cơ bản
+int nextMove() {   // Get operation from keyboard
 	while (true) {
 		if (_kbhit()) {
 			char c = _getch();
 
-			if (c == 13 || c == ' ') return 0;
-			if (c == 27) return 5;
+			if (c == 13 || c == ' ') return 0;	// Enter
+			if (c == 27) return 5;				// Exit
 
-			if (c == -32) {
+			if (c == -32) {						// Arrow
 				c = _getch();
 
-				if (c == 72) return 1;
-				if (c == 75) return 2;
-				if (c == 80) return 3;
-				if (c == 77) return 4;
+				if (c == 72) return 1;			// Up
+				if (c == 75) return 2;			// Left
+				if (c == 80) return 3;			// Down
+				if (c == 77) return 4;			// Right
 			}
 
-			if (c == 'W' || c == 'w') return 1;
-			if (c == 'A' || c == 'a') return 2;
-			if (c == 'S' || c == 's') return 3;
-			if (c == 'D' || c == 'd') return 4;
+			if (c == 'W' || c == 'w') return 1;	// Up
+			if (c == 'A' || c == 'a') return 2;	// Left
+			if (c == 'S' || c == 's') return 3;	// Down
+			if (c == 'D' || c == 'd') return 4;	// Right
 
-			if (c == 'U' || c == 'u') return 6;
-			if (c == 'I' || c == 'i') return 7;
+			if (c == 'U' || c == 'u') return 6;	// Undo
+			if (c == 'I' || c == 'i') return 7;	// Save
 		}
 	}
 }

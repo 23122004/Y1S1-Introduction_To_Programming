@@ -648,7 +648,7 @@ void drawDRAW(int XX, int YY) {
 	drawW(XX + 24, YY);
 }
 
-void drawBoardMenu(int XX, int YY, int size, int b_color, string str = "") { // 3 * size, vẽ bảng menu chọn
+void drawBoardMenu(int XX, int YY, int size, int b_color, string str = "") { // 3 * size, Menu Board
 	setColor(co_theme);
 
 	gotoXY(XX, YY); cout << char(201);
@@ -667,7 +667,7 @@ void drawBoardMenu(int XX, int YY, int size, int b_color, string str = "") { // 
 	setColor(co_theme);
 }
 
-void drawBoardSize(int XX, int YY, int h, int w) { // h * w, vẽ bảng viền bự
+void drawBoardSize(int XX, int YY, int h, int w) { // h * w, Board
 	setColor(co_theme);
 
 	gotoXY(XX, YY); cout << char(201);
@@ -684,11 +684,12 @@ void drawBoardSize(int XX, int YY, int h, int w) { // h * w, vẽ bảng viền 
 	cout << char(188);
 }
 
-void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscore, string fileName) {  // Vẽ bảng caro 12*12
+void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscore, string fileName) {  // Caro Board
 	setColor(co_theme);
 	drawIN_MATCH(Xi - 20, Yi - 9);
 
-	int XX = Xi - 31, YY = Yi - 2;
+	/*--------------------------- Draw Board ---------------------------------*/
+	int XX = Xi - 31, YY = Yi - 2;		// [XX, YY] is located of pointer to draw board
 	for (int y = 0; y <= 2 * BOARD_SIZE; ++y) {
 		for (int x = 0; x <= 4 * BOARD_SIZE; ++x) {
 			gotoXY(XX + x, YY + y);
@@ -728,14 +729,18 @@ void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscor
 	cout << char(204);
 	for (int i = 0; i < 20; ++i) cout << char(205);
 	cout << char(185);
+	/*--------------------------------------------------------------------------*/
 
+	/*--------------------------- Update status --------------------------------*/
 	for (int y = 1; y <= BOARD_SIZE; ++y)
 		for (int x = 1; x <= BOARD_SIZE; ++x) {
 			status[y][x].Y = YY + (y - 1) * 2 + 1;
 			status[y][x].X = XX + (x - 1) * 4 + 2;
 			status[y][x].opt = 0;
 		}
+	/*--------------------------------------------------------------------------*/
 
+	/*---------------------- Information in Board ------------------------------*/
 	setColor(11, 0); 
 	gotoXY(XX + 4 * BOARD_SIZE + 10 - ((int)name1.size() + 1) / 2 , YY + 2); cout << " " << name1 << " ";
 	gotoXY(XX + 4 * BOARD_SIZE + 10 - ((int)name2.size() + 1) / 2 , YY + 17); cout << " " << name2 << " ";
@@ -750,9 +755,10 @@ void drawBoard(int Xi, int Yi, string name1, string name2, int Xscore, int Oscor
 
 	drawName_Board(XX + 4 * BOARD_SIZE - 2, YY + 2 * BOARD_SIZE + 1, fileName);
 	drawStatus(XX, YY + 2 * BOARD_SIZE + 1, 1);
+	/*--------------------------------------------------------------------------*/
 }
 
-void drawStatus(int XX, int YY, int opt) {
+void drawStatus(int XX, int YY, int opt) {	// Draw status in Caro Board
 	gotoXY(XX - 3, YY); 
 	if (opt == 1) {
 		setColor(11, 0); cout << ">> Playing";
@@ -779,7 +785,7 @@ void drawStatus(int XX, int YY, int opt) {
 	} setColor(15, 0);
 }
 
-void drawName_Board(int XX, int YY, string fileName) {
+void drawName_Board(int XX, int YY, string fileName) {	// NameBoard frame
 	gotoXY(XX, YY);
 	setColor(0, 15);  cout << " BOARD NAME: ";
 	if ((int)fileName.size() == 0) fileName = "[NULL]";
@@ -788,7 +794,7 @@ void drawName_Board(int XX, int YY, string fileName) {
 	setColor(15, 0);
 }
 
-void drawPopUp(int XX, int YY, int h, int w) {
+void drawPopUp(int XX, int YY, int h, int w) {			// Pop Up Board
 	setColor(co_theme);
 
 	gotoXY(XX + 2, YY); 
