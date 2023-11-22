@@ -5,15 +5,15 @@
 
 #define F first
 #define S second
-typedef pair<int, int> ii;
-vector<ii> Cache;
-set<ii> Neighbor;
-const int BOARD_SIZE = 15;
-_Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
-int Turn;
-int maxDepth = 3;
+
 #define moveTo(x, y) gotoXY(status[x][y].X, status[x][y].Y)
-vector<ii> winLine;
+const int BOARD_SIZE = 15;
+typedef pair<int, int> ii;
+
+int Turn, maxDepth = 3;
+_Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
+vector<ii> Cache, winLine;
+set<ii> Neighbor;
 
 long long consecutiveScore(int len, int openEnds, bool currentTurn) // tính điểm
 {

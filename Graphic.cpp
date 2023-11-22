@@ -3,7 +3,7 @@
 #define co_theme 15,0
 const int BOARD_SIZE = 15;
 
-extern _Point status[15 + 5][15 + 5];
+extern _Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
 void drawA(int XX, int YY) { // 6 * 8
 	gotoXY(XX + 1, YY);
 	setColor(0, 0); cout << "     ";
