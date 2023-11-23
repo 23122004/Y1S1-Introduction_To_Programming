@@ -341,11 +341,6 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
     for(int i = 1; i <= BOARD_SIZE; i++)
         for(int j = 1; j <= BOARD_SIZE; j++)
             if (status[i][j].opt != 0) addNeighbor(i, j);
-    /*for (auto x : Neighbor)
-    {
-        moveTo(x.F, x.S);
-        cout << '.';
-    }*/
 }
 
 void displayWinLine() // nháy nháy chỗ thắng 
