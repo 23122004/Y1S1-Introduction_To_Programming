@@ -15,7 +15,7 @@ _Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
 vector<ii> Cache, winLine;
 set<ii> Neighbor;
 
-long long consecutiveScore(int len, int openEnds, bool currentTurn) // tính điểm
+long long consecutiveScore(int len, int openEnds, bool currentTurn) // return the score of consecutive elements
 {
     if (len < 5 && openEnds == 0) return 0;
     switch (len)
@@ -77,13 +77,13 @@ long long get_score(int a[], int player)
 {
     int Size = BOARD_SIZE + 2;
     long long score = 0;
-    for (int i = 1; i < Size - 1; i++) if (abs(a[i]) == 1) // đánh giá điểm
+    for (int i = 1; i < Size - 1; i++) if (abs(a[i]) == 1) // get consecutive equal elements 
     {
         int j = i;
         while (j + 1 < Size - 1 && a[i] == a[j + 1]) j++;
 
         int len = j - i + 1;
-        int openEnds = 2 - (a[i - 1] != 0) - (a[j + 1] != 0); // số ô mở hai bên
+        int openEnds = 2 - (a[i - 1] != 0) - (a[j + 1] != 0); // number of open cells
         score += 1ll * consecutiveScore(len, openEnds, player == a[i]) * a[i];
         i = j;
     }
@@ -95,11 +95,11 @@ bool valid(int x, int y)
     return y > 0 && x > 0 && x <= BOARD_SIZE && y <= BOARD_SIZE;
 }
 
-long long evaluation(int player) // hàm đánh giá trạng thái
+long long evaluation(int player) // evaluate a status
 {
     long long score = 0;
     int* b = new int[BOARD_SIZE + 2];
-    for (int i = 1; i <= BOARD_SIZE; i++) // đánh giá hàng ngang
+    for (int i = 1; i <= BOARD_SIZE; i++) // get a row
     {
         for (int k = 0; k < BOARD_SIZE + 2; k++)
         {
@@ -118,7 +118,7 @@ long long evaluation(int player) // hàm đánh giá trạng thái
         }
     }
 
-    for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá hàng dọc
+    for (int j = 1; j <= BOARD_SIZE; j++) // get a column
     {
         for (int k = 0; k < BOARD_SIZE + 2; k++)
         {
@@ -137,7 +137,7 @@ long long evaluation(int player) // hàm đánh giá trạng thái
         }
     }
 
-    for (int i = 0; i <= BOARD_SIZE; i++) // đánh giá đường chéo chính
+    for (int i = 0; i <= BOARD_SIZE; i++) // get a main diagonal
     {
         for (int k = 0; k < BOARD_SIZE + 2; k++)
         {
@@ -155,7 +155,7 @@ long long evaluation(int player) // hàm đánh giá trạng thái
             return score;
         }
     }
-    for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá đường chéo chính
+    for (int j = 1; j <= BOARD_SIZE; j++) // get a main diagonal
     {
         for (int k = 0; k < BOARD_SIZE + 2; k++)
         {
@@ -174,7 +174,7 @@ long long evaluation(int player) // hàm đánh giá trạng thái
         }
     }
 
-    for (int i = 1; i <= BOARD_SIZE + 1; i++) // đánh giá đường chéo phụ
+    for (int i = 1; i <= BOARD_SIZE + 1; i++) // get a secondary diagonal
     {
         for (int k = 0; k < BOARD_SIZE + 2; k++)
         {
@@ -192,7 +192,7 @@ long long evaluation(int player) // hàm đánh giá trạng thái
             return score;
         }
     }
-    for (int j = 1; j <= BOARD_SIZE; j++) // đánh giá đường chéo phụ
+    for (int j = 1; j <= BOARD_SIZE; j++) // get a secondary diagonal
     {
         for (int k = 0; k < BOARD_SIZE + 2; k++)
         {
@@ -215,11 +215,11 @@ long long evaluation(int player) // hàm đánh giá trạng thái
 
 long long minimax(int depth, long long alpha, long long beta, int player, int& x, int& y)
 {
-    long long val = evaluation(player); // tính trạng thái bàn cờ hiện tại nếu đến lượt người chơi "player"
-    if (depth == 0 || abs(val) >= 1e8) // kiểm tra xuống độ sâu cuối cùng hoặc một trong hai thắng
-        return val; // trả về đánh giá trạng thái
+    long long val = evaluation(player); // get the score of the current state if is the "player"'s turn.
+    if (depth == 0 || abs(val) >= 1e8) // deepest depth or one of the two players wins.
+        return val; // return the score
 
-    // đặt cho người chơi (Max)
+    // Max is the X player
     if (player == 1)
     {
         long long maxEval = (long long)-1e11;
@@ -229,8 +229,8 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
             int i = tmp.F, j = tmp.S;
             if (status[i][j].opt == 0)
             {
-                status[i][j].opt = 1; // đánh thử x vào ô i, j
-                long long eval = minimax(depth - 1, alpha, beta, -1, x, y); // gọi đệ quy minimax
+                status[i][j].opt = 1; // try to put X into cell i, j
+                long long eval = minimax(depth - 1, alpha, beta, -1, x, y); // minimax recursion
                 status[i][j].opt = 0;
                 if (maxEval < eval)
                 {
@@ -244,7 +244,7 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
         }
         return maxEval;
     }
-    else // đặt cho máy tương tự như cho người chơi (Min)
+    else // Min is the O player (bot)
     {
         long long minEval = (long long)1e11;
         vector<ii> a(Neighbor.begin(), Neighbor.end());
@@ -270,11 +270,10 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
     }
 }
 
-void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của người chơi
-// máy chơi trả về tham chiếu x, y là tọa độ vừa được đặt
+void botMove(int& x, int& y)
 {
     ShowCur(0);
-    if (Cache.size() == 1) // nước đi đầu tiên của bot là random
+    if (Cache.size() == 1) // bot's first move is random
     {
         int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
         int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
@@ -284,7 +283,7 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
         y += dy[r];
     }
     else minimax(maxDepth = (Neighbor.size() <= 110 ? 3 : 2), (long long)-1e11, (long long)1e11, -1, x, y);
-    if (status[x][y].opt != 0)
+    if (status[x][y].opt != 0) // if the algorithm is incorrect then go for a random move
     {
         int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
         int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
@@ -294,10 +293,9 @@ void botMove(int& x, int& y) // đưa vào tọa độ cuối cùng của ngư�
         y += dy[r];
     }
     ShowCur(1);
-    // bot mặc định là o
 }
 
-void addNeighbor(int x, int y)
+void addNeighbor(int x, int y) // add some adjective cells for calculations
 {
     if (Neighbor.count({ x, y })) Neighbor.erase({ x, y });
     int radius = 3;
@@ -311,7 +309,7 @@ void addNeighbor(int x, int y)
         }
 }
 
-void makeMove(int Turn, int x, int y)
+void makeMove(int Turn, int x, int y) // make a move
 {
     status[x][y].opt = Turn;
     
@@ -335,7 +333,7 @@ void makeMove(int Turn, int x, int y)
     moveTo(x, y);
 }
 
-void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
+void updateNeighbor()
 {
     Neighbor.clear();
     for(int i = 1; i <= BOARD_SIZE; i++)
@@ -343,7 +341,7 @@ void updateNeighbor() // thêm các tọa độ lân cận cho bot tính toán
             if (status[i][j].opt != 0) addNeighbor(i, j);
 }
 
-void displayWinLine() // nháy nháy chỗ thắng 
+void displayWinLine() // Bold the winning line
 {
 #define getVal(i) status[winLine[i].F][winLine[i].S].opt
     
@@ -354,11 +352,11 @@ void displayWinLine() // nháy nháy chỗ thắng
             int j = i;
             while (j + 1 < (int)winLine.size() - 1 && getVal(i) == getVal(j + 1)) j++;
             int len = j - i + 1;
-            if (len >= 5) // nếu đủ 5 để thắng thì đi nháy nháy
+            if (len >= 5)
             {
-                for (int T = 0; T < 3; T++) // nháy 3 lần
+                for (int T = 0; T < 3; T++) // 3 times
                 {
-                    for (int k = i; k <= j; k++) // tô ký tự vàng 
+                    for (int k = i; k <= j; k++)
                     {
                         int XX = status[winLine[k].F][winLine[k].S].X;
                         int YY = status[winLine[k].F][winLine[k].S].Y;
@@ -367,7 +365,7 @@ void displayWinLine() // nháy nháy chỗ thắng
                         cout << " " << (getVal(k) == 1 ? 'X' : 'O') << " ";
                     }
                     Sleep(500);
-                    for (int k = i; k <= j; k++) // tô lại mặc định
+                    for (int k = i; k <= j; k++)
                     {
                         int XX = status[winLine[k].F][winLine[k].S].X;
                         int YY = status[winLine[k].F][winLine[k].S].Y;
@@ -393,12 +391,12 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     Cache.clear();
     ShowCur(1);
     drawBoard(XX, YY, name1, name2, Xscore, Oscore, fileName);
-    if (isNewGame)
+    if (isNewGame) // if it is a new game then reset everything
     {
         Turn = 1;
         x = 8, y = 8;
         moveTo(x, y);
-    } else {
+    } else { // if not, use the previous data for the game
         Turn = 1;
         for (ii tmp : Data) {
             makeMove(Turn, tmp.F, tmp.S);
@@ -413,7 +411,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         }
     }
 
-    while (abs(evaluation(1)) < 1e8)
+    while (abs(evaluation(1)) < 1e8) // while the game is not over then keep playing
     {
         updateNeighbor();
         if (Turn == 1) {
@@ -435,7 +433,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                 if (Key == 2 && y > 1) y -= 1;
                 if (Key == 3 && x < BOARD_SIZE) x += 1;
                 if (Key == 4 && y < BOARD_SIZE) y += 1;
-                if (Key == 5) {
+                if (Key == 5) { // exit game
                     drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 4);
                     while (true) {
                         char key = _getch();
@@ -462,7 +460,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                         } moveTo(x, y);
                     }
                 }
-                if (Key == 7) {
+                if (Key == 7) { // save game
                     saveGame(XX, YY, Cache, Xscore, Oscore, name1, name2, fileName, vsBot);
                 }
                 moveTo(x, y);
@@ -479,7 +477,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     }
 
     ShowCur(0);
-    displayWinLine(); 
+    displayWinLine();
 
     drawPopUp(XX - 27, YY + 3, 16, 74);
     decorate_draw(XX - 24, YY + 3, "pixel_art/Cup.txt");
