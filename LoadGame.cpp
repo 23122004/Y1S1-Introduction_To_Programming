@@ -18,6 +18,7 @@ void loadGame(int XX, int YY) {
 		}
 	};
 
+	/*------------------ DECOR ---------------------------*/
 	int sz = min((int)fileNames.size() - 1, 14);  
 	_aboutMenu s1[15], s2[15]; 
 	for (int i = 0; i < 15; ++i) {
@@ -46,8 +47,9 @@ void loadGame(int XX, int YY) {
 	decorate_draw(100, 32, "pixel_art/Turtle.txt");
 	drawLOAD_GAME(XX - 26, YY - 9);
 	drawPopUp(XX - 33, YY - 1, 20, 86);
+	/*----------------------------------------------------*/
 
-	int S = min(0, sz);
+	int S = min(0, sz);		// Pointer
 	while (true) {
 		for (int i = 0; i < 15; ++i)
 			s1[i].draw();
@@ -62,11 +64,11 @@ void loadGame(int XX, int YY) {
 		setColor(co_theme);
 
 		int _in = nextMove();
-		if (_in == 5) break;
-		else if (S == -1) continue;
+		if (_in == 5) break;			// Esc
+		else if (S == -1) continue;		// No files were saved
 
 		if (_in == 0) {
-			_aboutMenu s3[3], s4[3]; 
+			_aboutMenu s3[3], s4[3];	// s3: unselect, s4: select
 			s3[0] = { XX - 12, YY + 15, 16, 15, "     PLAY     " };
 			s3[1] = { XX + 8, YY + 15, 16, 15,  "    DELETE    " };
 			s3[2] = { XX + 28, YY + 15, 16, 15, "    RENAME    " };
@@ -75,6 +77,7 @@ void loadGame(int XX, int YY) {
 			s4[1] = { XX + 8, YY + 15, 16, 14,  ">>  DELETE  <<" };
 			s4[2] = { XX + 28, YY + 15, 16, 14, ">>  RENAME  <<" };
 
+			// Display: choose the operation
 			s1[S].draw();
 			gotoXY(XX - 30, YY + 16); setColor(co_theme);
 			cout << "                                                                                 ";
@@ -82,6 +85,7 @@ void loadGame(int XX, int YY) {
 
 			int Sj = 0;
 			while (true) {
+				// Display: choose the operation
 				gotoXY(XX - 30, YY + 16); setColor(co_theme);
 				cout << "                                                                                 ";
 				gotoXY(XX - 24, YY + 16); setColor(11, 0); cout << " Choose: ";
@@ -91,11 +95,11 @@ void loadGame(int XX, int YY) {
 				s4[Sj].draw();
 
 				int _in = nextMove();
-				if (_in == 5) break;
-				else if (_in == 2) Sj = (Sj + 2) % 3;
-				else if (_in == 4) Sj = (Sj + 1) % 3;
-				else if (_in == 0) {
-					if (Sj == 0) {
+				if (_in == 5) break;					// Esc
+				else if (_in == 2) Sj = (Sj + 2) % 3;	// Left
+				else if (_in == 4) Sj = (Sj + 1) % 3;	// Right
+				else if (_in == 0) {					// Enter
+					if (Sj == 0) {		// Load file and play
 						vector<ii> Cache;
 						int Xscore, Oscore;
 						string name1, name2;
@@ -106,7 +110,7 @@ void loadGame(int XX, int YY) {
 						return;
 					}
 
-					if (Sj == 1) {
+					if (Sj == 1) {		// Delete file
 						deleteFile(fileNames[S]);
 						for (int t = S + 1; t <= sz; ++t) {
 							fileNames[t - 1] = fileNames[t];
@@ -120,17 +124,19 @@ void loadGame(int XX, int YY) {
 						s2[sz].str = "";
 						--sz;  S = min(S, sz);
 
-					} else {
+					} else {			// Rename file
 						setColor(co_theme);
 						gotoXY(XX - 29, YY + 15); cout << "                                                                               ";
 						gotoXY(XX - 29, YY + 16); cout << "                                                                               ";
 						gotoXY(XX - 29, YY + 17); cout << "                                                                               ";
 
+						// Import new name
 						renameFile:
 						string tmp;
 						gotoXY(XX - 24, YY + 16); cout << " New Name:                                                         ";
 						if (!putname(XX - 13, YY + 16, tmp = fileNames[S])) continue;
 
+						// Check the same name
 						bool checkSame = 0;
 						for (int t = 0; t <= sz; ++t)
 							if (t != S && fileNames[t] == tmp)
@@ -145,6 +151,7 @@ void loadGame(int XX, int YY) {
 							} break;
 						}
 
+						// Process rename
 						string old_name = fileNames[S] + ".txt";
 						string new_name = tmp + ".txt";
 						rename(old_name.c_str(), new_name.c_str());
@@ -166,15 +173,16 @@ void loadGame(int XX, int YY) {
 
 		} else {
 			int col = S / 5, nxt_S;
-			if (_in == 1) nxt_S = (S + 4) % 5 + col * 5;
-			else if (_in == 2) nxt_S = (S + 10) % 15;
-			else if (_in == 3) nxt_S = (S + 1) % 5 + col * 5;
-			else if (_in == 4) nxt_S = (S + 5) % 15;
-			if (nxt_S <= sz) S = nxt_S;
+			if (_in == 1) nxt_S = (S + 4) % 5 + col * 5;		// Up
+			else if (_in == 2) nxt_S = (S + 10) % 15;			// Left
+			else if (_in == 3) nxt_S = (S + 1) % 5 + col * 5;	// Down
+			else if (_in == 4) nxt_S = (S + 5) % 15;			// Right
+			if (nxt_S <= sz) S = nxt_S;		// The pointer mustn't be out of stock
 		}
 	}
 }
 
+// 
 void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string name1, string name2, string& nameFile, bool vsBot) {
 	if (nameFile == "") {
 		insertName:
@@ -209,6 +217,7 @@ void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string n
 	drawName_Board(XX + 4 * BOARD_SIZE - 33, YY + 2 * BOARD_SIZE - 1, nameFile);
 	pushList();
 
+	// Save game to PC
 	ofstream File(nameFile + ".txt");
 	File << int(vsBot) << " " << Xscore << " " << Oscore << '\n';
 	File << name1 << " " << name2 << '\n';
@@ -218,7 +227,7 @@ void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string n
 	} File.close();
 }
 
-void loadFromFile(string nameFile, vector<ii>& Cache, int& Xscore, int& Oscore, string& name1, string& name2, bool& vsBot) {
+void loadFromFile(string nameFile, vector<ii>& Cache, int& Xscore, int& Oscore, string& name1, string& name2, bool& vsBot) {	// Load data from file is saved
 	Cache.clear();
 	nameFile += ".txt";
 	ifstream file(nameFile);
@@ -229,20 +238,20 @@ void loadFromFile(string nameFile, vector<ii>& Cache, int& Xscore, int& Oscore, 
 	file.close();
 }
 
-void pullList() {
+void pullList() {		// Update list file is saved to fileNames
 	string s; fileNames.clear();
 	ifstream file("ListNameFiles.txt");
 	while (file >> s) fileNames.emplace_back(s);
 	file.close();
 }
-
-void pushList() {
+	
+void pushList() {		// Update list file is saved in fileNames to PC
 	ofstream File("ListNameFiles.txt");
 	for (string s : fileNames) File << s << '\n';
 	File.close();
 }
 
-void deleteFile(string nameFile) {
+void deleteFile(string nameFile) {	// Delete File
 	nameFile += ".txt";
 	remove(nameFile.c_str());
 }

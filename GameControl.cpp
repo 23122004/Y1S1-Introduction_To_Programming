@@ -448,7 +448,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
                         else if (key == 'Y' || key == 'y') return;
                     } drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
                 }
-                if (Key == 6) // undo
+                if (Key == 6) // Undo
                 {
                     for (int i = 0; i < (vsBot ? 2 : 1); i++) if(!Cache.empty())
                     {
@@ -484,15 +484,15 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     }
 
     ShowCur(0);
-    displayWinLine(); // nháy nháy các thứ
+    displayWinLine(); 
 
     drawPopUp(XX - 27, YY + 3, 16, 74);
     decorate_draw(XX - 24, YY + 3, "pixel_art/Cup.txt");
     if (Turn == -1)
-        drawX_WIN(XX + 6, YY + 7), Xscore++;
+        drawX_WIN(XX + 6, YY + 7), Xscore++;    // X Wins
     else if(Turn == 1) 
-        drawO_WIN(XX + 6, YY + 7), Oscore++;
-    else drawDRAW(XX + 7, YY + 7);
+        drawO_WIN(XX + 6, YY + 7), Oscore++;    // O Wins
+    else drawDRAW(XX + 7, YY + 7);              // Draw
 
     gotoXY(XX + 5 - (Turn == -1), YY + 13);
     for (int i = 0; i < 38; ++i)
@@ -502,6 +502,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     setColor(15, 8);  cout << "<< Press Y to continue or N to exit >>";
     setColor(15, 0);
     
+    // Check player want to play again
     while (true) {
         char key = _getch();
         if (key == 'N' || key == 'n') break;
