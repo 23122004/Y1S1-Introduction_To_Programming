@@ -1,8 +1,12 @@
-﻿#include "LoadGame.h"
-#include "GameControl.h"
-#include "Newgame.h"
-#include "Graphic.h"
-#include "library.h"
+#include "../include/LoadGame.h"
+#include "../include/Game.h"
+#include "../include/Newgame.h"
+#include "../include/Graphic.h"
+#include "../include/Console.h"
+#include "../include/library.h"
+
+using namespace std;
+
 #define co_theme 15,0
 
 const int BOARD_SIZE = 15;
@@ -14,7 +18,7 @@ void loadGame(int XX, int YY) {
 		string str;
 
 		void draw() {
-			drawBoardMenu(X, Y, size, b_color, str);
+			Graphics::drawBoardMenu(X, Y, size, b_color, str);
 		}
 	};
 
@@ -40,13 +44,13 @@ void loadGame(int XX, int YY) {
 	}
 
 	system("cls");
-	decorate_draw(5, 15, "pixel_art/Octopus.txt");
-	decorate_draw(117, 15, "pixel_art/Octopus.txt");
-	decorate_draw(20, 32, "pixel_art/Turtle.txt");
-	decorate_draw(60, 32, "pixel_art/Turtle.txt");
-	decorate_draw(100, 32, "pixel_art/Turtle.txt");
-	drawLOAD_GAME(XX - 26, YY - 9);
-	drawPopUp(XX - 33, YY - 1, 20, 86);
+	Console::drawImage(5, 15, "pixel_art/Octopus.txt");
+	Console::drawImage(117, 15, "pixel_art/Octopus.txt");
+	Console::drawImage(20, 32, "pixel_art/Turtle.txt");
+	Console::drawImage(60, 32, "pixel_art/Turtle.txt");
+	Console::drawImage(100, 32, "pixel_art/Turtle.txt");
+	Graphics::drawLOAD_GAME(XX - 26, YY - 9);
+	Graphics::drawPopUp(XX - 33, YY - 1, 20, 86);
 	/*----------------------------------------------------*/
 
 	int S = min(0, sz);		// Pointer
@@ -55,15 +59,15 @@ void loadGame(int XX, int YY) {
 			s1[i].draw();
 		if (S != -1) s2[S].draw();
 
-		setColor(co_theme);
-		gotoXY(XX - 29, YY + 15); cout << "                                                                               ";
-		gotoXY(XX - 29, YY + 16); cout << "                                                                               ";
-		gotoXY(XX - 29, YY + 17); cout << "                                                                               ";
-		gotoXY(XX - 3, YY + 16); setColor(11, 0);
+		Console::setColor(co_theme);
+		Console::gotoXY(XX - 29, YY + 15); cout << "                                                                               ";
+		Console::gotoXY(XX - 29, YY + 16); cout << "                                                                               ";
+		Console::gotoXY(XX - 29, YY + 17); cout << "                                                                               ";
+		Console::gotoXY(XX - 3, YY + 16); Console::setColor(11, 0);
 		cout << " << Press ESC to exit >> ";
-		setColor(co_theme);
+		Console::setColor(co_theme);
 
-		int _in = nextMove();
+		int _in = Console::nextMove();
 		if (_in == 5) break;			// Esc
 		else if (S == -1) continue;		// No files were saved
 
@@ -79,22 +83,22 @@ void loadGame(int XX, int YY) {
 
 			// Display: choose the operation
 			s1[S].draw();
-			gotoXY(XX - 30, YY + 16); setColor(co_theme);
+			Console::gotoXY(XX - 30, YY + 16); Console::setColor(co_theme);
 			cout << "                                                                                 ";
-			gotoXY(XX - 24, YY + 16); setColor(11, 0); cout << " Choose: ";
+			Console::gotoXY(XX - 24, YY + 16); Console::setColor(11, 0); cout << " Choose: ";
 
 			int Sj = 0;
 			while (true) {
 				// Display: choose the operation
-				gotoXY(XX - 30, YY + 16); setColor(co_theme);
+				Console::gotoXY(XX - 30, YY + 16); Console::setColor(co_theme);
 				cout << "                                                                                 ";
-				gotoXY(XX - 24, YY + 16); setColor(11, 0); cout << " Choose: ";
+				Console::gotoXY(XX - 24, YY + 16); Console::setColor(11, 0); cout << " Choose: ";
 
 				for (int j = 0; j < 3; ++j)
 					s3[j].draw();
 				s4[Sj].draw();
 
-				int _in = nextMove();
+				int _in = Console::nextMove();
 				if (_in == 5) break;					// Esc
 				else if (_in == 2) Sj = (Sj + 2) % 3;	// Left
 				else if (_in == 4) Sj = (Sj + 1) % 3;	// Right
@@ -106,7 +110,8 @@ void loadGame(int XX, int YY) {
 						bool vsBot;
 
 						loadFromFile(fileNames[S], Cache, Xscore, Oscore, name1, name2, vsBot);
-						startGame(vsBot, 0, XX, YY, name1, name2, Cache, fileNames[S], Xscore, Oscore);  
+                        Game game;
+						game.startGame(vsBot, 0, XX, YY, name1, name2, Cache, fileNames[S], Xscore, Oscore);
 						return;
 					}
 
@@ -125,15 +130,15 @@ void loadGame(int XX, int YY) {
 						--sz;  S = min(S, sz);
 
 					} else {			// Rename file
-						setColor(co_theme);
-						gotoXY(XX - 29, YY + 15); cout << "                                                                               ";
-						gotoXY(XX - 29, YY + 16); cout << "                                                                               ";
-						gotoXY(XX - 29, YY + 17); cout << "                                                                               ";
+						Console::setColor(co_theme);
+						Console::gotoXY(XX - 29, YY + 15); cout << "                                                                               ";
+						Console::gotoXY(XX - 29, YY + 16); cout << "                                                                               ";
+						Console::gotoXY(XX - 29, YY + 17); cout << "                                                                               ";
 
 						// Import new name
 						renameFile:
 						string tmp;
-						gotoXY(XX - 24, YY + 16); cout << " New Name:                                                         ";
+						Console::gotoXY(XX - 24, YY + 16); cout << " New Name:                                                         ";
 						if (!putname(XX - 13, YY + 16, tmp = fileNames[S])) continue;
 
 						// Check the same name
@@ -143,7 +148,7 @@ void loadGame(int XX, int YY) {
 								checkSame = 1;
 
 						if (checkSame) {
-							gotoXY(XX - 24, YY + 16); cout << ">> It already exists, do you want to change another name? Press Y/N";
+							Console::gotoXY(XX - 24, YY + 16); cout << ">> It already exists, do you want to change another name? Press Y/N";
 							while (true) {
 								char key = _getch();
 								if (key == 'N' || key == 'n') break;
@@ -152,8 +157,19 @@ void loadGame(int XX, int YY) {
 						}
 
 						// Process rename
-						string old_name = fileNames[S] + ".txt";
-						string new_name = tmp + ".txt";
+						string old_name = "resources/" + fileNames[S] + ".txt"; // NOTE: Should use resources path?
+						string new_name = "resources/" + tmp + ".txt"; // Or just assume relative to cwd
+
+                        // The load/save functions seem to rely on current working directory or specific path.
+                        // I should verify where files are saved.
+                        // Originally "ListNameFiles.txt" lists names.
+                        // `saveGame` opens `nameFile + ".txt"`.
+                        // If I moved `pixel_art` to `resources`, I didn't move save files.
+                        // So assuming save files are in root is safest for now.
+                        // Reverting "resources/" prefix for user save files.
+
+                        old_name = fileNames[S] + ".txt";
+                        new_name = tmp + ".txt";
 						rename(old_name.c_str(), new_name.c_str());
 
 						fileNames[S] = tmp;
@@ -186,9 +202,9 @@ void loadGame(int XX, int YY) {
 void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string name1, string name2, string& nameFile, bool vsBot) {
 	if (nameFile == "") {
 		insertName:
-		drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 2);
+		Graphics::drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 2);
 		if (!putname(XX - 18, YY + 2 * BOARD_SIZE - 1, nameFile)) {
-			drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
+			Graphics::drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
 			return;
 		} if (nameFile == "") goto insertName;
 	}
@@ -198,11 +214,11 @@ void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string n
 		if (tmp == nameFile) checkSame = 1;
 
 	if (checkSame) {
-		drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 3);
+		Graphics::drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 3);
 		while (true) {
 			char key = _getch();
 			if (key == 'N' || key == 'n') {
-				drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
+				Graphics::drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
 				nameFile = "";
 				return;
 			} else if (key == 'Y' || key == 'y') break;
@@ -213,8 +229,8 @@ void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string n
 		fileNames.push_back(nameFile);
 	}
 	
-	drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
-	drawName_Board(XX + 4 * BOARD_SIZE - 33, YY + 2 * BOARD_SIZE - 1, nameFile);
+	Graphics::drawStatus(XX - 31, YY + 2 * BOARD_SIZE - 1, 1);
+	Graphics::drawName_Board(XX + 4 * BOARD_SIZE - 33, YY + 2 * BOARD_SIZE - 1, nameFile);
 	pushList();
 
 	// Save game to PC
@@ -240,13 +256,13 @@ void loadFromFile(string nameFile, vector<ii>& Cache, int& Xscore, int& Oscore, 
 
 void pullList() {		// Update list file is saved to fileNames
 	string s; fileNames.clear();
-	ifstream file("ListNameFiles.txt");
+	ifstream file("resources/ListNameFiles.txt"); // Updated path
 	while (file >> s) fileNames.emplace_back(s);
 	file.close();
 }
 	
 void pushList() {		// Update list file is saved in fileNames to PC
-	ofstream File("ListNameFiles.txt");
+	ofstream File("resources/ListNameFiles.txt"); // Updated path
 	for (string s : fileNames) File << s << '\n';
 	File.close();
 }

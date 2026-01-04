@@ -1,6 +1,8 @@
-﻿#include "Console.h"
+#include "../include/Console.h"
 
-void fixConsoleWindow(int WIDTH, int HEIGHT) {		// Fix console screen
+using namespace std;
+
+void Console::fixConsoleWindow(int WIDTH, int HEIGHT) {
 	system("COLOR f0");
 	HWND consoleWindow = GetConsoleWindow();
 
@@ -23,21 +25,20 @@ void fixConsoleWindow(int WIDTH, int HEIGHT) {		// Fix console screen
 	ShowScrollBar(consoleWindow, SB_BOTH, 0);
 }
 
-void gotoXY(int x, int y) {		// Move pointer to (y, x)
+void Console::gotoXY(int x, int y) {
 	COORD coord;
 	coord.X = x;
 	coord.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
-void setColor(int background_color, int text_color) { // Setcolor of pointer
+void Console::setColor(int background_color, int text_color) {
 	HANDLE hconsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	int color_code = background_color * 16 + text_color;
 	SetConsoleTextAttribute(hconsole, color_code);
 }
 
-/*---------------@- Function Draw Picture in "Pixel-art" -@------------------*/
-void draw_square(int i, int j, int x, int y, int color) {
+void Console::drawSquare(int i, int j, int x, int y, int color) {
 	x = (x - 1) * 2 + 1;
 	gotoXY(x + i, y + j);
 	setColor(color, color);
@@ -45,8 +46,20 @@ void draw_square(int i, int j, int x, int y, int color) {
 	setColor(15, 15);
 }
 
-void decorate_draw(int x, int y, const string& nameFile) {
-	ifstream file(nameFile.c_str());
+void Console::drawImage(int x, int y, const string& nameFile) {
+    // Update path to resources folder if not absolute or already correct
+    string path = "resources/" + nameFile;
+    // However, if the nameFile already contains "resources/", we shouldn't add it.
+    // The previous code had "pixel_art/..." passed in.
+    // I moved pixel_art to resources/pixel_art.
+    // So if the input is "pixel_art/foo.txt", the new path is "resources/pixel_art/foo.txt".
+
+    // Check if file exists at path, if not try plain nameFile
+    ifstream file(path.c_str());
+    if (!file.is_open()) {
+        file.open(nameFile.c_str());
+    }
+
 	string s;
 	int i = 0;
 	while (getline(file, s))
@@ -59,27 +72,25 @@ void decorate_draw(int x, int y, const string& nameFile) {
 			j++;
 			int color;
 			ss >> color;
-			draw_square(x, y, j, i, color);
+			drawSquare(x, y, j, i, color);
 		}
 	}
 }
-/*---------------------------------------------------------------------------*/
 
-void ShowCur(bool CursorVisibility) {  // CursorVisibility = 0 is hide, = 1 is appear
+void Console::showCursor(bool visibility) {
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
-	CONSOLE_CURSOR_INFO cursor = { 1, CursorVisibility };
+	CONSOLE_CURSOR_INFO cursor = { 1, visibility };
 	SetConsoleCursorInfo(handle, &cursor);
 }
 
-void curr_coordinate(int& x, int& y)	// Get the locate of pointer
-{
+void Console::getCursorPosition(int& x, int& y) {
 	CONSOLE_SCREEN_BUFFER_INFO curr;
 	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &curr);
 	x = curr.dwCursorPosition.X;
 	y = curr.dwCursorPosition.Y;
 }
 
-int nextMove() {   // Get operation from keyboard
+int Console::nextMove() {
 	while (true) {
 		if (_kbhit()) {
 			char c = _getch();
