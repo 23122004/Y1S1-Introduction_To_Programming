@@ -1,12 +1,10 @@
 #ifndef _LOADGAME_H_
 #define _LOADGAME_H_
 #include "library.h"
-#include "GameControl.h"
-#include "Console.h"
-#include "Graphic.h"
+#include <vector>
+#include <string>
+#include <utility>
 
-#define F first
-#define S second
 typedef std::pair<int, int> ii;
 
 void loadGame(int XX, int YY);

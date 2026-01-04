@@ -1,23 +1,31 @@
-﻿#include "GameControl.h"
-#include "Graphic.h"
-#include "Newgame.h"
-#include "LoadGame.h"
+#include "../include/Game.h"
+#include "../include/Console.h"
+#include "../include/Graphic.h"
+#include "../include/LoadGame.h"
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
 #define F first
 #define S second
 
-#define moveTo(x, y) gotoXY(status[x][y].X, status[x][y].Y)
-const int BOARD_SIZE = 15;
+// Helper macro to move cursor based on grid coordinates
+#define moveTo(x, y) Console::gotoXY(status[x][y].X, status[x][y].Y)
+
 typedef pair<int, int> ii;
 
-int Turn, maxDepth = 3;
-_Point status[BOARD_SIZE + 5][BOARD_SIZE + 5];
-vector<ii> Cache, winLine;
-set<ii> Neighbor;
+Game::Game() : Turn(1), maxDepth(3) {
+    // Initialize status board?
+    // Actually status array init depends on drawBoard mapping logical to screen coords.
+    // This happens in drawBoard (in Graphic.cpp), which Game calls.
+}
 
-long long consecutiveScore(int len, int openEnds, bool currentTurn) // return the score of consecutive elements
+Game::~Game() {
+}
+
+long long Game::consecutiveScore(int len, int openEnds, bool currentTurn)
 {
     if (len < 5 && openEnds == 0) return 0;
     switch (len)
@@ -75,7 +83,7 @@ long long consecutiveScore(int len, int openEnds, bool currentTurn) // return th
     }
 }
 
-long long get_score(int a[], int player)
+long long Game::get_score(int a[], int player)
 {
     int Size = BOARD_SIZE + 2;
     long long score = 0;
@@ -92,12 +100,12 @@ long long get_score(int a[], int player)
     return score;
 }
 
-bool valid(int x, int y)
+bool Game::valid(int x, int y)
 {
     return y > 0 && x > 0 && x <= BOARD_SIZE && y <= BOARD_SIZE;
 }
 
-long long evaluation(int player) // evaluate a status
+long long Game::evaluation(int player)
 {
     long long score = 0;
     int* b = new int[BOARD_SIZE + 2];
@@ -116,6 +124,7 @@ long long evaluation(int player) // evaluate a status
             winLine.clear();
             for (int k = 0; k < BOARD_SIZE + 2; k++)
                 winLine.push_back({ i, k });
+            delete[] b;
             return score;
         }
     }
@@ -135,6 +144,7 @@ long long evaluation(int player) // evaluate a status
             winLine.clear();
             for (int k = 0; k < BOARD_SIZE + 2; k++)
                 winLine.push_back({ k, j });
+            delete[] b;
             return score;
         }
     }
@@ -154,6 +164,7 @@ long long evaluation(int player) // evaluate a status
             winLine.clear();
             for (int k = 0; k < BOARD_SIZE + 2; k++)
                 winLine.push_back({ i + k, k });
+            delete[] b;
             return score;
         }
     }
@@ -172,6 +183,7 @@ long long evaluation(int player) // evaluate a status
             winLine.clear();
             for (int k = 0; k < BOARD_SIZE + 2; k++)
                 winLine.push_back({ k, j + k });
+            delete[] b;
             return score;
         }
     }
@@ -191,6 +203,7 @@ long long evaluation(int player) // evaluate a status
             winLine.clear();
             for (int k = 0; k < BOARD_SIZE + 2; k++)
                 winLine.push_back({ i - k, k });
+            delete[] b;
             return score;
         }
     }
@@ -209,19 +222,20 @@ long long evaluation(int player) // evaluate a status
             winLine.clear();
             for (int k = 0; k < BOARD_SIZE + 2; k++)
                 winLine.push_back({ BOARD_SIZE + 1 - k, j + k });
+            delete[] b;
             return score;
         }
     }
+    delete[] b;
     return score;
 }
 
-long long minimax(int depth, long long alpha, long long beta, int player, int& x, int& y)
+long long Game::minimax(int depth, long long alpha, long long beta, int player, int& x, int& y)
 {
-    long long val = evaluation(player); // get the score of the current state if is the "player"'s turn.
-    if (depth == 0 || abs(val) >= 1e8) // deepest depth or one of the two players wins.
-        return val; // return the score
+    long long val = evaluation(player);
+    if (depth == 0 || abs(val) >= 1e8)
+        return val;
 
-    // Max is the X player
     if (player == 1)
     {
         long long maxEval = (long long)-1e11;
@@ -231,8 +245,8 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
             int i = tmp.F, j = tmp.S;
             if (status[i][j].opt == 0)
             {
-                status[i][j].opt = 1; // try to put X into cell i, j
-                long long eval = minimax(depth - 1, alpha, beta, -1, x, y); // minimax recursion
+                status[i][j].opt = 1;
+                long long eval = minimax(depth - 1, alpha, beta, -1, x, y);
                 status[i][j].opt = 0;
                 if (maxEval < eval)
                 {
@@ -240,13 +254,13 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
                     if (depth == maxDepth) x = i, y = j;
                 }
                 if (alpha < eval) alpha = eval;
-                if (beta <= alpha) // alpha-beta pruning
+                if (beta <= alpha)
                     break;
             }
         }
         return maxEval;
     }
-    else // Min is the O player (bot)
+    else
     {
         long long minEval = (long long)1e11;
         vector<ii> a(Neighbor.begin(), Neighbor.end());
@@ -272,10 +286,10 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
     }
 }
 
-void botMove(int& x, int& y)
+void Game::botMove(int& x, int& y)
 {
-    ShowCur(0);
-    if (Cache.size() == 1) // bot's first move is random
+    Console::showCursor(0);
+    if (Cache.size() == 1)
     {
         int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
         int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
@@ -285,7 +299,7 @@ void botMove(int& x, int& y)
         y += dy[r];
     }
     else minimax(maxDepth = (Neighbor.size() <= 110 ? 3 : 2), (long long)-1e11, (long long)1e11, -1, x, y);
-    if (status[x][y].opt != 0) // if the algorithm is incorrect then go for a random move
+    if (status[x][y].opt != 0)
     {
         int dx[] = { -1, 1, 0, 0, -1, 1, 1, -1 };
         int dy[] = { 0, 0, -1, 1, 1, -1, 1, -1 };
@@ -294,10 +308,10 @@ void botMove(int& x, int& y)
         x += dx[r];
         y += dy[r];
     }
-    ShowCur(1);
+    Console::showCursor(1);
 }
 
-void addNeighbor(int x, int y) // add some adjective cells for calculations
+void Game::addNeighbor(int x, int y)
 {
     if (Neighbor.count({ x, y })) Neighbor.erase({ x, y });
     int radius = 3;
@@ -311,7 +325,7 @@ void addNeighbor(int x, int y) // add some adjective cells for calculations
         }
 }
 
-void makeMove(int Turn, int x, int y) // make a move
+void Game::makeMove(int Turn, int x, int y)
 {
     status[x][y].opt = Turn;
     
@@ -319,23 +333,23 @@ void makeMove(int Turn, int x, int y) // make a move
     
     if (Turn == 1)
     {
-        setColor(15, 4);
+        Console::setColor(15, 4);
         cout << 'X';
     }
     else if(Turn == -1)
     {
-        setColor(15, 1);
+        Console::setColor(15, 1);
         cout << 'O';
     }
     else
     {
-        setColor(15, 15);
+        Console::setColor(15, 15);
         cout << " ";
     }
     moveTo(x, y);
 }
 
-void updateNeighbor()
+void Game::updateNeighbor()
 {
     Neighbor.clear();
     for(int i = 1; i <= BOARD_SIZE; i++)
@@ -343,7 +357,7 @@ void updateNeighbor()
             if (status[i][j].opt != 0) addNeighbor(i, j);
 }
 
-void displayWinLine() // Bold the winning line
+void Game::displayWinLine(int XX, int YY)
 {
 #define getVal(i) status[winLine[i].F][winLine[i].S].opt
     
@@ -356,23 +370,23 @@ void displayWinLine() // Bold the winning line
             int len = j - i + 1;
             if (len >= 5)
             {
-                for (int T = 0; T < 3; T++) // 3 times
+                for (int T = 0; T < 3; T++)
                 {
                     for (int k = i; k <= j; k++)
                     {
-                        int XX = status[winLine[k].F][winLine[k].S].X;
-                        int YY = status[winLine[k].F][winLine[k].S].Y;
-                        gotoXY(XX - 1, YY);
-                        setColor(getVal(k) == 1 ? 4 : 1, 15);
+                        int scrX = status[winLine[k].F][winLine[k].S].X;
+                        int scrY = status[winLine[k].F][winLine[k].S].Y;
+                        Console::gotoXY(scrX - 1, scrY);
+                        Console::setColor(getVal(k) == 1 ? 4 : 1, 15);
                         cout << " " << (getVal(k) == 1 ? 'X' : 'O') << " ";
                     }
                     Sleep(500);
                     for (int k = i; k <= j; k++)
                     {
-                        int XX = status[winLine[k].F][winLine[k].S].X;
-                        int YY = status[winLine[k].F][winLine[k].S].Y;
-                        gotoXY(XX - 1, YY);
-                        setColor(15, getVal(k) == 1 ? 4 : 1);
+                        int scrX = status[winLine[k].F][winLine[k].S].X;
+                        int scrY = status[winLine[k].F][winLine[k].S].Y;
+                        Console::gotoXY(scrX - 1, scrY);
+                        Console::setColor(15, getVal(k) == 1 ? 4 : 1);
                         cout << " " << (getVal(k) == 1 ? 'X' : 'O') << " ";
                     }
                     Sleep(300);
@@ -383,7 +397,7 @@ void displayWinLine() // Bold the winning line
     }
 }
 
-void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName, int Xscore, int Oscore)
+void Game::startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<ii> Data, string fileName, int Xscore, int Oscore)
 {
     playAgain:
     srand(time(0));
@@ -391,14 +405,21 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
     
     int x, y;
     Cache.clear();
-    ShowCur(1);
-    drawBoard(XX, YY, name1, name2, Xscore, Oscore, fileName);
-    if (isNewGame) // if it is a new game then reset everything
+    Console::showCursor(1);
+
+    // NOTE: This drawBoard call needs to initialize status[i][j].X/Y/opt.
+    // We pass *this to Graphics.
+    // However, the original code relied on drawBoard updating the global status array.
+    // We need to pass our status array to drawBoard or let Graphics update it.
+    // Refactoring: Graphics should probably take Game&
+    drawBoard(XX, YY, name1, name2, Xscore, Oscore, fileName, *this);
+
+    if (isNewGame)
     {
         Turn = 1;
         x = 8, y = 8;
         moveTo(x, y);
-    } else { // if not, use the previous data for the game
+    } else {
         Turn = 1;
         for (ii tmp : Data) {
             makeMove(Turn, tmp.F, tmp.S);
@@ -413,7 +434,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         }
     }
 
-    while (abs(evaluation(1)) < 1e8) // while the game is not over then keep playing
+    while (abs(evaluation(1)) < 1e8)
     {
         updateNeighbor();
         if (Turn == 1) {
@@ -429,7 +450,7 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         {
             while (true)
             {
-                int Key = nextMove();
+                int Key = Console::nextMove();
                 if (Key == 0 && status[x][y].opt == 0) break; 
                 if (Key == 1 && x > 1) x -= 1;
                 if (Key == 2 && y > 1) y -= 1;
@@ -478,24 +499,24 @@ void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string 
         }
     }
 
-    ShowCur(0);
-    displayWinLine();
+    Console::showCursor(0);
+    displayWinLine(XX, YY);
 
     drawPopUp(XX - 27, YY + 3, 16, 74);
-    decorate_draw(XX - 24, YY + 3, "pixel_art/Cup.txt");
+    Console::drawImage(XX - 24, YY + 3, "pixel_art/cup.txt"); // Note: capitalization might differ
     if (Turn == -1)
         drawX_WIN(XX + 6, YY + 7), Xscore++;    // X Wins
     else if(Turn == 1) 
         drawO_WIN(XX + 6, YY + 7), Oscore++;    // O Wins
     else drawDRAW(XX + 7, YY + 7);              // Draw
 
-    gotoXY(XX + 5 - (Turn == -1), YY + 13);
+    Console::gotoXY(XX + 5 - (Turn == -1), YY + 13);
     for (int i = 0; i < 38; ++i)
         cout << char(196);
 
-    gotoXY(XX + 5 - (Turn == -1), YY + 14);
-    setColor(15, 8);  cout << "<< Press Y to continue or N to exit >>";
-    setColor(15, 0);
+    Console::gotoXY(XX + 5 - (Turn == -1), YY + 14);
+    Console::setColor(15, 8);  cout << "<< Press Y to continue or N to exit >>";
+    Console::setColor(15, 0);
     
     // Check player want to play again
     while (true) {
