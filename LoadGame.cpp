@@ -3,6 +3,9 @@
 #include "Newgame.h"
 #include "Graphic.h"
 #include "library.h"
+
+using namespace std;
+
 #define co_theme 15,0
 
 const int BOARD_SIZE = 15;

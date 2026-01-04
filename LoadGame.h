@@ -7,13 +7,12 @@
 
 #define F first
 #define S second
-typedef pair<int, int> ii;
-using namespace std;
+typedef std::pair<int, int> ii;
 
 void loadGame(int XX, int YY);
-void saveGame(int XX, int YY, vector<ii> Cache, int Xscore, int Oscore, string name1, string name2, string& nameFile, bool vsBot);
-void loadFromFile(string nameFile, vector<ii>& Cache, int& Xscore, int& Oscore, string& name1, string& name2, bool& vsBot);
-void deleteFile(string nameFile);
+void saveGame(int XX, int YY, std::vector<ii> Cache, int Xscore, int Oscore, std::string name1, std::string name2, std::string& nameFile, bool vsBot);
+void loadFromFile(std::string nameFile, std::vector<ii>& Cache, int& Xscore, int& Oscore, std::string& name1, std::string& name2, bool& vsBot);
+void deleteFile(std::string nameFile);
 void pullList();
 void pushList();
 

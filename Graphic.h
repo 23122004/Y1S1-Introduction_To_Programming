@@ -2,7 +2,6 @@
 #define _GRAPHIC_H_
 #include "library.h"
 #include "Console.h"
-using namespace std;
 
 void drawA(int XX, int YY);
 void drawB(int XX, int YY);
@@ -34,11 +33,11 @@ void drawX_WIN(int XX, int YY);
 void drawO_WIN(int XX, int YY);
 void drawDRAW(int XX, int YY);
 
-void drawBoard(int startX, int startY, string name1, string name2, int Xscore, int Oscore, string fileName);
-void drawBoardMenu(int XX, int YY, int size, int b_color, string str);
+void drawBoard(int startX, int startY, std::string name1, std::string name2, int Xscore, int Oscore, std::string fileName);
+void drawBoardMenu(int XX, int YY, int size, int b_color, std::string str);
 void drawBoardSize(int XX, int YY, int h, int w);
 void drawPopUp(int XX, int YY, int h, int w);
-void drawName_Board(int XX, int YY, string fileName);
+void drawName_Board(int XX, int YY, std::string fileName);
 void drawStatus(int XX, int YY, int opt);
 
 #endif

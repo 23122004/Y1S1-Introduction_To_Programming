@@ -4,9 +4,8 @@
 #include "GameControl.h"
 #include "Console.h"
 #include "Graphic.h"
-using namespace std;
 
 void newGame(int XX, int YY);
-bool putname(int XX, int YY, string& str);
+bool putname(int XX, int YY, std::string& str);
 
 #endif

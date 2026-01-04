@@ -1,5 +1,8 @@
 ﻿#include "Graphic.h"
 #include "GameControl.h"
+
+using namespace std;
+
 #define co_theme 15,0
 const int BOARD_SIZE = 15;
 

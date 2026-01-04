@@ -3,6 +3,8 @@
 #include "Newgame.h"
 #include "LoadGame.h"
 
+using namespace std;
+
 #define F first
 #define S second
 

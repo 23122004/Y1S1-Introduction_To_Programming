@@ -5,7 +5,6 @@
 #include "Graphic.h"
 #include "Console.h"
 #include "LoadGame.h"
-using namespace std;
 
 struct _Point 
 {
@@ -19,6 +18,6 @@ long long minimax(int depth, long long alpha, long long beta, int player, int& x
 void botMove(int& x, int& y); // nước đi của bot
 void loadGameBoardUpdate(int** a, int turn, int lastX, int lastY); // cập nhật bảng hiện tại nếu load game
 // sửa lại bằng mảng động hoặc vector đều được
-void startGame(bool vsBot, bool isNewGame, int XX, int YY, string name1, string name2, vector<pair<int, int>> Data, string fileName, int Xscore, int Oscore);
+void startGame(bool vsBot, bool isNewGame, int XX, int YY, std::string name1, std::string name2, std::vector<std::pair<int, int>> Data, std::string fileName, int Xscore, int Oscore);
 
 #endif
